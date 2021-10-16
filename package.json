@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "fix": "gts fix",
+    "posttest": "yarn run lint"
   },
   "dependencies": {
     "next": "11.1.2",
@@ -14,9 +17,10 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
+    "@types/node": "^16.11.0",
     "@types/react": "17.0.30",
-    "eslint": "8.0.1",
     "eslint-config-next": "11.1.2",
+    "sijiaoh-gts": "^0.5.4",
     "typescript": "4.4.4"
   }
 }

@@ -1,6 +1,7 @@
 import type {NextPage} from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import {Link} from 'src/utils/Link';
 
 const Home: NextPage = () => {
   return (
@@ -15,6 +16,10 @@ const Home: NextPage = () => {
         <h1>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+
+        <Link href="#">
+          <a css={{color: 'red'}}>red text</a>
+        </Link>
 
         <p>
           Get started by editing <code>pages/index.js</code>

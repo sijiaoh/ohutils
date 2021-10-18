@@ -446,6 +446,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@reactive-class/core@npm:0.1.0":
+  version: 0.1.0
+  resolution: "@reactive-class/core@npm:0.1.0"
+  checksum: adc1d26f5107470041c07cba4ec89f41bfd34833c695368cbeef6b65ce060eca3d7493068e5d2ef12926b68b9d2c28942fab39d05cdbb772773ff343fbe800b2
+  languageName: node
+  linkType: hard
+
+"@reactive-class/react@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@reactive-class/react@npm:0.1.0"
+  dependencies:
+    "@reactive-class/core": 0.1.0
+    react: ^17.0.2
+    shallowequal: ^1.1.0
+  checksum: 8f3cc0b353499b3c5f85cc91a613244449f00fb80393220fa7707aa92ca67fb29f1f68738cd8a7a2b890f1b94c47f802e7b29e752f46fdc2680d1afbd46e1850
+  languageName: node
+  linkType: hard
+
 "@rushstack/eslint-patch@npm:^1.0.6":
   version: 1.0.8
   resolution: "@rushstack/eslint-patch@npm:1.0.8"
@@ -4393,6 +4411,7 @@ fsevents@~2.3.1:
   dependencies:
     "@emotion/babel-plugin": ^11.3.0
     "@emotion/react": ^11.5.0
+    "@reactive-class/react": ^0.1.0
     "@types/node": ^16.11.0
     "@types/react": 17.0.30
     eslint-config-next: 11.1.2
@@ -4911,7 +4930,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"react@npm:17.0.2":
+"react@npm:17.0.2, react@npm:^17.0.2":
   version: 17.0.2
   resolution: "react@npm:17.0.2"
   dependencies:
@@ -5263,6 +5282,13 @@ resolve@^2.0.0-next.3:
   bin:
     sha.js: ./bin.js
   checksum: ebd3f59d4b799000699097dadb831c8e3da3eb579144fd7eb7a19484cbcbb7aca3c68ba2bb362242eb09e33217de3b4ea56e4678184c334323eca24a58e3ad07
+  languageName: node
+  linkType: hard
+
+"shallowequal@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "shallowequal@npm:1.1.0"
+  checksum: f4c1de0837f106d2dbbfd5d0720a5d059d1c66b42b580965c8f06bb1db684be8783538b684092648c981294bf817869f743a066538771dbecb293df78f765e00
   languageName: node
   linkType: hard
 

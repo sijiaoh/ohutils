@@ -1,0 +1,19 @@
+{
+  "schema": "./generated/schema.graphql",
+  "documents": [
+    "generated/default-queries.graphql",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.gql",
+    "src/**/*.graphql"
+  ],
+  "generates": {
+    "./src/generated/graphql-apollo.ts": {
+      "plugins": [
+        "typescript",
+        "typescript-operations",
+        "typescript-graphql-apollo"
+      ]
+    }
+  }
+}

@@ -1031,6 +1031,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@graphql-codegen/typescript-react-apollo@npm:^3.1.6":
+  version: 3.1.6
+  resolution: "@graphql-codegen/typescript-react-apollo@npm:3.1.6"
+  dependencies:
+    "@graphql-codegen/plugin-helpers": ^2.2.0
+    "@graphql-codegen/visitor-plugin-common": 2.4.0
+    auto-bind: ~4.0.0
+    change-case-all: 1.0.14
+    tslib: ~2.3.0
+  peerDependencies:
+    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
+    graphql-tag: ^2.0.0
+  checksum: 070c2c1dd21384b300e121503d1978dc6a837a3227eb5a84477da292108f634fa9c5eaa17106857bb4f1a799776f46737781a29082ef66d8b78f24e6bacf1fb6
+  languageName: node
+  linkType: hard
+
 "@graphql-codegen/typescript@npm:^2.2.4":
   version: 2.2.4
   resolution: "@graphql-codegen/typescript@npm:2.2.4"
@@ -7043,6 +7059,7 @@ __metadata:
     "@graphql-codegen/typescript": ^2.2.4
     "@graphql-codegen/typescript-graphql-apollo": ^1.0.0
     "@graphql-codegen/typescript-operations": ^2.1.8
+    "@graphql-codegen/typescript-react-apollo": ^3.1.6
     "@reactive-class/react": ^0.1.0
     "@sijiaoh/graphql-codegen-default-queries": ^0.0.2
     "@types/node": ^16.11.0

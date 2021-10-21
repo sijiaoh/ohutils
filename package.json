@@ -7,14 +7,15 @@
     "build": "yarn generate && next build",
     "start": "next start",
     "lint": "gts lint",
-    "clean": "rm -rf generated src/generated .next",
+    "cleanGenerates": "rm -rf generated src/generated",
+    "clean": "yarn cleanGenerates && rm -rf .next",
     "fix": "gts fix",
     "execScript": "NODE_PATH=. ts-node --project=tsconfig.script.json",
     "generateGraphqlSchema": "yarn execScript scripts/generateGraphqlSchema",
     "generateGraphqlDefaultQueries": "yarn graphql-codegen --config=lib/default-queries.codegen.json",
     "generateGraphqlSrc": "yarn graphql-codegen --config=lib/src.codegen.json",
     "generateGraphql": "yarn generateGraphqlDefaultQueries && yarn generateGraphqlSrc",
-    "generate": "yarn generateGraphqlSchema && yarn generateGraphql"
+    "generate": "yarn cleanGenerates && yarn generateGraphqlSchema && yarn generateGraphql"
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
@@ -41,6 +42,7 @@
     "@graphql-codegen/typescript": "^2.2.4",
     "@graphql-codegen/typescript-graphql-apollo": "^1.0.0",
     "@graphql-codegen/typescript-operations": "^2.1.8",
+    "@graphql-codegen/typescript-react-apollo": "^3.1.6",
     "@sijiaoh/graphql-codegen-default-queries": "^0.0.2",
     "@types/node": "^16.11.0",
     "@types/react": "17.0.30",

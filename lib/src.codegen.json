@@ -14,6 +14,13 @@
         "typescript-operations",
         "typescript-graphql-apollo"
       ]
+    },
+    "./src/generated/graphql-apollo-react.ts": {
+      "plugins": [
+        "typescript",
+        "typescript-operations",
+        "typescript-react-apollo"
+      ]
     }
   }
 }

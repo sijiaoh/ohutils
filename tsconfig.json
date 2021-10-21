@@ -15,7 +15,9 @@
     "jsx": "preserve",
     "types": ["@emotion/react/types/css-prop"],
     "rootDir": ".",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

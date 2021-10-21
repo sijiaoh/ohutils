@@ -1,6 +1,6 @@
 import type {NextPage} from 'next';
 import Head from 'next/head';
-import {Counter} from './Counter';
+import {CounterComponent} from './CounterComponent';
 import {useHelloQuery} from 'src/apollo';
 import {Link} from 'src/utils/Link';
 
@@ -26,7 +26,7 @@ export const Home: NextPage = () => {
         <a css={{color: 'red'}}>{data?.hello}</a>
       </Link>
 
-      <Counter css={{marginTop: '1em'}} />
+      <CounterComponent css={{marginTop: '1em'}} />
     </div>
   );
 };

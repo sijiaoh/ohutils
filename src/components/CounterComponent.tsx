@@ -1,9 +1,9 @@
 import {useListen} from '@reactive-class/react';
 import {useRef} from 'react';
-import {Counter as CounterClass} from 'src/classes/Counter';
+import {Counter} from 'src/classes/Counter';
 
-export const Counter = ({className}: {className: string}) => {
-  const counter = useRef(new CounterClass()).current;
+export const CounterComponent = ({className}: {className?: string}) => {
+  const counter = useRef(new Counter()).current;
   const {count} = useListen(counter);
 
   return (

@@ -1,0 +1,9 @@
+{
+  "extends": "./node_modules/sijiaoh-gts/tsconfig-google.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+  "include": ["**/*.ts"]
+}

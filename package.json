@@ -4,12 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "yarn codegen && next build",
     "start": "next start",
     "lint": "gts lint",
     "clean": "gts clean",
     "fix": "gts fix",
-    "posttest": "yarn run lint"
+    "execScript": "NODE_PATH=. ts-node --project=tsconfig.script.json",
+    "generateGraphqlSchema": "yarn execScript scripts/generateGraphqlSchema",
+    "codegen": "yarn generateGraphqlSchema"
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",
@@ -36,6 +38,7 @@
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "eslint-config-next": "11.1.2",
     "sijiaoh-gts": "^0.5.4",
+    "ts-node": "^10.3.0",
     "typescript": "4.4.4"
   }
 }

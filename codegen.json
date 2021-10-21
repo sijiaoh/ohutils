@@ -1,0 +1,8 @@
+{
+  "schema": "./generated/schema.graphql",
+  "generates": {
+    "./generated/default-queries.graphql": {
+      "plugins": ["@sijiaoh/graphql-codegen-default-queries"]
+    }
+  }
+}

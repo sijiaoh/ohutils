@@ -13,7 +13,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "types": ["@emotion/react/types/css-prop"],
+    "types": ["@emotion/react/types/css-prop", "jest"],
     "rootDir": ".",
     "baseUrl": ".",
     "emitDecoratorMetadata": true,

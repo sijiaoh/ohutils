@@ -1946,21 +1946,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reactive-class/core@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@reactive-class/core@npm:0.1.0"
-  checksum: adc1d26f5107470041c07cba4ec89f41bfd34833c695368cbeef6b65ce060eca3d7493068e5d2ef12926b68b9d2c28942fab39d05cdbb772773ff343fbe800b2
+"@reactive-class/core@npm:0.1.1":
+  version: 0.1.1
+  resolution: "@reactive-class/core@npm:0.1.1"
+  checksum: 9fc08df78a58c68974a96df10c142c2815b779981ff706810de3173180ac487ce0c124b6d071ccf90e4db6ad8dd6961e0383d432af2dd4330137435b40cfc235
   languageName: node
   linkType: hard
 
-"@reactive-class/react@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@reactive-class/react@npm:0.1.0"
+"@reactive-class/react@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@reactive-class/react@npm:0.1.1"
   dependencies:
-    "@reactive-class/core": 0.1.0
+    "@reactive-class/core": 0.1.1
     react: ^17.0.2
     shallowequal: ^1.1.0
-  checksum: 8f3cc0b353499b3c5f85cc91a613244449f00fb80393220fa7707aa92ca67fb29f1f68738cd8a7a2b890f1b94c47f802e7b29e752f46fdc2680d1afbd46e1850
+  checksum: 4dc1e4531a69416c5a502009cf0441824083841615881fe59b10b58f1515ab35dc8e7bc5e989136755f998ef4db27c83923daaa66a99b3901f82635a5b53a1fa
   languageName: node
   linkType: hard
 
@@ -1985,15 +1985,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sijiaoh/docker-mysql@npm:^0.0.3":
-  version: 0.0.3
-  resolution: "@sijiaoh/docker-mysql@npm:0.0.3"
+"@sijiaoh/docker-mysql@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@sijiaoh/docker-mysql@npm:0.1.0"
   dependencies:
     commander: ^8.3.0
     execa: ^5.1.1
   bin:
     docker-mysql: build/src/index.js
-  checksum: 82cac233877e8bcf4489f95866a96090a24978e62b99aed719e1923dc81e9a78cec19de1917ccc04ad6bb2867290f2b0af9e2b0c29df560d11cf5287d41d2258
+  checksum: 769a1281698332e7044e3ccd777e0ad2971ed2cdccaebde875175bd0cd8688c37a31ec3d9afaee7d9c5907ca858f5e93582d8c49fc98208ce9d84bf9e45963bf
   languageName: node
   linkType: hard
 
@@ -2239,10 +2239,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*, @types/node@npm:^16.11.0":
+"@types/node@npm:*":
   version: 16.11.0
   resolution: "@types/node@npm:16.11.0"
   checksum: 194ae80ec72f664e15e03c33f116be96aa1e85b167a19e31003c53ddfc36dabd65744e9a76c1d46b7ce2e5981d2ccb8e84a85c3ec9ac89f1471daaa885bdcfd0
+  languageName: node
+  linkType: hard
+
+"@types/node@npm:^16.11.5":
+  version: 16.11.5
+  resolution: "@types/node@npm:16.11.5"
+  checksum: 290382b32606f0edf4b0b4d3e50283fdf18591c48f0088c22f114196d7f032973720afaba9c11a5acf8411a97c40c94cb89efb5a49691b77ec47917d501916be
   languageName: node
   linkType: hard
 
@@ -2274,14 +2281,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:17.0.30":
-  version: 17.0.30
-  resolution: "@types/react@npm:17.0.30"
+"@types/react@npm:17.0.32":
+  version: 17.0.32
+  resolution: "@types/react@npm:17.0.32"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: e3aaac1b8fda6e3622b75db0bd7d8dc412c2f2b77a00afdd32cae8c71fb0b1ca6926ab1fbe1c536dd51d96c0ba372738993837a8df1637637aaab7b86e421b7f
+  checksum: 952d33bf948b6f4ce52fbf4118d9c99c97427aa3270a6bcde9f1156bb3898f1662d8f6ca128d095b4677acaff3971b3f761940dbb437366f656ad584eb69b108
   languageName: node
   linkType: hard
 
@@ -8718,12 +8725,12 @@ __metadata:
     "@graphql-codegen/typescript-graphql-apollo": ^1.0.0
     "@graphql-codegen/typescript-operations": ^2.1.8
     "@graphql-codegen/typescript-react-apollo": ^3.1.6
-    "@reactive-class/react": ^0.1.0
-    "@sijiaoh/docker-mysql": ^0.0.3
+    "@reactive-class/react": ^0.1.1
+    "@sijiaoh/docker-mysql": ^0.1.0
     "@sijiaoh/graphql-codegen-default-queries": ^0.0.2
     "@types/jest": ^27.0.2
-    "@types/node": ^16.11.0
-    "@types/react": 17.0.30
+    "@types/node": ^16.11.5
+    "@types/react": 17.0.32
     "@types/uuid": ^8.3.1
     babel-plugin-transform-typescript-metadata: ^0.3.2
     class-validator: ^0.13.1
@@ -8740,7 +8747,7 @@ __metadata:
     reflect-metadata: ^0.1.13
     sijiaoh-gts: ^0.5.4
     ts-jest: ^27.0.7
-    ts-node: ^10.3.0
+    ts-node: ^10.4.0
     type-graphql: ^1.1.1
     typeorm: ^0.2.38
     typescript: 4.4.4
@@ -10889,9 +10896,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"ts-node@npm:^10.3.0":
-  version: 10.3.0
-  resolution: "ts-node@npm:10.3.0"
+"ts-node@npm:^10.4.0":
+  version: 10.4.0
+  resolution: "ts-node@npm:10.4.0"
   dependencies:
     "@cspotcode/source-map-support": 0.7.0
     "@tsconfig/node10": ^1.0.7
@@ -10921,7 +10928,7 @@ resolve@^2.0.0-next.3:
     ts-node-script: dist/bin-script.js
     ts-node-transpile-only: dist/bin-transpile.js
     ts-script: dist/bin-script-deprecated.js
-  checksum: aea1b9eac4d4c735c453a0e7efef6fd76c7b59db3be158eabe21abad9d35209d243b210a9a5ef39742ffbda542250c2e771fa387e3b4829e8cb699e82f3820c4
+  checksum: 3933ac0a937d33c45e04a6750fcdd3e765eb2897d1da1307cd97ac52af093bcfb632ec0453a75000a65c8b5b7bdb32b1077050a186dcc556e62657cb592e6d49
   languageName: node
   linkType: hard
 

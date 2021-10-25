@@ -1,6 +1,6 @@
 export DB_HOST=localhost
 export DB_PORT=3057
-# Use `${PROJECT_CWD}_${NODE_ENV} if empty.
+# Use `${basename(PROJECT_CWD)}_${NODE_ENV} if empty.
 export DB_NAME=
 export DB_USER=osushi
 export DB_PASS=osushi

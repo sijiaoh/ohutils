@@ -8708,9 +8708,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"osushi@workspace:.":
+"osushi-with-auth@workspace:.":
   version: 0.0.0-use.local
-  resolution: "osushi@workspace:."
+  resolution: "osushi-with-auth@workspace:."
   dependencies:
     "@apollo/client": ^3.4.16
     "@babel/core": ^7.15.8

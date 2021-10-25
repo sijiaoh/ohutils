@@ -4,7 +4,7 @@ import {CounterComponent} from './CounterComponent';
 import {useHelloQuery} from 'src/apollo';
 import {Link} from 'src/utils/Link';
 
-export const Home: NextPage = () => {
+export const HomeComponent: NextPage = () => {
   const {data} = useHelloQuery();
 
   return (

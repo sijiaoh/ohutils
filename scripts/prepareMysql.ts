@@ -11,7 +11,9 @@ void (async () => {
       'prepare',
       databaseConfig.version,
       databaseConfig.databaseName,
+      '--userName',
       databaseConfig.userName,
+      '--password',
       databaseConfig.password,
     ],
     {env: process.env, stdio: 'inherit'}

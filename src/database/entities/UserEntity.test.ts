@@ -1,7 +1,7 @@
 import {UserEntity} from './UserEntity';
-import {prepareMysql} from 'test/prepareTestMysql';
+import {prepareTestMysql} from 'test/prepareTestMysql';
 
-prepareMysql();
+prepareTestMysql();
 
 describe(UserEntity.name, () => {
   it('can create', async () => {

@@ -4,7 +4,7 @@ import {v4} from 'uuid';
 import {connectToDatabase} from 'src/database/connectToDatabase';
 import {databaseConfig} from 'src/database/databaseConfig';
 
-export const prepareMysql = () => {
+export const prepareTestMysql = () => {
   const databaseName = `${databaseConfig.databaseName}-${v4()}`.replace(
     /-/g,
     '_'
@@ -18,7 +18,9 @@ export const prepareMysql = () => {
         'prepare',
         databaseConfig.version,
         databaseName,
+        '--userName',
         databaseConfig.userName,
+        '--password',
         databaseConfig.password,
       ],
       {env: process.env, stdio: 'inherit'}

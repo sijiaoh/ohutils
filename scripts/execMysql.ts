@@ -10,7 +10,7 @@ void (async () => {
       'docker-mysql',
       'exec',
       databaseConfig.version,
-      '--database',
+      '--databaseName',
       databaseConfig.databaseName,
       '--userName',
       databaseConfig.userName,

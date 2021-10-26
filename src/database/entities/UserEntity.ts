@@ -1,6 +1,13 @@
 import 'reflect-metadata';
 
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
@@ -8,4 +15,9 @@ export class UserEntity extends BaseEntity {
   readonly id!: string;
   @Column()
   name!: string;
+
+  @CreateDateColumn()
+  readonly createdAt!: Date;
+  @UpdateDateColumn()
+  readonly updatedAt!: Date;
 }

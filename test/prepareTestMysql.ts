@@ -23,7 +23,7 @@ export const prepareTestMysql = () => {
         '--password',
         databaseConfig.password,
       ],
-      {env: process.env, stdio: 'inherit'}
+      {env: process.env}
     );
 
     await connectToDatabase({database: databaseName});
@@ -45,7 +45,7 @@ export const prepareTestMysql = () => {
         '--password',
         databaseConfig.password,
       ],
-      {env: process.env, stdio: 'inherit'}
+      {env: process.env}
     );
   });
 

@@ -1,11 +1,16 @@
 import 'reflect-metadata';
 
-import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {BaseEntity, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {SocialProfileEntity} from '.';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   readonly id!: string;
-  @Column()
-  name!: string;
+
+  @OneToMany(
+    () => SocialProfileEntity,
+    async socialProfile => socialProfile.user
+  )
+  readonly socialProfiles!: Promise<SocialProfileEntity[]>;
 }

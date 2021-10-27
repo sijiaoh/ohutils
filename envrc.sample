@@ -4,3 +4,7 @@ export DB_PORT=3057
 export DB_NAME=
 export DB_USER=osushi_with_auth
 export DB_PASS=osushi_with_auth
+
+export URL=http://localhost:3000
+export GOOGLE_CLIENT_ID=
+export GOOGLE_CLIENT_SECRET=

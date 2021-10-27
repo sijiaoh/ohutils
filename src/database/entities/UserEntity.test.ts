@@ -1,4 +1,4 @@
-import {UserEntity} from './UserEntity';
+import {UserEntity} from '.';
 import {prepareTestMysql} from 'test/prepareTestMysql';
 
 prepareTestMysql();

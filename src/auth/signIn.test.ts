@@ -1,34 +1,12 @@
 import {NextApiRequest} from 'next';
-import {Profile} from 'passport';
 import {signIn} from './signIn';
 import {SocialProfileEntity, UserEntity} from 'src/database/entities';
+import {buildProfile} from 'test/buildProfile';
+import {createUser} from 'test/createUser';
+import {emptyRequest} from 'test/emptyRequest';
 import {prepareTestMysql} from 'test/prepareTestMysql';
 
 prepareTestMysql();
-
-const emptyRequest = {} as NextApiRequest;
-
-const buildProfile = (options?: Partial<Profile>): Profile => ({
-  provider: 'google',
-  id: 'googleId',
-  displayName: 'john',
-  emails: [{value: 'john@osushi.com'}],
-  ...options,
-});
-
-const createUser = async (profile?: Partial<Profile>) => {
-  return new Promise<UserEntity>((resolve, reject) => {
-    void signIn(emptyRequest, buildProfile(profile), (err, user) => {
-      if (err || !user) {
-        reject(err);
-        return;
-      }
-      resolve(user);
-    }).catch(err => {
-      reject(err);
-    });
-  });
-};
 
 describe(signIn.name, () => {
   it('can create new user', async () => {

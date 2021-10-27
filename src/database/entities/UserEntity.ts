@@ -1,12 +1,24 @@
 import 'reflect-metadata';
 
-import {BaseEntity, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {
+  BaseEntity,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import {SocialProfileEntity} from '.';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   readonly id!: string;
+
+  @CreateDateColumn()
+  readonly createdAt!: Date;
+  @UpdateDateColumn()
+  readonly updatedAt!: Date;
 
   /**
    * @deprecated

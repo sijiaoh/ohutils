@@ -7,7 +7,7 @@ prepareTestMysql();
 describe(SocialProfileEntity.name, () => {
   it('will not remove user when itself removed', async () => {
     const user = await createUser();
-    const socialProfiles = await user.socialProfiles;
+    const socialProfiles = await user.getSocialProfiles();
     await socialProfiles[0].remove();
 
     expect(await UserEntity.count()).toBe(1);

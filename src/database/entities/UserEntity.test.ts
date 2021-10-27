@@ -8,4 +8,10 @@ describe(UserEntity.name, () => {
     await UserEntity.create().save();
     expect(await UserEntity.count()).toBe(1);
   });
+
+  it('socialProfiles can not use directly', async () => {
+    // Remove socialProfiles duplecate when it fixed.
+    const user = await UserEntity.create().save();
+    await expect(async () => user.socialProfiles).rejects.toThrowError();
+  });
 });

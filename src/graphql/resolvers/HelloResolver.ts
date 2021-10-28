@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+
 import {Ctx, Query, Resolver} from 'type-graphql';
 import {Context} from 'src/utils/Context';
 

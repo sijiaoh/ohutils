@@ -18,7 +18,7 @@
     "generateGraphql": "yarn generateGraphqlDefaultQueries && yarn generateGraphqlSrc",
     "generate": "yarn cleanGenerates && yarn generateGraphqlSchema && yarn generateGraphql",
     "prepareMysql": "yarn execScript scripts/prepareMysql",
-    "removeDatabase": "yarn docker-mysql rm --userName ${DB_USER} --password ${DB_PASS} --volume ${DB_VERSION} ${DB_NAME}",
+    "removeDatabase": "yarn execScript scripts/removeDatabase",
     "resetDatabase": "yarn removeDatabase && yarn prepareMysql",
     "execMysql": "yarn execScript scripts/execMysql"
   },

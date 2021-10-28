@@ -1,6 +1,6 @@
-import {NextApiRequest} from 'next';
 import {signIn} from './signIn';
 import {SocialProfileEntity, UserEntity} from 'src/database/entities';
+import {Request} from 'src/utils/Context';
 import {buildProfile} from 'test/buildProfile';
 import {createUser} from 'test/createUser';
 import {emptyRequest} from 'test/emptyRequest';
@@ -32,7 +32,7 @@ describe(signIn.name, () => {
     const userId = await createUser().then(user => user.id);
 
     await signIn(
-      {user: {id: userId}} as NextApiRequest,
+      {user: {id: userId}} as Request,
       buildProfile({provider: 'twitter'}),
       (err, user) => {
         expect(err).toBeUndefined();
@@ -48,7 +48,7 @@ describe(signIn.name, () => {
     await createUser({id: 'googleId2'});
 
     await signIn(
-      {user: {id: userId}} as NextApiRequest,
+      {user: {id: userId}} as Request,
       buildProfile({id: 'googleId2'}),
       (err, user) => {
         expect(err).toBeInstanceOf(Error);
@@ -63,7 +63,7 @@ describe(signIn.name, () => {
     const userId = await createUser().then(user => user.id);
 
     await signIn(
-      {user: {id: userId}} as NextApiRequest,
+      {user: {id: userId}} as Request,
       buildProfile({id: 'googleId2'}),
       (err, user) => {
         expect(err).toBeInstanceOf(Error);

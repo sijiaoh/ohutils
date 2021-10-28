@@ -1,8 +1,10 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import nookies from 'nookies';
+import {UserEntity} from 'src/database/entities';
 
 export type Request = Omit<NextApiRequest, 'cookies'> & {
   cookies: {[key: string]: string | undefined};
+  user?: UserEntity;
 };
 
 export type Response = NextApiResponse & {

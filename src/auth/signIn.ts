@@ -1,7 +1,7 @@
-import {NextApiRequest} from 'next';
 import {Profile} from 'passport';
 import {getManager} from 'typeorm';
 import {SocialProfileEntity, UserEntity} from 'src/database/entities';
+import {Request} from 'src/utils/Context';
 
 export type VerifyCallback = (
   err?: string | Error | null,
@@ -16,7 +16,7 @@ const buildSocialProfile = (userId: string, profile: Profile) => ({
 });
 
 export async function signIn(
-  req: NextApiRequest,
+  req: Request,
   profile: Profile,
   done: VerifyCallback
 ) {

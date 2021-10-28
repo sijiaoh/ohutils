@@ -1,3 +1,3 @@
-import {NextApiRequest} from 'next';
+import {Request} from 'src/utils/Context';
 
-export const emptyRequest = {} as NextApiRequest;
+export const emptyRequest = {} as Request;

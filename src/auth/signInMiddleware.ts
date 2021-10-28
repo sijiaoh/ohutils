@@ -1,7 +1,7 @@
-import {NextApiRequest} from 'next';
 import passport from 'passport';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
 import {signIn} from 'src/auth/signIn';
+import {Request} from 'src/utils/Context';
 import {Middleware} from 'src/utils/Middleware';
 
 const config = {
@@ -23,7 +23,7 @@ passport.use(
       passReqToCallback: true,
     },
     (req, _, __, profile, done) => {
-      signIn(req as unknown as NextApiRequest, profile, done).catch(done);
+      signIn(req as unknown as Request, profile, done).catch(done);
     }
   )
 );

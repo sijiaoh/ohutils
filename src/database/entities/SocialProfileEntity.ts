@@ -12,7 +12,7 @@ import {
 } from 'typeorm';
 import {UserEntity} from '.';
 
-@Entity('social_profiles')
+@Entity()
 @Index(['userId', 'provider'], {unique: true})
 @Index(['provider', 'providerId'], {unique: true})
 export class SocialProfileEntity extends BaseEntity {

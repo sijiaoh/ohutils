@@ -1,9 +1,7 @@
-import {NextApiRequest, NextApiResponse} from 'next';
-import {Middleware} from 'next-connect';
 import {connectToDatabase} from './connectToDatabase';
+import {Middleware} from 'src/utils/Middleware';
 
-export const databaseMiddleware: Middleware<NextApiRequest, NextApiResponse> =
-  async (req, res, next) => {
-    await connectToDatabase();
-    next();
-  };
+export const databaseMiddleware: Middleware = async (req, res, next) => {
+  await connectToDatabase();
+  next();
+};

@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 import {SocialProfileEntity} from '.';
 
-@Entity('users')
+@Entity()
 export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   readonly id!: string;

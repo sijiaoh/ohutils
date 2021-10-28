@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import {SocialProfileEntity} from '.';
+import {PostEntity, SocialProfileEntity} from '.';
 
 @Entity()
 export class UserEntity extends BaseEntity {
@@ -27,4 +27,7 @@ export class UserEntity extends BaseEntity {
   // eslint-disable-next-line @typescript-eslint/promise-function-async
   @OneToMany(() => SocialProfileEntity, socialProfile => socialProfile.user)
   readonly socialProfiles!: Promise<SocialProfileEntity[]>;
+  // eslint-disable-next-line @typescript-eslint/promise-function-async
+  @OneToMany(() => PostEntity, post => post.user)
+  readonly posts!: Promise<PostEntity[]>;
 }

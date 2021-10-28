@@ -1,9 +1,8 @@
 import {NextApiRequest} from 'next';
-import nextConnect from 'next-connect';
 import passport from 'passport';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
 import {signIn} from 'src/auth/signIn';
-import {databaseMiddleware} from 'src/database/databaseMiddleware';
+import {Middleware} from 'src/utils/Middleware';
 
 const config = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID!,
@@ -29,21 +28,12 @@ passport.use(
   )
 );
 
-export const getSignHandler = () => {
-  const handler = nextConnect();
+export const signInMiddleware: Middleware = (req, res, next) => {
+  const provider = req.query.provider;
+  if (!provider) throw new Error('req.query.provider can not be falsy.');
 
-  handler.use(databaseMiddleware);
-  handler.use(passport.initialize());
-
-  handler.get<NextApiRequest>((req, res, next) => {
-    const provider = req.query.provider;
-    if (!provider) throw new Error('req.query.provider can not be falsy.');
-
-    passport.authenticate(req.query.provider, {
-      scope: ['email'],
-      session: false,
-    })(req, res, next);
-  });
-
-  return handler;
+  passport.authenticate(req.query.provider, {
+    scope: ['email'],
+    session: false,
+  })(req, res, next);
 };

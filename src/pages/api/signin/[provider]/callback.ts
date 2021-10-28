@@ -1,3 +1,10 @@
-import {getSignHandler} from 'src/auth/getSignHandler';
+import nextConnect from 'next-connect';
+import passport from 'passport';
+import {signInMiddleware} from 'src/auth/signInMiddleware';
+import {databaseMiddleware} from 'src/database/databaseMiddleware';
 
-export default getSignHandler();
+const handler = nextConnect();
+handler.use(databaseMiddleware);
+handler.use(passport.initialize());
+handler.get(signInMiddleware);
+export default handler;

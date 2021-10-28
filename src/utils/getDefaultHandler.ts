@@ -3,9 +3,10 @@ import {cookieMiddleware} from './cookieMiddleware';
 import {authMiddleware} from 'src/auth/authMiddleware';
 import {databaseMiddleware} from 'src/database/databaseMiddleware';
 
-const handler = nextConnect();
-handler.use(databaseMiddleware);
-handler.use(cookieMiddleware);
-handler.use(authMiddleware);
-
-export {handler};
+export const getDefaultHandler = () => {
+  const handler = nextConnect();
+  handler.use(databaseMiddleware);
+  handler.use(cookieMiddleware);
+  handler.use(authMiddleware);
+  return handler;
+};

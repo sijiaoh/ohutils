@@ -10,7 +10,7 @@ export const HomeComponent: NextPage = () => {
   return (
     <div>
       <Head>
-        <title>Osushi with auth</title>
+        <title>ohutils.com</title>
         <meta
           name="description"
           content="next.js + typescript + graphql + apollo + reactive-class template"
@@ -19,10 +19,7 @@ export const HomeComponent: NextPage = () => {
       </Head>
 
       <h1>
-        Welcome to{' '}
-        <a href="https://github.com/sijiaoh/osushi-with-auth">
-          Osushi with auth!
-        </a>
+        Welcome to <a href="https://github.com/sijiaoh/ohutils">ohutils.com!</a>
       </h1>
 
       <Link href="#">

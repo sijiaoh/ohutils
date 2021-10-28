@@ -3,8 +3,8 @@ export DB_HOST=localhost
 export DB_PORT=3057
 # Use `${basename(PROJECT_CWD)}_${NODE_ENV} if empty.
 export DB_NAME=
-export DB_USER=osushi_with_auth
-export DB_PASS=osushi_with_auth
+export DB_USER=ohutils
+export DB_PASS=ohutils
 
 export URL=http://localhost:3000
 export GOOGLE_CLIENT_ID=

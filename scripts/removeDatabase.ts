@@ -1,6 +1,4 @@
 import execa from 'execa';
-import {getConnection} from 'typeorm';
-import {connectToDatabase} from 'src/database/connectToDatabase';
 import {databaseConfig} from 'src/database/databaseConfig';
 
 void (async () => {
@@ -19,8 +17,4 @@ void (async () => {
     ],
     {env: process.env, stdio: 'inherit'}
   );
-
-  await connectToDatabase();
-  const connection = getConnection();
-  await connection.close();
 })();

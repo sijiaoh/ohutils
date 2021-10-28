@@ -12,6 +12,7 @@ export type Response = NextApiResponse & {
     value: string,
     options?: Parameters<typeof nookies.set>[3]
   ) => void;
+  clearCookie: (name: string) => void;
 };
 
 export interface Context {

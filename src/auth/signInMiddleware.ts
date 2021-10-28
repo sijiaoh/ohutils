@@ -1,7 +1,7 @@
 import passport from 'passport';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
 import {signIn} from 'src/auth/signIn';
-import {Request} from 'src/utils/Context';
+import {Request, Response} from 'src/utils/Context';
 import {Middleware} from 'src/utils/Middleware';
 
 const config = {
@@ -22,8 +22,16 @@ passport.use(
       callbackURL: `${config.URL}/api/signin/google/callback`,
       passReqToCallback: true,
     },
-    (req, _, __, profile, done) => {
-      signIn(req as unknown as Request, profile, done).catch(done);
+    (rq, rs, __, profile, done) => {
+      const req = rq as unknown as Request;
+      const res = rs as unknown as Response;
+      signIn(req as unknown as Request, profile)
+        .then(user => {
+          req.user = user;
+          res.cookie('token', req.user.token);
+          done(undefined, user);
+        })
+        .catch(done);
     }
   )
 );

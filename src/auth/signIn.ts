@@ -17,9 +17,8 @@ const buildSocialProfile = (userId: string, profile: Profile) => ({
 
 export async function signIn(
   req: Request,
-  profile: Profile,
-  done: VerifyCallback
-) {
+  profile: Profile
+): Promise<UserEntity> {
   const socialProfile = await SocialProfileEntity.findOne({
     where: {provider: profile.provider, providerId: profile.id},
   });
@@ -29,45 +28,34 @@ export async function signIn(
     // Check if social profile is correct.
     if (socialProfile) {
       if (req.user.id === socialProfile.userId) {
-        done(undefined, req.user);
-        return;
+        return req.user;
       } else {
-        done(new Error('User is not a SocialProfile user.'));
-        return;
+        throw new Error('User is not a SocialProfile user.');
       }
     }
     // Link new social profile.
     else {
-      const err = await SocialProfileEntity.create(
+      await SocialProfileEntity.create(
         buildSocialProfile(req.user.id, profile)
-      )
-        .save()
-        .then(() => undefined)
-        .catch(err => err);
-      done(err, err ? undefined : req.user);
-      return;
+      ).save();
+      return req.user;
     }
   }
   // Normal sign in.
   else if (socialProfile) {
     const user = await socialProfile.user;
-    done(undefined, user);
-    return;
+    return user;
   }
   // Sign up.
   else {
-    const res = await getManager()
-      .transaction(async entityManager => {
-        const user = await entityManager.create(UserEntity).save();
-        await entityManager
-          .create(SocialProfileEntity, buildSocialProfile(user.id, profile))
-          .save();
-        return user;
-      })
-      .then(user => [undefined, user] as const)
-      .catch(err => [err]);
+    const user = await getManager().transaction(async entityManager => {
+      const user = await entityManager.create(UserEntity).save();
+      await entityManager
+        .create(SocialProfileEntity, buildSocialProfile(user.id, profile))
+        .save();
+      return user;
+    });
 
-    done(...res);
-    return;
+    return user;
   }
 }

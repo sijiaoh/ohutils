@@ -2,6 +2,7 @@ import 'reflect-metadata';
 
 import {
   BaseEntity,
+  Column,
   CreateDateColumn,
   Entity,
   OneToMany,
@@ -14,6 +15,9 @@ import {SocialProfileEntity} from '.';
 export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   readonly id!: string;
+
+  @Column({generated: 'uuid', unique: true})
+  readonly token!: string;
 
   @CreateDateColumn()
   readonly createdAt!: Date;

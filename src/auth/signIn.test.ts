@@ -10,9 +10,9 @@ prepareTestMysql();
 
 describe(signIn.name, () => {
   it('can create new user', async () => {
-    await signIn(emptyRequest, buildProfile(), err => {
-      expect(err).toBeUndefined();
-    });
+    await expect(
+      signIn(emptyRequest, buildProfile())
+    ).resolves.not.toThrowError();
     expect(await UserEntity.count()).toBe(1);
     expect(await SocialProfileEntity.count()).toBe(1);
   });
@@ -20,10 +20,8 @@ describe(signIn.name, () => {
   it('can normal login', async () => {
     await createUser();
 
-    await signIn(emptyRequest, buildProfile(), (err, user) => {
-      expect(err).toBeUndefined();
-      expect(user).toBeInstanceOf(UserEntity);
-    });
+    const user = await signIn(emptyRequest, buildProfile());
+    expect(user).toBeInstanceOf(UserEntity);
     expect(await UserEntity.count()).toBe(1);
     expect(await SocialProfileEntity.count()).toBe(1);
   });
@@ -31,14 +29,11 @@ describe(signIn.name, () => {
   it('can link other social account', async () => {
     const userId = await createUser().then(user => user.id);
 
-    await signIn(
+    const user = await signIn(
       {user: {id: userId}} as Request,
-      buildProfile({provider: 'twitter'}),
-      (err, user) => {
-        expect(err).toBeUndefined();
-        expect(user).toBeTruthy();
-      }
+      buildProfile({provider: 'twitter'})
     );
+    expect(user).toBeTruthy();
     expect(await UserEntity.count()).toBe(1);
     expect(await SocialProfileEntity.count()).toBe(2);
   });
@@ -47,14 +42,9 @@ describe(signIn.name, () => {
     const userId = await createUser().then(user => user.id);
     await createUser({id: 'googleId2'});
 
-    await signIn(
-      {user: {id: userId}} as Request,
-      buildProfile({id: 'googleId2'}),
-      (err, user) => {
-        expect(err).toBeInstanceOf(Error);
-        expect(user).toBeUndefined();
-      }
-    );
+    await expect(
+      signIn({user: {id: userId}} as Request, buildProfile({id: 'googleId2'}))
+    ).rejects.toThrowError();
     expect(await UserEntity.count()).toBe(2);
     expect(await SocialProfileEntity.count()).toBe(2);
   });
@@ -62,14 +52,9 @@ describe(signIn.name, () => {
   it("can not sign in with already linked provider's another profile", async () => {
     const userId = await createUser().then(user => user.id);
 
-    await signIn(
-      {user: {id: userId}} as Request,
-      buildProfile({id: 'googleId2'}),
-      (err, user) => {
-        expect(err).toBeInstanceOf(Error);
-        expect(user).toBeUndefined();
-      }
-    );
+    await expect(
+      signIn({user: {id: userId}} as Request, buildProfile({id: 'googleId2'}))
+    ).rejects.toThrowError();
     expect(await UserEntity.count()).toBe(1);
     expect(await SocialProfileEntity.count()).toBe(1);
   });

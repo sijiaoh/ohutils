@@ -11,7 +11,7 @@ import {getUser} from 'src/utils/getUser';
 export class PostResolver {
   @Mutation(() => Boolean)
   @Authorized()
-  async create(
+  async createPost(
     @Ctx() {req}: Context,
     @Arg('post') {title, text, tags}: PostInput
   ): Promise<Boolean> {

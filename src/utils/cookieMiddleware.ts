@@ -2,6 +2,10 @@ import nookies from 'nookies';
 import {Middleware} from 'src/utils/Middleware';
 
 export const cookieMiddleware: Middleware = (req, res, next) => {
+  if (process.env.NODE_ENV === 'test') {
+    req.cookies = nookies.get({req});
+  }
+
   res.cookie = (name, value, options?: Parameters<typeof nookies.set>[3]) => {
     req.cookies[name] = value;
     nookies.set({res}, name, value, {

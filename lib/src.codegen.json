@@ -21,6 +21,13 @@
         "typescript-operations",
         "typescript-react-apollo"
       ]
+    },
+    "./test/generated/generic-sdk.ts": {
+      "plugins": [
+        "typescript",
+        "typescript-operations",
+        "typescript-generic-sdk"
+      ]
     }
   }
 }

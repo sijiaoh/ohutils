@@ -1,6 +1,14 @@
 import 'reflect-metadata';
 
-import {Arg, Authorized, Ctx, Mutation, Query, Resolver} from 'type-graphql';
+import {
+  Arg,
+  Authorized,
+  Ctx,
+  Mutation,
+  Query,
+  Resolver,
+  UnauthorizedError,
+} from 'type-graphql';
 import {getManager} from 'typeorm';
 import {EntityNotFoundError} from '../EntityNotFoundError';
 import {PostInput} from '../input-types/PostInput';
@@ -58,5 +66,21 @@ export class PostResolver {
     });
 
     return {...createdPost, tags: tags || []};
+  }
+
+  @Mutation(() => Boolean)
+  @Authorized()
+  async removePost(
+    @Ctx() {req}: Context,
+    @Arg('id') id: string
+  ): Promise<boolean> {
+    const user = getUser(req);
+    const post = await PostEntity.findOne(id);
+
+    if (!post) throw new EntityNotFoundError();
+    if (post.userId !== user.id) throw new UnauthorizedError();
+
+    await post.remove();
+    return true;
   }
 }

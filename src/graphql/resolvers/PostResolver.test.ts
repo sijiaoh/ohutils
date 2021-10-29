@@ -1,3 +1,4 @@
+import {UnauthorizedError} from 'type-graphql';
 import {EntityNotFoundError} from '../EntityNotFoundError';
 import {PostResolver} from '.';
 import {PostEntity, TagEntity} from 'src/database/entities';
@@ -86,6 +87,45 @@ describe(PostResolver.name, () => {
       expect(res.createPost.id).toBeTruthy();
 
       expect(await TagEntity.count()).toBe(3);
+    });
+  });
+
+  describe(PostResolver.prototype.removePost.name, () => {
+    it('should remove post', async () => {
+      const user = await createUser();
+      const sdk = await getSignedTestSdk(user);
+
+      const createPostRes = await sdk.createPost({
+        post: {title: 'title', text: 'text'},
+      });
+      expect(createPostRes.createPost.id).toBeTruthy();
+
+      const removePostRes = await sdk.removePost({
+        id: createPostRes.createPost.id,
+      });
+      expect(removePostRes.removePost).toBeTruthy();
+
+      expect(await PostEntity.count()).toBe(0);
+    });
+
+    it('should throw error when user is not owner', async () => {
+      const owner = await createUser();
+      const ownerSdk = await getSignedTestSdk(owner);
+
+      const createPostRes = await ownerSdk.createPost({
+        post: {title: 'title', text: 'text'},
+      });
+      expect(createPostRes.createPost.id).toBeTruthy();
+
+      const user = await createUser({id: 'googleId2'});
+      const userSdk = await getSignedTestSdk(user);
+
+      const errors = await userSdk
+        .removePost({id: createPostRes.createPost.id})
+        .catch(err => err);
+      expect(errors[0].message).toBe(new UnauthorizedError().message);
+
+      expect(await PostEntity.count()).toBe(1);
     });
   });
 });

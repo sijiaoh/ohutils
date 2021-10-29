@@ -1,8 +1,9 @@
 import 'reflect-metadata';
 
 import {Arg, Authorized, Ctx, Mutation, Resolver} from 'type-graphql';
+import {getManager} from 'typeorm';
 import {PostInput} from '../input-types/PostInput';
-import {PostEntity} from 'src/database/entities';
+import {PostEntity, TagEntity} from 'src/database/entities';
 import {Context} from 'src/utils/Context';
 import {getUser} from 'src/utils/getUser';
 
@@ -12,10 +13,32 @@ export class PostResolver {
   @Authorized()
   async create(
     @Ctx() {req}: Context,
-    @Arg('post') {type, title, text}: PostInput
+    @Arg('post') {title, text, tags}: PostInput
   ): Promise<Boolean> {
     const user = getUser(req);
-    await PostEntity.create({userId: user.id, type, title, text}).save();
+    await getManager().transaction(async entityManager => {
+      await entityManager
+        .createQueryBuilder()
+        .insert()
+        .orIgnore()
+        .into(TagEntity)
+        .values(tags.map(tag => ({name: tag})))
+        .execute();
+
+      const tagEntities = await entityManager.find(TagEntity, {
+        where: tags.map(tag => ({name: tag})),
+      });
+
+      const postEntity = entityManager.create(PostEntity, {
+        userId: user.id,
+        title,
+        text,
+      });
+      await entityManager.save(postEntity);
+
+      postEntity.tags = Promise.resolve(tagEntities);
+      await entityManager.save(postEntity);
+    });
     return true;
   }
 }

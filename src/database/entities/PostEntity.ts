@@ -5,11 +5,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import {UserEntity} from '.';
+import {TagEntity, UserEntity} from '.';
 
 @Entity()
 export class PostEntity extends BaseEntity {
@@ -17,11 +19,9 @@ export class PostEntity extends BaseEntity {
   readonly id!: string;
 
   @Column()
-  readonly type!: string;
-  @Column()
-  readonly title!: string;
+  title!: string;
   @Column('text')
-  readonly text!: string;
+  text!: string;
 
   @CreateDateColumn()
   readonly createdAt!: Date;
@@ -32,4 +32,8 @@ export class PostEntity extends BaseEntity {
   readonly userId!: string;
   @ManyToOne(() => UserEntity, {onDelete: 'CASCADE'})
   readonly user!: Promise<UserEntity>;
+
+  @ManyToMany(() => TagEntity)
+  @JoinTable()
+  tags!: Promise<TagEntity[]>;
 }

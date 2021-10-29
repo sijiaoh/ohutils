@@ -1,8 +1,3 @@
-import {graphqlMiddleware} from 'src/graphql/graphqlMiddleware';
-import {getDefaultHandler} from 'src/utils/getDefaultHandler';
+import {getGraphqlHandler} from 'src/graphql/getGraphqlHandler';
 
-const handler = getDefaultHandler();
-if (process.env.NODE_ENV === 'development') handler.get(graphqlMiddleware);
-handler.post(graphqlMiddleware);
-
-export default handler;
+export default getGraphqlHandler();

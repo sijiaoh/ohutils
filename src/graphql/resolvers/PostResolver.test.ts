@@ -1,6 +1,6 @@
 import {EntityNotFoundError} from '../EntityNotFoundError';
 import {PostResolver} from '.';
-import {PostEntity} from 'src/database/entities';
+import {PostEntity, TagEntity} from 'src/database/entities';
 import {createUser} from 'test/createUser';
 import {getSignedTestSdk} from 'test/getSignedTestSdk';
 import {prepareTestMysql} from 'test/prepareTestMysql';
@@ -66,6 +66,26 @@ describe(PostResolver.name, () => {
       const tags = await post?.tags;
       expect(tags?.map(tag => tag.name).sort()).toEqual(tagNames.sort());
       expect(tags?.length).toBe(2);
+    });
+
+    it('can create post with exists tags', async () => {
+      const postProps = {title: 'title', text: 'text'};
+      const tagNames = ['tag1', 'tag2'];
+
+      const user = await createUser();
+      const sdk = await getSignedTestSdk(user);
+
+      let res = await sdk.createPost({
+        post: {...postProps, tags: tagNames},
+      });
+      expect(res.createPost.id).toBeTruthy();
+
+      res = await sdk.createPost({
+        post: {...postProps, tags: [...tagNames, 'tag3']},
+      });
+      expect(res.createPost.id).toBeTruthy();
+
+      expect(await TagEntity.count()).toBe(3);
     });
   });
 });

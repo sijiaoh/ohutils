@@ -10,7 +10,10 @@ export const getTestSdk = (agent?: SuperAgentTest) => {
     const res = await agent!
       .post('/api/graphql')
       .send({query: print(doc), variables: vars});
+
+    if (res.body.errors) throw res.body.errors;
     if (res.error) throw res.error;
+
     return res.body.data;
   });
 };

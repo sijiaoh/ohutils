@@ -16,18 +16,22 @@ export class PostResolver {
     @Arg('post') {title, text, tags}: PostInput
   ): Promise<Boolean> {
     const user = getUser(req);
-    await getManager().transaction(async entityManager => {
-      await entityManager
-        .createQueryBuilder()
-        .insert()
-        .orIgnore()
-        .into(TagEntity)
-        .values(tags.map(tag => ({name: tag})))
-        .execute();
 
-      const tagEntities = await entityManager.find(TagEntity, {
-        where: tags.map(tag => ({name: tag})),
-      });
+    await getManager().transaction(async entityManager => {
+      let tagEntities: TagEntity[] = [];
+      if (tags) {
+        await entityManager
+          .createQueryBuilder()
+          .insert()
+          .orIgnore()
+          .into(TagEntity)
+          .values(tags.map(tag => ({name: tag})))
+          .execute();
+
+        tagEntities = await entityManager.find(TagEntity, {
+          where: tags.map(tag => ({name: tag})),
+        });
+      }
 
       const postEntity = entityManager.create(PostEntity, {
         userId: user.id,

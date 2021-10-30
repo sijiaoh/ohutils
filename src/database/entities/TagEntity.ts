@@ -1,7 +1,10 @@
 import 'reflect-metadata';
 
+import {IsNotEmpty, Matches, validateOrReject} from 'class-validator';
 import {
   BaseEntity,
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -17,6 +20,8 @@ export class TagEntity extends BaseEntity {
   readonly id!: string;
 
   @Column({unique: true})
+  @IsNotEmpty()
+  @Matches(/^((?!\s).)*$/)
   readonly name!: string;
 
   @CreateDateColumn()
@@ -26,4 +31,10 @@ export class TagEntity extends BaseEntity {
 
   @ManyToMany(() => PostEntity)
   readonly posts!: Promise<PostEntity[]>;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  async validate() {
+    await validateOrReject(this);
+  }
 }

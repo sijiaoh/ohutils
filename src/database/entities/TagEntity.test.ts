@@ -1,3 +1,4 @@
+import {validate} from 'class-validator';
 import {getConnection} from 'typeorm';
 import {PostEntity, TagEntity} from '.';
 import {createUser} from 'test/createUser';
@@ -50,5 +51,27 @@ describe(TagEntity.name, () => {
       .values({postEntityId: post.id, tagEntityId: tags[0].id});
     await expect(query.execute()).resolves.not.toThrowError();
     await expect(query.execute()).rejects.toThrowError();
+  });
+
+  describe('validate', () => {
+    const createWithName = async (name: string) => {
+      return await TagEntity.create({name})
+        .save()
+        .catch(err => err);
+    };
+
+    it('name should be provide', async () => {
+      const errors = await createWithName('');
+      expect(errors.length).toBe(1);
+    });
+
+    it('should not contain \\s in name', async () => {
+      let errors = await createWithName('a a');
+      expect(errors.length).toBe(1);
+      errors = await createWithName('a\ta');
+      expect(errors.length).toBe(1);
+      errors = await createWithName('a\na');
+      expect(errors.length).toBe(1);
+    });
   });
 });

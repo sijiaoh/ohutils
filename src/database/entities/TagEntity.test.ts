@@ -1,4 +1,3 @@
-import {validate} from 'class-validator';
 import {getConnection} from 'typeorm';
 import {PostEntity, TagEntity} from '.';
 import {createUser} from 'test/createUser';

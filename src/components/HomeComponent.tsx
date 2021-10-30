@@ -1,13 +1,10 @@
 import type {NextPage} from 'next';
-import Head from 'next/head';
+import {HeadComponent} from './HeadComponent';
 
 export const HomeComponent: NextPage = () => {
   return (
     <div>
-      <Head>
-        <title>ohutils.com</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadComponent subTitle={'Home'} />
 
       <h1>
         Welcome to <a href="https://github.com/sijiaoh/ohutils">ohutils.com!</a>

@@ -1,6 +1,6 @@
 import type {NextPage} from 'next';
-import Head from 'next/head';
 import {CounterComponent} from './CounterComponent';
+import {HeadComponent} from './HeadComponent';
 import {useHelloQuery} from 'src/apollo';
 import {Link} from 'src/utils/Link';
 
@@ -9,14 +9,7 @@ export const HomeComponent: NextPage = () => {
 
   return (
     <div>
-      <Head>
-        <title>Osushi with auth</title>
-        <meta
-          name="description"
-          content="next.js + typescript + graphql + apollo + reactive-class template"
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadComponent subTitle={'Home'} />
 
       <h1>
         Welcome to{' '}

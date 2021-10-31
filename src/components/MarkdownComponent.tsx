@@ -1,6 +1,9 @@
+import hljs from 'highlight.js';
 import marked from 'marked';
 import {useEffect, useRef} from 'react';
 import {DefaultProps} from 'src/utils/DefaultProps';
+
+import 'highlight.js/styles/github.css';
 
 export const MarkdownComponent = ({
   text,
@@ -11,7 +14,13 @@ export const MarkdownComponent = ({
   useEffect(() => {
     const elm = elmRef.current;
     if (!elm) return;
-    elm.innerHTML = marked(text);
+    elm.innerHTML = marked(text, {
+      highlight: (code, lang) => {
+        if (hljs.getLanguage(lang))
+          return hljs.highlight(code, {language: lang}).value;
+        return code;
+      },
+    });
   }, [text]);
 
   return (

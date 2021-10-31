@@ -1,4 +1,6 @@
 import {useListen} from '@reactive-class/react';
+import {useRef} from 'react';
+import _ from 'underscore';
 import {MarkdownComponent} from '../MarkdownComponent';
 import {Post} from 'src/classes/Post';
 import {
@@ -13,6 +15,13 @@ export const PostEditorComponent = ({
   className,
 }: DefaultProps<{post: Post}>) => {
   const postData = useListen(post);
+  const onChange = useRef(
+    _.debounce(({title, text, tags}: typeof initialValues) => {
+      post.title = title;
+      post.text = text;
+      post.setTagsFromStr(tags);
+    }, 500)
+  ).current;
 
   const initialValues = {
     title: postData.title,
@@ -29,11 +38,7 @@ export const PostEditorComponent = ({
         if (!title) errors.title = 'タイトルは必須です';
         return errors;
       }}
-      onChange={({title, text, tags}) => {
-        post.title = title;
-        post.text = text;
-        post.setTagsFromStr(tags);
-      }}
+      onChange={onChange}
       onSubmit={async ({title, text, tags}) => {
         post.title = title;
         post.text = text;

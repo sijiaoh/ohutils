@@ -2524,6 +2524,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/underscore@npm:^1.11.3":
+  version: 1.11.3
+  resolution: "@types/underscore@npm:1.11.3"
+  checksum: 113084a0e2f20837f70d1735ad16318f7a4320bf9804198023d8af4eb66a910b6beb5fba142f4a372982da145449a2c99de1477e335ef8807563468ae1936170
+  languageName: node
+  linkType: hard
+
 "@types/uuid@npm:^8.3.1":
   version: 8.3.1
   resolution: "@types/uuid@npm:8.3.1"
@@ -9117,6 +9124,7 @@ __metadata:
     "@types/passport-google-oauth20": ^2.0.10
     "@types/react": 17.0.33
     "@types/supertest": ^2.0.11
+    "@types/underscore": ^1.11.3
     "@types/uuid": ^8.3.1
     babel-plugin-transform-typescript-metadata: ^0.3.2
     class-validator: ^0.13.1
@@ -9146,6 +9154,7 @@ __metadata:
     type-graphql: ^1.1.1
     typeorm: ^0.2.38
     typescript: 4.4.4
+    underscore: ^1.13.1
     uuid: ^8.3.2
   languageName: unknown
   linkType: soft
@@ -11844,6 +11853,13 @@ typescript@4.4.4:
   version: 0.1.2
   resolution: "unc-path-regex@npm:0.1.2"
   checksum: a05fa2006bf4606051c10fc7968f08ce7b28fa646befafa282813aeb1ac1a56f65cb1b577ca7851af2726198d59475bb49b11776036257b843eaacee2860a4ec
+  languageName: node
+  linkType: hard
+
+"underscore@npm:^1.13.1":
+  version: 1.13.1
+  resolution: "underscore@npm:1.13.1"
+  checksum: 69bb4e6dd92c387ad322dd5b105f496fa64896d92ff1eea987610920d452667a12bca0938def4c4d60acd12da62410540fd268e7ca4f2480d89324498382fcac
   languageName: node
   linkType: hard
 

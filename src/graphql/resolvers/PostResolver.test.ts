@@ -32,6 +32,24 @@ describe(PostResolver.name, () => {
     });
   });
 
+  describe(PostResolver.prototype.posts.name, () => {
+    it('should return posts', async () => {
+      const user = await createUser();
+      const sdk = await getSignedTestSdk(user);
+
+      const postProps = {title: 'title', text: 'text'};
+      const tagNames = ['tag1', 'tag2'];
+      for (let i = 0; i < 5; i++) {
+        await sdk.createPost({
+          post: {...postProps, tags: tagNames},
+        });
+      }
+
+      const postsRes = await sdk.posts();
+      expect(postsRes.posts.length).toBe(5);
+    });
+  });
+
   describe(PostResolver.prototype.createPost.name, () => {
     it('can create post without tags', async () => {
       const postProps = {title: 'title', text: 'text'};

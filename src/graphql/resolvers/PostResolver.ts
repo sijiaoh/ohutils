@@ -30,6 +30,21 @@ export class PostResolver {
     };
   }
 
+  @Query(() => [PostType])
+  async posts(): Promise<PostType[]> {
+    return await PostEntity.find().then(
+      async posts =>
+        await Promise.all(
+          posts.map(async post => ({
+            id: post.id,
+            title: post.title,
+            text: post.text,
+            tags: await post.tags.then(tags => tags.map(tag => tag.name)),
+          }))
+        )
+    );
+  }
+
   @Mutation(() => PostType)
   @Authorized()
   async createPost(

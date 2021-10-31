@@ -12,7 +12,6 @@ handler.get<Request, Response>(
     if (!provider) throw new Error('req.query.provider can not be falsy.');
 
     passport.authenticate(req.query.provider, {
-      successRedirect: '/',
       failureRedirect: '/',
       session: false,
     })(req, res, next);
@@ -22,6 +21,7 @@ handler.get<Request, Response>(
     if (!user) throw new Error('req.user is falsy.');
 
     createSession(res, user);
+    res.redirect('/');
     next();
   }
 );

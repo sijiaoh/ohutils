@@ -17,16 +17,15 @@ export const PostEditorComponent = ({
   const postData = useListen(post);
   const onChange = useRef(
     _.debounce(({title, text, tags}: typeof initialValues) => {
-      post.title = title;
-      post.text = text;
+      post.setData({title, text});
       post.setTagsFromStr(tags);
     }, 500)
   ).current;
 
   const initialValues = {
-    title: postData.title,
-    text: postData.text,
-    tags: postData.tags.join(' '),
+    title: postData.data?.title || '',
+    text: postData.data?.text || '',
+    tags: postData.data?.tags.join(' ') || '',
   };
 
   return (
@@ -40,8 +39,7 @@ export const PostEditorComponent = ({
       }}
       onChange={onChange}
       onSubmit={async ({title, text, tags}) => {
-        post.title = title;
-        post.text = text;
+        post.setData({title, text});
         post.setTagsFromStr(tags);
         await post.save();
       }}
@@ -58,7 +56,7 @@ export const PostEditorComponent = ({
           fieldCss={{flex: 1}}
         />
         <MarkdownComponent
-          text={postData.text}
+          text={postData.data?.text || ''}
           css={{
             width: '50%',
             height: '100%',

@@ -1,34 +1,55 @@
 import {ReactiveClass} from '@reactive-class/react';
-import {apolloSdk} from 'src/apollo';
-import {EntityNotFoundError} from 'src/graphql/EntityNotFoundError';
+import {produce} from 'immer';
+import {apolloSdk, PostType} from 'src/apollo';
+
+export type PostData = Omit<PostType, 'id'>;
 
 export class Post extends ReactiveClass {
-  async load(id: string) {
-    const {data, error, errors} = await apolloSdk.postQuery({variables: {id}});
-    if (error || errors) throw new EntityNotFoundError();
-    return new Post(data.post.title, data.post.text, data.post.tags);
-  }
+  data?: Readonly<PostData> | null;
 
-  constructor(public title = '', public text = '', public tags: string[] = []) {
+  constructor(public id?: string) {
     super();
   }
 
+  load = async () => {
+    if (!this.id) return;
+
+    this.data = await apolloSdk
+      .postQuery({variables: {id: this.id}})
+      .then(({data}) => data.post)
+      .catch(() => null);
+  };
+
+  setData = (data: Partial<PostData>) => {
+    this.data = this.data || {title: '', text: '', tags: []};
+    this.data = produce(this.data, draft => {
+      return {
+        ...draft,
+        ...data,
+      };
+    });
+  };
+
   setTagsFromStr = (str: string) => {
-    this.tags = str
-      .replace(/\s+/g, ' ')
-      .split(' ')
-      .filter(tag => !!tag);
+    if (!this.data) return;
+
+    this.data = produce(this.data, data => {
+      data.tags = str
+        .replace(/\s+/g, ' ')
+        .split(' ')
+        .filter(tag => !!tag);
+    });
   };
 
   save = async () => {
-    await apolloSdk.createPostMutation({
-      variables: {
-        post: {
-          text: this.text,
-          title: this.title,
-          tags: this.tags,
+    if (!this.data) return;
+
+    this.id = await apolloSdk
+      .createPostMutation({
+        variables: {
+          post: this.data,
         },
-      },
-    });
+      })
+      .then(({data}) => data?.createPost.id);
   };
 }

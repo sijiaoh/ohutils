@@ -1,4 +1,5 @@
 import {useListen} from '@reactive-class/react';
+import {useRouter} from 'next/dist/client/router';
 import {useRef} from 'react';
 import _ from 'underscore';
 import {MarkdownComponent} from '../MarkdownComponent';
@@ -14,6 +15,7 @@ export const PostEditorComponent = ({
   post,
   className,
 }: DefaultProps<{post: Post}>) => {
+  const router = useRouter();
   const postData = useListen(post);
   const onChange = useRef(
     _.debounce(({title, text, tags}: typeof initialValues) => {
@@ -42,6 +44,7 @@ export const PostEditorComponent = ({
         post.setData({title, text});
         post.setTagsFromStr(tags);
         await post.save();
+        await router.push(`/post/${post.id}`);
       }}
     >
       <FieldComponent id="title" name="title" label="タイトル" />

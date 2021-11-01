@@ -26,7 +26,6 @@ export class UserEntity extends BaseEntity {
 
   @OneToMany(() => SocialProfileEntity, socialProfile => socialProfile.user)
   readonly socialProfiles?: SocialProfileEntity[];
-  // eslint-disable-next-line @typescript-eslint/promise-function-async
   @OneToMany(() => PostEntity, post => post.user)
-  readonly posts!: Promise<PostEntity[]>;
+  readonly posts?: PostEntity[];
 }

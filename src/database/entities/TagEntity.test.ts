@@ -26,17 +26,17 @@ describe(TagEntity.name, () => {
     const post = await createPost();
     const tags = await createTags();
 
-    post.tags = Promise.resolve(tags);
+    post.tags = tags;
     await post.save();
 
-    const findPost = async () => await PostEntity.findOne();
-    const findPostTags = async () => findPost().then(async post => post?.tags);
+    const findPost = async () =>
+      await PostEntity.findOne({relations: ['tags']});
 
-    expect((await findPostTags())?.length).toEqual(tags.length);
+    expect((await findPost())?.tags?.length).toEqual(tags.length);
 
-    post.tags = Promise.resolve([tags[0]]);
+    post.tags = [tags[0]];
     await post.save();
-    expect((await findPostTags())?.length).toEqual(1);
+    expect((await findPost())?.tags?.length).toEqual(1);
   });
 
   it('can not tag tagged post', async () => {

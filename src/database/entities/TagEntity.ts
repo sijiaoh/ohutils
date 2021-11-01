@@ -30,7 +30,7 @@ export class TagEntity extends BaseEntity {
   readonly updatedAt!: Date;
 
   @ManyToMany(() => PostEntity)
-  readonly posts!: Promise<PostEntity[]>;
+  readonly posts?: PostEntity[];
 
   @BeforeInsert()
   @BeforeUpdate()

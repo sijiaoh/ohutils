@@ -61,10 +61,10 @@ describe(PostResolver.name, () => {
       });
       expect(res.createPost.id).toBeTruthy();
 
-      const post = await PostEntity.findOne();
+      const post = await PostEntity.findOne({relations: ['tags']});
       expect({title: post?.title, text: post?.text}).toEqual(postProps);
 
-      const tags = await post?.tags;
+      const tags = post?.tags;
       expect(tags?.length).toBe(0);
     });
 
@@ -79,10 +79,10 @@ describe(PostResolver.name, () => {
       });
       expect(res.createPost.id).toBeTruthy();
 
-      const post = await PostEntity.findOne();
+      const post = await PostEntity.findOne({relations: ['tags']});
       expect({title: post?.title, text: post?.text}).toEqual(postProps);
 
-      const tags = await post?.tags;
+      const tags = post?.tags;
       expect(tags?.map(tag => tag.name).sort()).toEqual(tagNames.sort());
       expect(tags?.length).toBe(2);
     });

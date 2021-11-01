@@ -21,28 +21,25 @@ import {getUser} from 'src/utils/getUser';
 export class PostResolver {
   @Query(() => PostType)
   async post(@Arg('id') id: string): Promise<PostType> {
-    const post = await PostEntity.findOne(id);
+    const post = await PostEntity.findOne(id, {relations: ['tags']});
     if (!post) throw new EntityNotFoundError();
-    const tags = await post.tags;
+    if (!post.tags) throw new Error('Failed to load tags.');
     return {
       ...post,
-      tags: tags.map(tag => tag.name),
+      tags: post.tags.map(tag => tag.name),
     };
   }
 
   @Query(() => [PostType])
   async posts(): Promise<PostType[]> {
-    return await PostEntity.find().then(
-      async posts =>
-        await Promise.all(
-          posts.map(async post => ({
-            id: post.id,
-            title: post.title,
-            text: post.text,
-            tags: await post.tags.then(tags => tags.map(tag => tag.name)),
-          }))
-        )
-    );
+    const posts = await PostEntity.find();
+    const res = posts.map(post => ({
+      id: post.id,
+      title: post.title,
+      text: post.text,
+      tags: post.tags?.map(tag => tag.name) || [],
+    }));
+    return res;
   }
 
   @Mutation(() => PostType)
@@ -76,7 +73,7 @@ export class PostResolver {
       });
       await entityManager.save(postEntity);
 
-      postEntity.tags = Promise.resolve(tagEntities);
+      postEntity.tags = tagEntities;
       return await entityManager.save(postEntity);
     });
 

@@ -35,11 +35,11 @@ export class PostEntity extends BaseEntity {
   @Column()
   readonly userId!: string;
   @ManyToOne(() => UserEntity, {onDelete: 'CASCADE'})
-  readonly user!: Promise<UserEntity>;
+  readonly user?: UserEntity;
 
   @ManyToMany(() => TagEntity)
   @JoinTable()
-  tags!: Promise<TagEntity[]>;
+  tags?: TagEntity[];
 
   @BeforeInsert()
   @BeforeUpdate()

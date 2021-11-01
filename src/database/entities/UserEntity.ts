@@ -24,7 +24,6 @@ export class UserEntity extends BaseEntity {
   @UpdateDateColumn()
   readonly updatedAt!: Date;
 
-  // eslint-disable-next-line @typescript-eslint/promise-function-async
   @OneToMany(() => SocialProfileEntity, socialProfile => socialProfile.user)
-  readonly socialProfiles!: Promise<SocialProfileEntity[]>;
+  readonly socialProfiles?: SocialProfileEntity[];
 }

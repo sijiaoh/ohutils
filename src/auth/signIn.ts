@@ -43,7 +43,8 @@ export async function signIn(
   }
   // Normal sign in.
   else if (socialProfile) {
-    const user = await socialProfile.user;
+    const user = await UserEntity.findOne(socialProfile.userId);
+    if (!user) throw new Error("Social profile's user not found.");
     return user;
   }
   // Sign up.

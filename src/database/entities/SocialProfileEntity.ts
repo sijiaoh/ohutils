@@ -34,5 +34,5 @@ export class SocialProfileEntity extends BaseEntity {
   @Column()
   readonly userId!: string;
   @ManyToOne(() => UserEntity, {onDelete: 'CASCADE'})
-  readonly user!: Promise<UserEntity>;
+  readonly user?: UserEntity;
 }

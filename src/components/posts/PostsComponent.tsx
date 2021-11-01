@@ -7,11 +7,13 @@ export const PostsComponent = () => {
   if (loading) return <div>Loading...</div>;
   return (
     <div>
-      {data?.posts.map(post => (
-        <Link key={post.id} href={`/post/${post.id}`}>
-          {post.title}
-        </Link>
-      ))}
+      <ul>
+        {data?.posts.map(post => (
+          <li key={post.id}>
+            <Link href={`/post/${post.id}`}>{post.title}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };

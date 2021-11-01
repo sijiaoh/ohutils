@@ -62,6 +62,7 @@ export const PostEditorComponent = ({
             height: '100%',
             overflow: 'auto',
             border: 'solid 1px lightgray',
+            padding: '1em',
           }}
         />
       </div>

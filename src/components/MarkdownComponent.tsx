@@ -24,7 +24,7 @@ export const MarkdownComponent = ({
   }, [text]);
 
   return (
-    <div className={className} css={{padding: '1em'}}>
+    <div className={className}>
       <div ref={elmRef} />
     </div>
   );

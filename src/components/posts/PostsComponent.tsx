@@ -1,3 +1,4 @@
+import {ContainerComponent} from '../ContainerComponent';
 import {usePostsQuery} from 'src/apollo';
 import {Link} from 'src/utils/Link';
 
@@ -6,7 +7,7 @@ export const PostsComponent = () => {
 
   if (loading) return <div>Loading...</div>;
   return (
-    <div>
+    <ContainerComponent>
       <ul>
         {data?.posts.map(post => (
           <li key={post.id}>
@@ -14,6 +15,6 @@ export const PostsComponent = () => {
           </li>
         ))}
       </ul>
-    </div>
+    </ContainerComponent>
   );
 };

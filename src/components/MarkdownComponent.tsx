@@ -25,7 +25,12 @@ export const MarkdownComponent = ({
   }, [text]);
 
   return (
-    <div className={className}>
+    <div
+      className={className}
+      css={{
+        userSelect: 'none',
+      }}
+    >
       <div ref={elmRef} />
     </div>
   );

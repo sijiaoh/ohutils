@@ -3,8 +3,9 @@ import {useRef} from 'react';
 import {HeadComponent} from '../HeadComponent';
 import {PostEditorComponent} from './PostEditorComponent';
 import {Post} from 'src/classes/Post';
+import {withAuth} from 'src/hocs/withAuth';
 
-export const PostsCreateComponent: NextPage = () => {
+export const PostsCreateComponent: NextPage = withAuth(() => {
   const post = useRef(new Post()).current;
 
   return (
@@ -16,4 +17,4 @@ export const PostsCreateComponent: NextPage = () => {
       <PostEditorComponent post={post} />
     </div>
   );
-};
+});

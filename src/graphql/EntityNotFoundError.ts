@@ -1,3 +1,3 @@
 export class EntityNotFoundError extends Error {
-  message = 'Entity not found.';
+  override message = 'Entity not found.';
 }

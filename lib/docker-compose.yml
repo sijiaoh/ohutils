@@ -11,8 +11,12 @@ services:
     environment:
       DOMAINS: 'ohutils.com -> http://host.docker.internal:3000'
       STAGE: '${HTTPS_PORTAL_STAGE}'
+      ERROR_LOG: default
+      ACCESS_LOG: default
     volumes:
       - https-portal-data:/var/lib/https-portal
+      - /path/to/log/directory:/var/log/nginx/
+      - /path/to/logrotate/state/directory:/var/lib/logrotate/
 
 volumes:
   https-portal-data:

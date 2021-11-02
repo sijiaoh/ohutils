@@ -1,5 +1,6 @@
 import type {NextPage} from 'next';
 import {HeadComponent} from './HeadComponent';
+import {Link} from 'src/utils/Link';
 
 export const HomeComponent: NextPage = () => {
   return (
@@ -9,6 +10,10 @@ export const HomeComponent: NextPage = () => {
       <h1>
         Welcome to <a href="https://github.com/sijiaoh/ohutils">ohutils.com!</a>
       </h1>
+
+      <div>
+        <Link href="/posts">投稿一覧</Link>
+      </div>
     </div>
   );
 };

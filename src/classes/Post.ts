@@ -1,6 +1,6 @@
 import {ReactiveClass} from '@reactive-class/react';
 import {produce} from 'immer';
-import {apolloSdk, PostType} from 'src/apollo';
+import {apolloSdk, PostInput, PostType} from 'src/apollo';
 
 export type PostData = Omit<PostType, 'id'>;
 
@@ -44,12 +44,27 @@ export class Post extends ReactiveClass {
   save = async () => {
     if (!this.data) return;
 
-    this.id = await apolloSdk
-      .createPostMutation({
+    const postVariable: PostInput = {
+      title: this.data.title,
+      text: this.data.text,
+      tags: this.data.tags,
+    };
+
+    if (this.id == null) {
+      this.id = await apolloSdk
+        .createPostMutation({
+          variables: {
+            post: postVariable,
+          },
+        })
+        .then(({data}) => data?.createPost.id);
+    } else {
+      await apolloSdk.updatePostMutation({
         variables: {
-          post: this.data,
+          id: this.id,
+          post: postVariable,
         },
-      })
-      .then(({data}) => data?.createPost.id);
+      });
+    }
   };
 }

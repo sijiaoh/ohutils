@@ -7,9 +7,7 @@ export const HomeComponent: NextPage = () => {
     <div>
       <HeadComponent subTitle={'Home'} />
 
-      <h1>
-        Welcome to <a href="https://github.com/sijiaoh/ohutils">ohutils.com!</a>
-      </h1>
+      <h1>Welcome to ohutils.com!</h1>
 
       <div>
         <Link href="/posts">投稿一覧</Link>

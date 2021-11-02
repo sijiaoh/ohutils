@@ -4,6 +4,7 @@ import {useEffect, useRef} from 'react';
 import {ContainerComponent} from '../ContainerComponent';
 import {HeadComponent} from '../HeadComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
+import {Me} from 'src/classes/Me';
 import {Post} from 'src/classes/Post';
 import {Link} from 'src/utils/Link';
 
@@ -13,6 +14,7 @@ export const PostComponent = () => {
   if (typeof id !== 'string') throw new Error('id is not providing.');
   const post = useRef(new Post(id)).current;
   const postData = useListen(post, ({data}) => data);
+  const meData = useListen(Me.useMe(), ({data}) => data);
 
   useEffect(() => {
     void post.load();
@@ -25,9 +27,11 @@ export const PostComponent = () => {
 
       <h1>{postData.title}</h1>
 
-      <div>
-        <Link href={`/posts/edit/${id}`}>編集</Link>
-      </div>
+      {meData && (
+        <div>
+          <Link href={`/posts/edit/${id}`}>編集</Link>
+        </div>
+      )}
 
       <ul>
         {postData.tags.map(tag => (

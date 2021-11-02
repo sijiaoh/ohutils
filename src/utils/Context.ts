@@ -1,9 +1,7 @@
 import {NextApiRequest, NextApiResponse} from 'next';
 import nookies from 'nookies';
 
-export type Request = Omit<NextApiRequest, 'cookies'> & {
-  cookies: {[key: string]: string | undefined};
-};
+export type Request = NextApiRequest;
 
 export type Response = NextApiResponse & {
   /** Default maxAge is 30 days. */

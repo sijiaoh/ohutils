@@ -4,6 +4,7 @@ import {useEffect, useRef} from 'react';
 import {ContainerComponent} from '../ContainerComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
 import {Post} from 'src/classes/Post';
+import {Link} from 'src/utils/Link';
 
 export const PostComponent = () => {
   const router = useRouter();
@@ -20,6 +21,10 @@ export const PostComponent = () => {
   return (
     <ContainerComponent>
       <h1>{postData.title}</h1>
+
+      <div>
+        <Link href={`/posts/edit/${id}`}>編集</Link>
+      </div>
 
       <ul>
         {postData.tags.map(tag => (

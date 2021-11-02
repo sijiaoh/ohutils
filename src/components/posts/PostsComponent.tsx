@@ -8,6 +8,10 @@ export const PostsComponent = () => {
   if (loading) return <div>Loading...</div>;
   return (
     <ContainerComponent>
+      <div>
+        <Link href="posts/create">新規投稿</Link>
+      </div>
+
       <ul>
         {data?.posts.map(post => (
           <li key={post.id}>

@@ -108,6 +108,25 @@ describe(PostResolver.name, () => {
     });
   });
 
+  describe(PostResolver.prototype.updatePost.name, () => {
+    it('should update exists post', async () => {
+      const user = await createUser();
+      const sdk = await getSignedTestSdk(user);
+
+      const {
+        createPost: {id},
+      } = await sdk.createPost({
+        post: {title: 'title', text: 'text'},
+      });
+
+      const newPostData = {title: 'title2', text: 'text2', tags: ['newTag']};
+
+      const updatePostRes = await sdk.updatePost({id, post: newPostData});
+      const {title, text, tags} = updatePostRes.updatePost;
+      expect({title, text, tags}).toEqual(newPostData);
+    });
+  });
+
   describe(PostResolver.prototype.removePost.name, () => {
     it('should remove post', async () => {
       const user = await createUser();

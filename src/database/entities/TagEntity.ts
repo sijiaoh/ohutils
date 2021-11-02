@@ -8,6 +8,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  EntityManager,
   ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -16,6 +17,19 @@ import {PostEntity} from '.';
 
 @Entity()
 export class TagEntity extends BaseEntity {
+  static createIfNotExists = async (
+    entityManager: EntityManager,
+    tagNames: string[]
+  ) => {
+    await entityManager
+      .createQueryBuilder()
+      .insert()
+      .orIgnore()
+      .into(TagEntity)
+      .values(tagNames.map(tagName => ({name: tagName})))
+      .execute();
+  };
+
   @PrimaryGeneratedColumn('uuid')
   readonly id!: string;
 

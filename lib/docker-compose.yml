@@ -7,10 +7,9 @@ services:
       - '80:80'
       - '443:443'
     extra_hosts:
-      - "host.docker.internal:host-gateway"
+      - 'host.docker.internal:host-gateway'
     environment:
       DOMAINS: 'ohutils.com -> http://host.docker.internal:3000'
-      DOMAINS: 'localhost -> http://host.docker.internal:3000'
       STAGE: '${HTTPS_PORTAL_STAGE}'
     volumes:
       - https-portal-data:/var/lib/https-portal

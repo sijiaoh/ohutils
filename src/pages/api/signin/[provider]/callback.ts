@@ -11,7 +11,7 @@ handler.get<Request, Response>(
     const provider = req.query.provider;
     if (!provider) throw new Error('req.query.provider can not be falsy.');
 
-    passport.authenticate(req.query.provider, {
+    passport.authenticate(provider, {
       failureRedirect: '/',
       session: false,
     })(req, res, next);

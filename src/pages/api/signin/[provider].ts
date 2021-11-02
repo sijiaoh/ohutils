@@ -9,7 +9,7 @@ handler.get<Request, Response>((req, res, next) => {
   const provider = req.query.provider;
   if (!provider) throw new Error('req.query.provider can not be falsy.');
 
-  passport.authenticate(req.query.provider, {
+  passport.authenticate(provider, {
     scope: ['email'],
     session: false,
   })(req, res, next);

@@ -1,4 +1,5 @@
 import {ContainerComponent} from '../ContainerComponent';
+import {HeadComponent} from '../HeadComponent';
 import {usePostsQuery} from 'src/apollo';
 import {Link} from 'src/utils/Link';
 
@@ -8,6 +9,8 @@ export const PostsComponent = () => {
   if (loading) return <div>Loading...</div>;
   return (
     <ContainerComponent>
+      <HeadComponent subTitle="投稿一覧" />
+
       <div>
         <Link href="posts/create">新規投稿</Link>
       </div>

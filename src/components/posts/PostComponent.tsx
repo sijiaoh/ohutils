@@ -2,6 +2,7 @@ import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
 import {useEffect, useRef} from 'react';
 import {ContainerComponent} from '../ContainerComponent';
+import {HeadComponent} from '../HeadComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
 import {Post} from 'src/classes/Post';
 import {Link} from 'src/utils/Link';
@@ -20,6 +21,8 @@ export const PostComponent = () => {
   if (!postData) return <div>Loading...</div>;
   return (
     <ContainerComponent>
+      <HeadComponent subTitle={postData.title} />
+
       <h1>{postData.title}</h1>
 
       <div>

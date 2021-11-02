@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  https-portal:
+    image: steveltn/https-portal:latest
+    ports:
+      - '80:80'
+      - '443:443'
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      DOMAINS: 'ohutils.com -> http://host.docker.internal:3000'
+      DOMAINS: 'localhost -> http://host.docker.internal:3000'
+      STAGE: '${HTTPS_PORTAL_STAGE}'
+    volumes:
+      - https-portal-data:/var/lib/https-portal
+
+volumes:
+  https-portal-data:

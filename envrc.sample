@@ -1,3 +1,6 @@
+# Change to production in production.
+export HTTPS_PORTAL_STAGE=local
+
 export DB_VERSION=5.7
 export DB_HOST=localhost
 export DB_PORT=3057

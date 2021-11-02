@@ -8,6 +8,6 @@ export class PostInput {
   title!: string;
   @Field()
   text!: string;
-  @Field(() => [String], {nullable: true})
-  tags?: string[];
+  @Field(() => [String])
+  tags!: string[];
 }

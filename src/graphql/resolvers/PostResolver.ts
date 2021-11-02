@@ -52,7 +52,7 @@ export class PostResolver {
 
     const createdPost = await getManager().transaction(async entityManager => {
       let tagEntities: TagEntity[] = [];
-      if (tags) {
+      if (tags.length) {
         await TagEntity.createIfNotExists(entityManager, tags);
 
         tagEntities = await entityManager.find(TagEntity, {
@@ -83,15 +83,15 @@ export class PostResolver {
   ): Promise<PostType> {
     const user = getUser(req);
 
-    const createdPost = await getManager().transaction(async entityManager => {
+    const updatedPost = await getManager().transaction(async entityManager => {
       const postEntity = await entityManager.findOne(PostEntity, id, {
         relations: ['tags'],
       });
       if (!postEntity) throw new EntityNotFoundError();
       if (postEntity.userId !== user.id) throw new UnauthorizedError();
 
-      let tagEntities: TagEntity[] | undefined = undefined;
-      if (tags) {
+      let tagEntities: TagEntity[] = [];
+      if (tags.length) {
         await TagEntity.createIfNotExists(entityManager, tags);
 
         tagEntities = await entityManager.find(TagEntity, {
@@ -108,10 +108,10 @@ export class PostResolver {
       return postEntity;
     });
 
-    if (createdPost.tags == null) throw new Error('Failed to load tags.');
-    const resTags = createdPost.tags.map(({name}) => name);
+    if (updatedPost.tags == null) throw new Error('Failed to load tags.');
+    const resTags = updatedPost.tags.map(({name}) => name);
 
-    return {...createdPost, tags: resTags};
+    return {...updatedPost, tags: resTags};
   }
 
   @Mutation(() => Boolean)

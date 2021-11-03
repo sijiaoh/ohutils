@@ -1,6 +1,7 @@
 import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
 import {useEffect, useRef} from 'react';
+import {BreadcrumbComponent} from '../BreadcrumbComponent';
 import {ContainerComponent} from '../ContainerComponent';
 import {HeadComponent} from '../HeadComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
@@ -24,6 +25,14 @@ export const PostComponent = () => {
   return (
     <ContainerComponent>
       <HeadComponent subTitle={postData.title} />
+
+      <BreadcrumbComponent
+        list={[
+          {title: 'Home', path: '/'},
+          {title: '投稿一覧', path: '/posts'},
+          {title: postData.title},
+        ]}
+      />
 
       <h1>{postData.title}</h1>
 

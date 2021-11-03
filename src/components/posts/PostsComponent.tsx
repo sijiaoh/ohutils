@@ -1,4 +1,5 @@
 import {useListen} from '@reactive-class/react';
+import {BreadcrumbComponent} from '../BreadcrumbComponent';
 import {ContainerComponent} from '../ContainerComponent';
 import {HeadComponent} from '../HeadComponent';
 import {Order, usePostsQuery} from 'src/apollo';
@@ -15,6 +16,12 @@ export const PostsComponent = () => {
   return (
     <ContainerComponent>
       <HeadComponent subTitle="投稿一覧" />
+
+      <BreadcrumbComponent
+        list={[{title: 'Home', path: '/'}, {title: '投稿一覧'}]}
+      />
+
+      <h1>投稿一覧</h1>
 
       {meData && (
         <div>

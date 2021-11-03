@@ -8,12 +8,7 @@ export const HomeComponent: NextPage = () => {
     <div>
       <HeadComponent subTitle={'Home'} />
 
-      <BreadcrumbComponent
-        list={[
-          {title: 'Home', path: '/'},
-          {title: 'Home', path: '/'},
-        ]}
-      />
+      <BreadcrumbComponent list={[{title: 'Home', path: '/'}]} />
 
       <h1>Welcome to ohutils.com!</h1>
 

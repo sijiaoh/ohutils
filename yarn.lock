@@ -1263,16 +1263,16 @@ __metadata:
   linkType: hard
 
 "@graphql-tools/apollo-engine-loader@npm:^7.0.5":
-  version: 7.1.2
-  resolution: "@graphql-tools/apollo-engine-loader@npm:7.1.2"
+  version: 7.2.0
+  resolution: "@graphql-tools/apollo-engine-loader@npm:7.2.0"
   dependencies:
     "@graphql-tools/utils": ^8.5.1
-    cross-fetch: ^3.1.4
+    cross-undici-fetch: 0.0.19
     sync-fetch: 0.3.1
     tslib: ~2.3.0
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 84ed66b0e8d8f4e32c1c2ed1ac39c8e20b60cf71ecf711de63abfa64f715970893c0d15aef85008b6df0c06628ae787659e491f195ee9056e2e1883a8c1784ee
+  checksum: 05e45516e3b9196d473e8475f31d134cf40cf597d0dee836cc9ff8922f191db5b028cee80d35268f4ff9fbf616b6b44d0b8038a05f52c371ea13c1be1acc8009
   languageName: node
   linkType: hard
 
@@ -1338,16 +1338,17 @@ __metadata:
   linkType: hard
 
 "@graphql-tools/github-loader@npm:^7.0.5":
-  version: 7.1.1
-  resolution: "@graphql-tools/github-loader@npm:7.1.1"
+  version: 7.2.0
+  resolution: "@graphql-tools/github-loader@npm:7.2.0"
   dependencies:
     "@graphql-tools/graphql-tag-pluck": ^7.1.3
     "@graphql-tools/utils": ^8.5.1
-    cross-fetch: 3.1.4
+    cross-undici-fetch: 0.0.19
+    sync-fetch: 0.3.1
     tslib: ~2.3.0
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: 49bda0b22830818772f1e8114fc1a271a7c5bd6e60565c034bd19b4866f1aba6f565ce7cf996f240a8e095720ef13b72eeffa9c500bfb8b4247ecc0c96d7099b
+  checksum: 45f70e9eb9c1a1ca7d0f5d0a9dc3c7b42290ba6c9cdaeb22d13c5d082291d4f384550879d6d709830b8ebf8650fde9dfe0abee30436b5364f3eabf02befde217
   languageName: node
   linkType: hard
 
@@ -1503,25 +1504,23 @@ __metadata:
   linkType: hard
 
 "@graphql-tools/url-loader@npm:^7.0.11, @graphql-tools/url-loader@npm:^7.4.2":
-  version: 7.4.2
-  resolution: "@graphql-tools/url-loader@npm:7.4.2"
+  version: 7.5.0
+  resolution: "@graphql-tools/url-loader@npm:7.5.0"
   dependencies:
     "@graphql-tools/delegate": ^8.4.1
     "@graphql-tools/utils": ^8.5.1
     "@graphql-tools/wrap": ^8.3.1
-    "@n1ru4l/graphql-live-query": 0.8.1
+    "@n1ru4l/graphql-live-query": 0.8.2
     "@types/websocket": 1.0.4
     "@types/ws": ^8.0.0
-    abort-controller: 3.0.0
-    cross-fetch: 3.1.4
+    cross-undici-fetch: 0.0.19
     dset: ^3.1.0
     extract-files: 11.0.0
-    form-data: 4.0.0
     graphql-sse: ^1.0.1
     graphql-ws: ^5.4.1
     isomorphic-ws: 4.0.1
     meros: 1.1.4
-    subscriptions-transport-ws: ^0.10.0
+    subscriptions-transport-ws: ^0.11.0
     sync-fetch: 0.3.1
     tslib: ~2.3.0
     valid-url: 1.0.9
@@ -1529,7 +1528,7 @@ __metadata:
     ws: 8.2.3
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
-  checksum: eb21dfedbdb96beabbe29bc72a4e30d6d61dcd6a4524b9ed674a31910f6f871cf1a63ec074dab966fc25dd2ba0186a8e4a1b640dd719c5457f4c5842c14b39b1
+  checksum: f8486426a3de13797c8eb90afe87dc4754a513fb8dc15a7f837649186aa2e2d1d2e4be9087e2b5dce4178a8ee65d26615b9b20c85293133b000c4388d35da369
   languageName: node
   linkType: hard
 
@@ -1840,12 +1839,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@n1ru4l/graphql-live-query@npm:0.8.1":
-  version: 0.8.1
-  resolution: "@n1ru4l/graphql-live-query@npm:0.8.1"
+"@n1ru4l/graphql-live-query@npm:0.8.2":
+  version: 0.8.2
+  resolution: "@n1ru4l/graphql-live-query@npm:0.8.2"
   peerDependencies:
     graphql: ^15.4.0
-  checksum: cc225009ef19b5e22e6d90f63d887b93241d9dcd74a8fad0f42baa3bd165a5fcadde1f209635ef194eeb238477f3e47b77027a0502d0a739a5d865d07827d54f
+  checksum: 0441aa4e8930324b7b7c9b34d8cb03f346745263607406bf6ac64ed5da9e9cb1472392c00eda8dfc3ed25d5d9bd5bb6d8183b54e83d42a3b76f6fa95e98a1ea9
   languageName: node
   linkType: hard
 
@@ -2121,11 +2120,11 @@ __metadata:
   linkType: hard
 
 "@sinonjs/fake-timers@npm:^8.0.1":
-  version: 8.0.1
-  resolution: "@sinonjs/fake-timers@npm:8.0.1"
+  version: 8.1.0
+  resolution: "@sinonjs/fake-timers@npm:8.1.0"
   dependencies:
     "@sinonjs/commons": ^1.7.0
-  checksum: 97a78e6f83dd420d73b155a0438cd0fd3392e706b8314530db3d99354689cc714eb3d18540be2aedcd3a3d6070e14f509dce7c6cc817701e9538b3b8ac423eaa
+  checksum: 09b5a158ce013a6c37613258bad79ca4efeb99b1f59c41c73cca36cac00b258aefcf46eeea970fccf06b989414d86fe9f54c1102272c0c3bdd51a313cea80949
   languageName: node
   linkType: hard
 
@@ -2774,7 +2773,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"abort-controller@npm:3.0.0":
+"abort-controller@npm:^3.0.0":
   version: 3.0.0
   resolution: "abort-controller@npm:3.0.0"
   dependencies:
@@ -3760,9 +3759,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001202, caniuse-lite@npm:^1.0.30001219, caniuse-lite@npm:^1.0.30001228, caniuse-lite@npm:^1.0.30001274":
-  version: 1.0.30001274
-  resolution: "caniuse-lite@npm:1.0.30001274"
-  checksum: 75790d021edbc68dbb36c0bc63255fad1e7aa3986039e685d10340e7e9a37147b0ddedaba22cf6c52b3657cca794ed41af88045ad5cce79084e9361e95f1c5d4
+  version: 1.0.30001275
+  resolution: "caniuse-lite@npm:1.0.30001275"
+  checksum: 35baadc902acdeaafcce4ac76d1ccb6df1904c688e87ef4ca7afb6d960cd68f86a1e0252547443247863a598546bf6cd7fdd6e2611322c83d669cfd8b5a5179e
   languageName: node
   linkType: hard
 
@@ -4361,7 +4360,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-fetch@npm:3.1.4, cross-fetch@npm:^3.0.4, cross-fetch@npm:^3.0.6, cross-fetch@npm:^3.1.4":
+"cross-fetch@npm:^3.0.4, cross-fetch@npm:^3.0.6":
   version: 3.1.4
   resolution: "cross-fetch@npm:3.1.4"
   dependencies:
@@ -4378,6 +4377,18 @@ __metadata:
     shebang-command: ^2.0.0
     which: ^2.0.1
   checksum: 671cc7c7288c3a8406f3c69a3ae2fc85555c04169e9d611def9a675635472614f1c0ed0ef80955d5b6d4e724f6ced67f0ad1bb006c2ea643488fcfef994d7f52
+  languageName: node
+  linkType: hard
+
+"cross-undici-fetch@npm:0.0.19":
+  version: 0.0.19
+  resolution: "cross-undici-fetch@npm:0.0.19"
+  dependencies:
+    abort-controller: ^3.0.0
+    form-data: ^4.0.0
+    node-fetch: ^2.6.5
+    undici: ^4.9.3
+  checksum: da037a5ee6ff0a6fbe70526d79421da87eb181808bd5ea496b4b2aacf0b6120412acb4eb5cf5aa5443a1f75dea642beeaeac2b065fd371532c147e1db58f028f
   languageName: node
   linkType: hard
 
@@ -5764,17 +5775,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"form-data@npm:4.0.0":
-  version: 4.0.0
-  resolution: "form-data@npm:4.0.0"
-  dependencies:
-    asynckit: ^0.4.0
-    combined-stream: ^1.0.8
-    mime-types: ^2.1.12
-  checksum: 01135bf8675f9d5c61ff18e2e2932f719ca4de964e3be90ef4c36aacfc7b9cb2fceb5eca0b7e0190e3383fe51c5b37f4cb80b62ca06a99aaabfcfd6ac7c9328c
-  languageName: node
-  linkType: hard
-
 "form-data@npm:^3.0.0":
   version: 3.0.1
   resolution: "form-data@npm:3.0.1"
@@ -5783,6 +5783,17 @@ __metadata:
     combined-stream: ^1.0.8
     mime-types: ^2.1.12
   checksum: b019e8d35c8afc14a2bd8a7a92fa4f525a4726b6d5a9740e8d2623c30e308fbb58dc8469f90415a856698933c8479b01646a9dff33c87cc4e76d72aedbbf860d
+  languageName: node
+  linkType: hard
+
+"form-data@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "form-data@npm:4.0.0"
+  dependencies:
+    asynckit: ^0.4.0
+    combined-stream: ^1.0.8
+    mime-types: ^2.1.12
+  checksum: 01135bf8675f9d5c61ff18e2e2932f719ca4de964e3be90ef4c36aacfc7b9cb2fceb5eca0b7e0190e3383fe51c5b37f4cb80b62ca06a99aaabfcfd6ac7c9328c
   languageName: node
   linkType: hard
 
@@ -6490,9 +6501,9 @@ __metadata:
   linkType: hard
 
 "ignore@npm:^5.1.1, ignore@npm:^5.1.4, ignore@npm:^5.1.8":
-  version: 5.1.8
-  resolution: "ignore@npm:5.1.8"
-  checksum: 967abadb61e2cb0e5c5e8c4e1686ab926f91bc1a4680d994b91947d3c65d04c3ae126dcdf67f08e0feeb8ff8407d453e641aeeddcc47a3a3cca359f283cf6121
+  version: 5.1.9
+  resolution: "ignore@npm:5.1.9"
+  checksum: 6f6b2235f4e63648116c5814f76b2d3d63fae9c21b8a466862e865732f59e787c9938a9042f9457091db6f0d811508ea3c8c6a60f35bafc4ceea08bbe8f96fd5
   languageName: node
   linkType: hard
 
@@ -8860,7 +8871,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.1":
+"node-fetch@npm:^2.6.1, node-fetch@npm:^2.6.5":
   version: 2.6.6
   resolution: "node-fetch@npm:2.6.6"
   dependencies:
@@ -11169,9 +11180,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"subscriptions-transport-ws@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "subscriptions-transport-ws@npm:0.10.0"
+"subscriptions-transport-ws@npm:^0.11.0":
+  version: 0.11.0
+  resolution: "subscriptions-transport-ws@npm:0.11.0"
   dependencies:
     backo2: ^1.0.2
     eventemitter3: ^3.1.0
@@ -11179,8 +11190,8 @@ resolve@^2.0.0-next.3:
     symbol-observable: ^1.0.4
     ws: ^5.2.0 || ^6.0.0 || ^7.0.0
   peerDependencies:
-    graphql: ">=0.10.0"
-  checksum: 0e34bb31e82bde6db7022393997725338488d392b4d54965c29fc9ad38693538c525f9f255b2adf917535bcda82ea325167c303ec30fa0ce076c0d7f7aa0c57d
+    graphql: ^15.7.2 || ^16.0.0
+  checksum: cc2e98d5c9d89c44d2e15eca188781c6ebae13d1661c42a99cee9d2897aebe2a22bc118eefff83244a79c88ee4ea24d46973ebf26ae7cb47ac1857fb8ee2c947
   languageName: node
   linkType: hard
 
@@ -11892,6 +11903,13 @@ typescript@4.4.4:
   version: 1.13.1
   resolution: "underscore@npm:1.13.1"
   checksum: 69bb4e6dd92c387ad322dd5b105f496fa64896d92ff1eea987610920d452667a12bca0938def4c4d60acd12da62410540fd268e7ca4f2480d89324498382fcac
+  languageName: node
+  linkType: hard
+
+"undici@npm:^4.9.3":
+  version: 4.9.3
+  resolution: "undici@npm:4.9.3"
+  checksum: a02ea81b49b528baa7c4b11e7d5f3474b1f4001f951ccea4dd587c4eef082807e525c77313628804d70bf26bfbc66cc5e123276f06b889072234157bff969262
   languageName: node
   linkType: hard
 

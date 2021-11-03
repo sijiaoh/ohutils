@@ -19,19 +19,25 @@ export const BreadcrumbComponent = ({
       className={className}
       css={{
         display: 'flex',
-
-        '& > li:first-child:before': {
-          content: '""',
-          margin: '0',
-        },
-        '& > li:before': {
-          content: `"${separator}"`,
-          margin: '0 0.5em',
-        },
+        flexWrap: 'wrap',
       }}
     >
       {breadcrumbList.map((item, index) => (
-        <li key={index}>
+        <li
+          key={index}
+          css={{
+            whiteSpace: 'nowrap',
+
+            ':first-child:before': {
+              content: '""',
+              margin: '0',
+            },
+            ':before': {
+              content: `"${separator}"`,
+              margin: '0 0.5em',
+            },
+          }}
+        >
           {item.path ? <Link href={item.path}>{item.title}</Link> : item.title}
         </li>
       ))}

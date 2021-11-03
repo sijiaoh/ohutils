@@ -24,7 +24,7 @@ export const useAnalytics = () => {
 };
 
 export const initGA = () => {
-  const trackingCode = process.env.TRACKING_CODE;
+  const trackingCode = process.env.NEXT_PUBLIC_TRACKING_CODE;
   initialize(trackingCode || '', {
     debug: process.env.NODE_ENV !== 'production' || trackingCode == null,
   });

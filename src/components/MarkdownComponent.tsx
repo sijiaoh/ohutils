@@ -15,6 +15,7 @@ export const MarkdownComponent = ({
     const elm = elmRef.current;
     if (!elm) return;
     elm.innerHTML = marked(text, {
+      breaks: true,
       langPrefix: 'hljs ',
       highlight: (code, lang) => {
         if (hljs.getLanguage(lang))

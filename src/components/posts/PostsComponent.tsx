@@ -1,12 +1,14 @@
 import {useListen} from '@reactive-class/react';
 import {ContainerComponent} from '../ContainerComponent';
 import {HeadComponent} from '../HeadComponent';
-import {usePostsQuery} from 'src/apollo';
+import {Order, usePostsQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
 import {Link} from 'src/utils/Link';
 
 export const PostsComponent = () => {
-  const {data, loading} = usePostsQuery();
+  const {data, loading} = usePostsQuery({
+    variables: {order: {createdAt: Order.Asc}},
+  });
   const meData = useListen(Me.useMe(), ({data}) => data);
 
   if (loading) return <div>Loading...</div>;

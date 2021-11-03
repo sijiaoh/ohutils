@@ -46,7 +46,7 @@ describe(PostResolver.name, () => {
         });
       }
 
-      const postsRes = await sdk.posts();
+      const postsRes = await sdk.posts({order: {}});
       expect(postsRes.posts.length).toBe(5);
     });
   });

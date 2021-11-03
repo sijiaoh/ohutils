@@ -11,7 +11,9 @@ import {
 } from 'type-graphql';
 import {getManager} from 'typeorm';
 import {EntityNotFoundError} from '../EntityNotFoundError';
+import {Order} from '../enum/Order';
 import {PostInput} from '../input-types/PostInput';
+import {PostOrderInput} from '../input-types/PostOrderInput';
 import {PostType} from '../types/PostType';
 import {PostEntity, TagEntity} from 'src/database/entities';
 import {Context} from 'src/utils/Context';
@@ -31,8 +33,17 @@ export class PostResolver {
   }
 
   @Query(() => [PostType])
-  async posts(): Promise<PostType[]> {
-    const posts = await PostEntity.find();
+  async posts(@Arg('order') order: PostOrderInput): Promise<PostType[]> {
+    const o = Object.entries(order).reduce<{[key: string]: string}>(
+      (obj, [key, value]) => {
+        if (value == null) return obj;
+        const v = Order[value]?.toString();
+        if (v != null) obj[key] = Order[value]!.toString();
+        return obj;
+      },
+      {}
+    );
+    const posts = await PostEntity.find({order: o});
     const res = posts.map(post => ({
       id: post.id,
       title: post.title,

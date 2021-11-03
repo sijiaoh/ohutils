@@ -1,7 +1,7 @@
 # Change to production in production.
 export HTTPS_PORTAL_STAGE=local
 
-// Google analytics.
+# Google analytics.
 export TRACKING_CODE=
 
 export DB_VERSION=8.0

@@ -1606,9 +1606,9 @@ __metadata:
   linkType: hard
 
 "@humanwhocodes/object-schema@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "@humanwhocodes/object-schema@npm:1.2.0"
-  checksum: 40b75480376de8104d65f7c44a7dd76d30fb57823ca8ba3a3239b2b568323be894d93440578a72fd8e5e2cc3df3577ce0d2f0fe308b990dd51cf35392bf3c9a2
+  version: 1.2.1
+  resolution: "@humanwhocodes/object-schema@npm:1.2.1"
+  checksum: a824a1ec31591231e4bad5787641f59e9633827d0a2eaae131a288d33c9ef0290bd16fda8da6f7c0fcb014147865d12118df10db57f27f41e20da92369fcb3f1
   languageName: node
   linkType: hard
 
@@ -4269,9 +4269,9 @@ __metadata:
   linkType: hard
 
 "core-js-pure@npm:^3.19.0":
-  version: 3.19.0
-  resolution: "core-js-pure@npm:3.19.0"
-  checksum: b1ff8e30791b4d32777200189fc7e0b0c5aa57ffb36280c4ee4aed83bee551b21a5027e62d12ca9bbdfa6522b795642d9ba0513b983dfc710c657551c58aefaa
+  version: 3.19.1
+  resolution: "core-js-pure@npm:3.19.1"
+  checksum: b6d593ce2ac9da1adf8da3efc0b9cca8cc969d7d758c511db877a41d92216dbdf7a2341f89c07516bf0da1ce8b994e103f604ab37ca31379a35512c05d291804
   languageName: node
   linkType: hard
 
@@ -4827,9 +4827,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.3.723, electron-to-chromium@npm:^1.3.886":
-  version: 1.3.886
-  resolution: "electron-to-chromium@npm:1.3.886"
-  checksum: c171a1444095f8f61b3cef75a4b3b1d4a0e5deadbdd37020fc680cfc37849067219de6c94c8ea75b60e6fc7f825241c5ce55809dd2b33fadadda236255337c85
+  version: 1.3.887
+  resolution: "electron-to-chromium@npm:1.3.887"
+  checksum: ddb3f0c9f610d886eb67429cb16e2361aaced6bac7da5352ec6b4ffcee624897918889f007dd484afa3556c3c7603aa449434c0b232e6a8eae4fef98698973af
   languageName: node
   linkType: hard
 
@@ -8469,11 +8469,11 @@ __metadata:
   linkType: hard
 
 "mime@npm:^2.4.6":
-  version: 2.5.2
-  resolution: "mime@npm:2.5.2"
+  version: 2.6.0
+  resolution: "mime@npm:2.6.0"
   bin:
     mime: cli.js
-  checksum: dd3c93d433d41a09f6a1cfa969b653b769899f3bd573e7bfcea33bdc8b0cc4eba57daa2f95937369c2bd2b6d39d62389b11a4309fe40d1d3a1b736afdedad0ff
+  checksum: 1497ba7b9f6960694268a557eae24b743fd2923da46ec392b042469f4b901721ba0adcf8b0d3c2677839d0e243b209d76e5edcbd09cfdeffa2dfb6bb4df4b862
   languageName: node
   linkType: hard
 
@@ -9182,6 +9182,7 @@ __metadata:
     passport-google-oauth20: ^2.0.0
     react: 17.0.2
     react-dom: 17.0.2
+    react-ga: ^3.3.0
     reflect-metadata: ^0.1.13
     sanitize.css: ^13.0.0
     sijiaoh-gts: ^0.6.0
@@ -9997,6 +9998,16 @@ __metadata:
   version: 2.0.4
   resolution: "react-fast-compare@npm:2.0.4"
   checksum: 06046595f90a4e3e3a56f40a8078c00aa71bdb064ddb98343f577f546aa22e888831fd45f009c93b34707cc842b4c637737e956fd13d6f80607ee92fb9cf9a1c
+  languageName: node
+  linkType: hard
+
+"react-ga@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "react-ga@npm:3.3.0"
+  peerDependencies:
+    prop-types: ^15.6.0
+    react: ^15.6.2 || ^16.0 || ^17
+  checksum: b4f5b0ed3a5d7ea781397d6a1f8dacae2284fe7f03f72dde330958dd0a64732f8766c6fa26cf0f1a8fb1303fa02aa51f23cf0b261e52981d0275262b831c7fea
   languageName: node
   linkType: hard
 

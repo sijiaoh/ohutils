@@ -34,7 +34,7 @@ describe(TagEntity.name, () => {
 
     expect((await findPost())?.tags?.length).toEqual(tags.length);
 
-    post.tags = [tags[0]];
+    post.tags = [tags[0]!];
     await post.save();
     expect((await findPost())?.tags?.length).toEqual(1);
   });
@@ -47,7 +47,7 @@ describe(TagEntity.name, () => {
       .createQueryBuilder()
       .insert()
       .into('post_entity_tags_tag_entity')
-      .values({postEntityId: post.id, tagEntityId: tags[0].id});
+      .values({postEntityId: post.id, tagEntityId: tags[0]!.id});
     await expect(query.execute()).resolves.not.toThrowError();
     await expect(query.execute()).rejects.toThrowError();
   });

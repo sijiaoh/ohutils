@@ -1,4 +1,4 @@
-// Google analytics.
+# Google analytics.
 export TRACKING_CODE=
 
 export DB_VERSION=8.0

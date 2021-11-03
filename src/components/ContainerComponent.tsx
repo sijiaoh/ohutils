@@ -6,9 +6,9 @@ export const ContainerComponent = ({children}: PropsWithChildren<{}>) => {
       <div
         css={{
           '@media (min-width: 720px)': {
-            minWidth: '720px',
+            width: '720px',
           },
-          minWidth: '90vw',
+          width: '90vw',
         }}
       >
         {children}

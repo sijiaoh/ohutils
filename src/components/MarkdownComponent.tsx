@@ -1,5 +1,5 @@
 import hljs from 'highlight.js';
-import markdownToHtml from 'marked';
+import marked from 'marked';
 import {useEffect, useRef} from 'react';
 import {DefaultProps} from 'src/utils/DefaultProps';
 
@@ -14,7 +14,7 @@ export const MarkdownComponent = ({
   useEffect(() => {
     const elm = elmRef.current;
     if (!elm) return;
-    elm.innerHTML = markdownToHtml(text, {
+    elm.innerHTML = marked(text, {
       langPrefix: 'hljs ',
       highlight: (code, lang) => {
         if (hljs.getLanguage(lang))

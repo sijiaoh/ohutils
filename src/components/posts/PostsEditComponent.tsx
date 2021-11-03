@@ -37,6 +37,7 @@ export const PostsEditComponent: NextPage = withAuth(() => {
           {title: 'Home', path: '/'},
           {title: '投稿一覧', path: '/posts'},
           {title: originalTitleRef.current || '', path: `/post/${id}`},
+          {title: '投稿編集'},
         ]}
       />
 

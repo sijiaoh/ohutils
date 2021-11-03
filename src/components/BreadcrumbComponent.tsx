@@ -20,13 +20,17 @@ export const BreadcrumbComponent = ({
       css={{
         display: 'flex',
         flexWrap: 'wrap',
+        overflow: 'hidden',
       }}
     >
       {breadcrumbList.map((item, index) => (
         <li
           key={index}
           css={{
+            maxWidth: '10em',
+            overflow: 'hidden',
             whiteSpace: 'nowrap',
+            textOverflow: 'ellipsis',
 
             ':first-child:before': {
               content: '""',

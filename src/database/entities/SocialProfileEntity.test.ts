@@ -10,7 +10,7 @@ describe(SocialProfileEntity.name, () => {
     const socialProfiles = await SocialProfileEntity.find({
       where: {userId: user.id},
     });
-    await socialProfiles[0].remove();
+    await socialProfiles[0]!.remove();
 
     expect(await UserEntity.count()).toBe(1);
     expect(await SocialProfileEntity.count()).toBe(0);

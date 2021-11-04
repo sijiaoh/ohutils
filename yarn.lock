@@ -4447,6 +4447,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns@npm:^2.25.0":
+  version: 2.25.0
+  resolution: "date-fns@npm:2.25.0"
+  checksum: 8896dc1dde0ee5ef77616942423bfa11fa2017a5ac19457293b7aaedc8822ff94f0a14eaf93da573b09b601dc0149eb430988a046cc9f79a2eb15f8c66c9c50c
+  languageName: node
+  linkType: hard
+
 "debounce@npm:^1.2.0":
   version: 1.2.1
   resolution: "debounce@npm:1.2.1"
@@ -9125,6 +9132,7 @@ __metadata:
     "@types/uuid": ^8.3.1
     babel-plugin-transform-typescript-metadata: ^0.3.2
     class-validator: ^0.13.1
+    date-fns: ^2.25.0
     eslint-config-next: 12.0.2
     execa: ^5.1.1
     express: ^4.17.1

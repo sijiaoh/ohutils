@@ -1,19 +1,17 @@
 import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
 import {useEffect, useRef} from 'react';
-import {BreadcrumbComponent} from '../BreadcrumbComponent';
+import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {ContainerComponent} from '../ContainerComponent';
 import {HeadComponent} from '../HeadComponent';
-import {homePath, homeTitle} from '../HomeComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
-import {postsPath, postsTitle} from './PostsComponent';
-import {postsEditPath, postsEditTitle} from './PostsEditComponent';
 import {Me} from 'src/classes/Me';
 import {Post} from 'src/classes/Post';
+import {homeBreadcrumb} from 'src/pages';
+import {postTitle} from 'src/pages/post/[id]';
+import {postsBreadcrumb} from 'src/pages/posts';
+import {postsEditPath, postsEditTitle} from 'src/pages/posts/edit/[id]';
 import {Link} from 'src/utils/Link';
-
-export const postTitle = (title: string) => title;
-export const postPath = (id: string) => `/post/${id}`;
 
 export const PostComponent = () => {
   const router = useRouter();
@@ -32,10 +30,10 @@ export const PostComponent = () => {
     <ContainerComponent>
       <HeadComponent subTitle={postTitle(postData.title)} />
 
-      <BreadcrumbComponent
+      <BreadcrumbListComponent
         list={[
-          {title: homeTitle, path: homePath},
-          {title: postsTitle, path: postsPath},
+          homeBreadcrumb,
+          postsBreadcrumb,
           {title: postTitle(postData.title)},
         ]}
       />

@@ -2,19 +2,16 @@ import {useListen} from '@reactive-class/react';
 import type {NextPage} from 'next';
 import {useRouter} from 'next/dist/client/router';
 import {useEffect, useRef} from 'react';
-import {BreadcrumbComponent} from '../BreadcrumbComponent';
+import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
-import {homePath, homeTitle} from '../HomeComponent';
-import {postPath, postTitle} from './PostComponent';
 import {PostEditorComponent} from './PostEditorComponent';
-import {postsPath, postsTitle} from './PostsComponent';
 import {Post} from 'src/classes/Post';
-import {withAuth} from 'src/hocs/withAuth';
+import {homeBreadcrumb} from 'src/pages';
+import {postBreadcrumb} from 'src/pages/post/[id]';
+import {postsBreadcrumb} from 'src/pages/posts';
+import {postsEditTitle} from 'src/pages/posts/edit/[id]';
 
-export const postsEditTitle = '投稿編集';
-export const postsEditPath = (id: string) => `/posts/edit/${id}`;
-
-export const PostsEditComponent: NextPage = withAuth(() => {
+export const PostsEditComponent: NextPage = () => {
   const router = useRouter();
   const {id} = router.query;
   if (typeof id !== 'string') throw new Error('id is not providing.');
@@ -38,14 +35,11 @@ export const PostsEditComponent: NextPage = withAuth(() => {
     <div>
       <HeadComponent subTitle={postsEditTitle} />
 
-      <BreadcrumbComponent
+      <BreadcrumbListComponent
         list={[
-          {title: homeTitle, path: homePath},
-          {title: postsTitle, path: postsPath},
-          {
-            title: postTitle(originalTitleRef.current || ''),
-            path: postPath(id),
-          },
+          homeBreadcrumb,
+          postsBreadcrumb,
+          postBreadcrumb({id, title: originalTitleRef.current || ''}),
           {title: postsEditTitle},
         ]}
       />
@@ -55,4 +49,4 @@ export const PostsEditComponent: NextPage = withAuth(() => {
       <PostEditorComponent post={post} />
     </div>
   );
-});
+};

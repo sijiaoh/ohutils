@@ -1,29 +1,22 @@
 import type {NextPage} from 'next';
 import {useRef} from 'react';
-import {BreadcrumbComponent} from '../BreadcrumbComponent';
+import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
-import {homePath, homeTitle} from '../HomeComponent';
 import {PostEditorComponent} from './PostEditorComponent';
-import {postsPath, postsTitle} from './PostsComponent';
 import {Post} from 'src/classes/Post';
-import {withAuth} from 'src/hocs/withAuth';
+import {homeBreadcrumb} from 'src/pages';
+import {postsBreadcrumb} from 'src/pages/posts';
+import {postsCreateTitle} from 'src/pages/posts/create';
 
-export const postsCreateTitle = '投稿作成';
-export const postsCreatePath = '/posts/create';
-
-export const PostsCreateComponent: NextPage = withAuth(() => {
+export const PostsCreateComponent: NextPage = () => {
   const post = useRef(new Post()).current;
 
   return (
     <div>
       <HeadComponent subTitle={postsCreateTitle} />
 
-      <BreadcrumbComponent
-        list={[
-          {title: homeTitle, path: homePath},
-          {title: postsTitle, path: postsPath},
-          {title: postsCreateTitle},
-        ]}
+      <BreadcrumbListComponent
+        list={[homeBreadcrumb, postsBreadcrumb, {title: postsCreateTitle}]}
       />
 
       <h1>{postsCreateTitle}</h1>
@@ -31,4 +24,4 @@ export const PostsCreateComponent: NextPage = withAuth(() => {
       <PostEditorComponent post={post} />
     </div>
   );
-});
+};

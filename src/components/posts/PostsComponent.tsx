@@ -1,16 +1,14 @@
 import {useListen} from '@reactive-class/react';
-import {BreadcrumbComponent} from '../BreadcrumbComponent';
+import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {ContainerComponent} from '../ContainerComponent';
 import {HeadComponent} from '../HeadComponent';
-import {homePath, homeTitle} from '../HomeComponent';
-import {postPath, postTitle} from './PostComponent';
-import {postsCreatePath, postsCreateTitle} from './PostsCreateComponent';
 import {Order, usePostsQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
+import {homeBreadcrumb} from 'src/pages';
+import {postPath, postTitle} from 'src/pages/post/[id]';
+import {postsTitle} from 'src/pages/posts';
+import {postsCreatePath, postsCreateTitle} from 'src/pages/posts/create';
 import {Link} from 'src/utils/Link';
-
-export const postsTitle = '投稿一覧';
-export const postsPath = '/posts';
 
 export const PostsComponent = () => {
   const {data, loading} = usePostsQuery({
@@ -23,9 +21,7 @@ export const PostsComponent = () => {
     <ContainerComponent>
       <HeadComponent subTitle={postsTitle} />
 
-      <BreadcrumbComponent
-        list={[{title: homeTitle, path: homePath}, {title: postsTitle}]}
-      />
+      <BreadcrumbListComponent list={[homeBreadcrumb, {title: postsTitle}]} />
 
       <h1>{postsTitle}</h1>
 

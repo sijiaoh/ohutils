@@ -1,8 +1,8 @@
 import type {NextPage} from 'next';
 import {BreadcrumbListComponent} from './BreadcrumbListComponent';
 import {HeadComponent} from './HeadComponent';
-import {postsPath, postsTitle} from './posts/PostsComponent';
 import {homeBreadcrumb, homeTitle} from 'src/pages';
+import {postsPath, postsTitle} from 'src/pages/posts';
 import {Link} from 'src/utils/Link';
 
 export const HomeComponent: NextPage = () => {

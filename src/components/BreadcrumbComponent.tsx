@@ -32,7 +32,7 @@ export const BreadcrumbComponent = ({
             whiteSpace: 'nowrap',
             textOverflow: 'ellipsis',
 
-            ':first-child:before': {
+            ':first-of-type:before': {
               content: '""',
               margin: '0',
             },

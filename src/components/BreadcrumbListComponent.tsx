@@ -1,17 +1,17 @@
 import {DefaultProps} from 'src/utils/DefaultProps';
 import {Link} from 'src/utils/Link';
 
-export interface BreadcrumbListItem {
+export interface Breadcrumb {
   title: string;
   path?: string;
 }
 
-export const BreadcrumbComponent = ({
+export const BreadcrumbListComponent = ({
   className,
-  list: breadcrumbList,
+  list,
   separator = '>',
 }: DefaultProps<{
-  list: BreadcrumbListItem[];
+  list: Breadcrumb[];
   separator?: string;
 }>) => {
   return (
@@ -23,7 +23,7 @@ export const BreadcrumbComponent = ({
         overflow: 'hidden',
       }}
     >
-      {breadcrumbList.map((item, index) => (
+      {list.map((item, index) => (
         <li
           key={index}
           css={{

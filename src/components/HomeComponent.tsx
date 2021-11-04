@@ -7,6 +7,9 @@ import {useHelloQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
 import {Link} from 'src/utils/Link';
 
+export const homeTitle = 'Home';
+export const homePath = '/';
+
 export const HomeComponent: NextPage = () => {
   const {data} = useHelloQuery();
   const me = Me.useMe();
@@ -14,12 +17,12 @@ export const HomeComponent: NextPage = () => {
 
   return (
     <div>
-      <HeadComponent subTitle={'Home'} />
+      <HeadComponent subTitle={homeTitle} />
 
       <BreadcrumbComponent
         list={[
-          {title: 'Home', path: '/'},
-          {title: 'Home', path: '/'},
+          {title: homeTitle, path: homePath},
+          {title: homeTitle, path: homePath},
         ]}
       />
 

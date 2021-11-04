@@ -1,6 +1,4 @@
-import dynamic from 'next/dynamic';
+import {HomeComponent} from 'src/components/HomeComponent';
+import {toCsrPage} from 'src/utils/toCsrPage';
 
-export default dynamic(
-  async () => (await import('src/components/HomeComponent')).HomeComponent,
-  {ssr: false}
-);
+export default toCsrPage(HomeComponent);

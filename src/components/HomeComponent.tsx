@@ -3,12 +3,15 @@ import {BreadcrumbComponent} from './BreadcrumbComponent';
 import {HeadComponent} from './HeadComponent';
 import {Link} from 'src/utils/Link';
 
+export const homeTitle = 'Home';
+export const homePath = '/';
+
 export const HomeComponent: NextPage = () => {
   return (
     <div>
-      <HeadComponent subTitle={'Home'} />
+      <HeadComponent subTitle={homeTitle} />
 
-      <BreadcrumbComponent list={[{title: 'Home', path: '/'}]} />
+      <BreadcrumbComponent list={[{title: homeTitle, path: homePath}]} />
 
       <h1>Welcome to ohutils.com!</h1>
 

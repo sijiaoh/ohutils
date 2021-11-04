@@ -7,6 +7,11 @@
     "src/**/*.gql",
     "src/**/*.graphql"
   ],
+  "config": {
+    "scalars": {
+      "DateTime": "string"
+    }
+  },
   "generates": {
     "./src/generated/graphql-apollo.ts": {
       "plugins": [

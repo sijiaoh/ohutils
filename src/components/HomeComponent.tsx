@@ -1,14 +1,12 @@
 import {useListen} from '@reactive-class/react';
 import type {NextPage} from 'next';
-import {BreadcrumbComponent} from './BreadcrumbComponent';
+import {BreadcrumbListComponent} from './BreadcrumbListComponent';
 import {CounterComponent} from './CounterComponent';
 import {HeadComponent} from './HeadComponent';
 import {useHelloQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
+import {homeBreadcrumb, homeTitle} from 'src/pages';
 import {Link} from 'src/utils/Link';
-
-export const homeTitle = 'Home';
-export const homePath = '/';
 
 export const HomeComponent: NextPage = () => {
   const {data} = useHelloQuery();
@@ -19,12 +17,7 @@ export const HomeComponent: NextPage = () => {
     <div>
       <HeadComponent subTitle={homeTitle} />
 
-      <BreadcrumbComponent
-        list={[
-          {title: homeTitle, path: homePath},
-          {title: homeTitle, path: homePath},
-        ]}
-      />
+      <BreadcrumbListComponent list={[homeBreadcrumb, homeBreadcrumb]} />
 
       <h1>
         Welcome to{' '}

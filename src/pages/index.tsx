@@ -1,6 +1,9 @@
-import dynamic from 'next/dynamic';
+import {Breadcrumb} from 'src/components/BreadcrumbListComponent';
+import {HomeComponent} from 'src/components/HomeComponent';
+import {toCsrPage} from 'src/utils/toCsrPage';
 
-export default dynamic(
-  async () => (await import('src/components/HomeComponent')).HomeComponent,
-  {ssr: false}
-);
+export const homeTitle = 'Home';
+export const homePath = '/';
+export const homeBreadcrumb: Breadcrumb = {title: homeTitle, path: homePath};
+
+export default toCsrPage(HomeComponent);

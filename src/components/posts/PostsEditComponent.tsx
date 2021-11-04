@@ -2,6 +2,7 @@ import {useListen} from '@reactive-class/react';
 import type {NextPage} from 'next';
 import {useRouter} from 'next/dist/client/router';
 import {useEffect, useRef} from 'react';
+import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
 import {PostEditorComponent} from './PostEditorComponent';
@@ -32,7 +33,7 @@ export const PostsEditComponent: NextPage = () => {
 
   if (!postData) return <div>Loading...</div>;
   return (
-    <div>
+    <Container>
       <HeadComponent subTitle={postsEditTitle} />
 
       <BreadcrumbListComponent
@@ -47,6 +48,6 @@ export const PostsEditComponent: NextPage = () => {
       <h1>{postsEditTitle}</h1>
 
       <PostEditorComponent post={post} />
-    </div>
+    </Container>
   );
 };

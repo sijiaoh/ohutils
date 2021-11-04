@@ -1,7 +1,7 @@
 import {useListen} from '@reactive-class/react';
+import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
-import {ContainerComponent} from '../ContainerComponent';
 import {HeadComponent} from '../HeadComponent';
 import {Order, usePostsQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
@@ -20,7 +20,7 @@ export const PostsComponent = () => {
 
   if (loading) return <div>Loading...</div>;
   return (
-    <ContainerComponent>
+    <Container>
       <HeadComponent subTitle={postsTitle} />
 
       <BreadcrumbListComponent list={[homeBreadcrumb, {title: postsTitle}]} />
@@ -53,6 +53,6 @@ export const PostsComponent = () => {
           ))}
         </tbody>
       </Table>
-    </ContainerComponent>
+    </Container>
   );
 };

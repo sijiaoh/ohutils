@@ -1,4 +1,5 @@
 import type {NextPage} from 'next';
+import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from './BreadcrumbListComponent';
 import {HeadComponent} from './HeadComponent';
 import {homeBreadcrumb, homeTitle} from 'src/pages';
@@ -7,7 +8,7 @@ import {Link} from 'src/utils/Link';
 
 export const HomeComponent: NextPage = () => {
   return (
-    <div>
+    <Container>
       <HeadComponent subTitle={homeTitle} />
 
       <BreadcrumbListComponent list={[homeBreadcrumb]} />
@@ -17,6 +18,6 @@ export const HomeComponent: NextPage = () => {
       <div>
         <Link href={postsPath}>{postsTitle}</Link>
       </div>
-    </div>
+    </Container>
   );
 };

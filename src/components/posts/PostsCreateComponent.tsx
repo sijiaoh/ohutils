@@ -1,5 +1,6 @@
 import type {NextPage} from 'next';
 import {useRef} from 'react';
+import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
 import {PostEditorComponent} from './PostEditorComponent';
@@ -12,7 +13,7 @@ export const PostsCreateComponent: NextPage = () => {
   const post = useRef(new Post()).current;
 
   return (
-    <div>
+    <Container>
       <HeadComponent subTitle={postsCreateTitle} />
 
       <BreadcrumbListComponent
@@ -22,6 +23,6 @@ export const PostsCreateComponent: NextPage = () => {
       <h1>{postsCreateTitle}</h1>
 
       <PostEditorComponent post={post} />
-    </div>
+    </Container>
   );
 };

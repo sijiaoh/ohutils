@@ -1,8 +1,8 @@
 import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
 import {useEffect, useRef} from 'react';
+import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
-import {ContainerComponent} from '../ContainerComponent';
 import {HeadComponent} from '../HeadComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
 import {Me} from 'src/classes/Me';
@@ -27,7 +27,7 @@ export const PostComponent = () => {
 
   if (!postData) return <div>Loading...</div>;
   return (
-    <ContainerComponent>
+    <Container>
       <HeadComponent subTitle={postTitle(postData.title)} />
 
       <BreadcrumbListComponent
@@ -53,6 +53,6 @@ export const PostComponent = () => {
       </ul>
 
       <MarkdownComponent text={postData.text}></MarkdownComponent>
-    </ContainerComponent>
+    </Container>
   );
 };

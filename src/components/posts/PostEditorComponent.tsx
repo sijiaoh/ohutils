@@ -71,7 +71,9 @@ export const PostEditorComponent = ({
       </div>
 
       <FieldComponent id="tags" name="tags" label="タグ" />
-      <SubmitButtonComponent>登録</SubmitButtonComponent>
+      <SubmitButtonComponent css={{marginTop: '2em'}}>
+        登録
+      </SubmitButtonComponent>
     </FormComponent>
   );
 };

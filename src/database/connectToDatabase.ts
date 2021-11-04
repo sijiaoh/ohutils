@@ -22,6 +22,7 @@ export const connectToDatabase = async (
     entities: Object.values(entities),
     synchronize: process.env.NODE_ENV !== 'production',
     charset: 'utf8mb4',
+    timezone: 'Z',
     ...options,
   } as ConnectionOptions);
 };

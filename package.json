@@ -29,6 +29,7 @@
     "@reactive-class/react": "^0.1.1",
     "bootstrap": "5.1.3",
     "class-validator": "^0.13.1",
+    "date-fns": "^2.25.0",
     "express-graphql": "^0.12.0",
     "formik": "^2.2.9",
     "graphql": "^15.7.2",

@@ -2,69 +2,71 @@ import {ReactiveClass} from '@reactive-class/react';
 import {produce} from 'immer';
 import {apolloSdk, PostInput, PostType} from 'src/apollo';
 
-export type PostData = Omit<PostType, 'id'>;
-
 export class Post extends ReactiveClass {
-  data?: Readonly<PostData> | null;
+  input: Readonly<PostInput> = {title: '', text: '', tags: []};
+  data?: Readonly<PostType>;
 
   constructor(public id?: string) {
     super();
   }
 
+  loading = () => this.id != null && this.data == null;
+
   load = async () => {
     if (!this.id) return;
 
-    this.data = await apolloSdk
-      .postQuery({variables: {id: this.id}})
-      .then(({data}) => data.post)
-      .catch(() => null);
+    const {
+      data: {post},
+    } = await apolloSdk.postQuery({variables: {id: this.id}});
+    this.setData(post);
   };
 
-  setData = (data: Partial<PostData>) => {
-    this.data = this.data || {title: '', text: '', tags: []};
-    this.data = produce(this.data, draft => {
-      return {
-        ...draft,
-        ...data,
-      };
+  setInput = (input: Partial<PostInput>) => {
+    this.input = produce(this.input, draft => ({...draft, ...input}));
+    if (!this.data) return;
+    this.data = produce(this.data, data => {
+      Object.assign(data, this.input);
     });
   };
 
   setTagsFromStr = (str: string) => {
-    if (!this.data) return;
-
-    this.data = produce(this.data, data => {
-      data.tags = str
+    this.setInput({
+      tags: str
         .replace(/\s+/g, ' ')
         .split(' ')
-        .filter(tag => !!tag);
+        .filter(tag => !!tag),
     });
   };
 
   save = async () => {
-    if (!this.data) return;
-
+    // this.inputには余分なデータが入っている可能性がある。
     const postVariable: PostInput = {
-      title: this.data.title,
-      text: this.data.text,
-      tags: this.data.tags,
+      title: this.input.title,
+      text: this.input.text,
+      tags: this.input.tags,
     };
 
     if (this.id == null) {
-      this.id = await apolloSdk
-        .createPostMutation({
-          variables: {
-            post: postVariable,
-          },
-        })
-        .then(({data}) => data?.createPost.id);
+      const {data} = await apolloSdk.createPostMutation({
+        variables: {
+          post: postVariable,
+        },
+      });
+      if (data) this.setData(data.createPost);
     } else {
-      await apolloSdk.updatePostMutation({
+      const {data} = await apolloSdk.updatePostMutation({
         variables: {
           id: this.id,
           post: postVariable,
         },
       });
+      if (data) this.setData(data.updatePost);
     }
+    this.id = this.data?.id;
+  };
+
+  private setData = (data: PostType) => {
+    this.data = produce(this.data, () => data);
+    this.input = produce(this.input, () => data);
   };
 }

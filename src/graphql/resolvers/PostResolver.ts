@@ -45,9 +45,7 @@ export class PostResolver {
     );
     const posts = await PostEntity.find({order: o});
     const res = posts.map(post => ({
-      id: post.id,
-      title: post.title,
-      text: post.text,
+      ...post,
       tags: post.tags?.map(tag => tag.name) || [],
     }));
     return res;

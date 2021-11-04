@@ -12,4 +12,8 @@ export class PostType {
   text!: string;
   @Field(() => [String])
   tags!: string[];
+  @Field()
+  createdAt!: Date;
+  @Field()
+  updatedAt!: Date;
 }

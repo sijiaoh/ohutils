@@ -19,7 +19,7 @@ export const PostEditorComponent = ({
   const postData = useListen(post);
   const onChange = useRef(
     _.debounce(({title, text, tags}: typeof initialValues) => {
-      post.setData({title, text});
+      post.setInput({title, text});
       post.setTagsFromStr(tags);
     }, 500)
   ).current;
@@ -41,7 +41,7 @@ export const PostEditorComponent = ({
       }}
       onChange={onChange}
       onSubmit={async ({title, text, tags}) => {
-        post.setData({title, text});
+        post.setInput({title, text});
         post.setTagsFromStr(tags);
         await post.save();
         await router.push(`/post/${post.id}`);

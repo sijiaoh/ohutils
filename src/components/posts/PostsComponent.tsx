@@ -10,6 +10,7 @@ import {postPath, postTitle} from 'src/pages/post/[id]';
 import {postsTitle} from 'src/pages/posts';
 import {postsCreatePath, postsCreateTitle} from 'src/pages/posts/create';
 import {Link} from 'src/utils/Link';
+import {printDateTime} from 'src/utils/printDateTime';
 
 export const PostsComponent = () => {
   const {data, loading} = usePostsQuery({
@@ -46,8 +47,8 @@ export const PostsComponent = () => {
               <td>
                 <Link href={postPath(post.id)}>{postTitle(post.title)}</Link>
               </td>
-              <td>{post.createdAt}</td>
-              <td>{post.updatedAt}</td>
+              <td>{printDateTime(post.createdAt)}</td>
+              <td>{printDateTime(post.updatedAt)}</td>
             </tr>
           ))}
         </tbody>

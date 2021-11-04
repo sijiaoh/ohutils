@@ -1,6 +1,7 @@
 import type {NextPage} from 'next';
 import {BreadcrumbComponent} from './BreadcrumbComponent';
 import {HeadComponent} from './HeadComponent';
+import {postsPath, postsTitle} from './posts/PostsComponent';
 import {Link} from 'src/utils/Link';
 
 export const homeTitle = 'Home';
@@ -16,7 +17,7 @@ export const HomeComponent: NextPage = () => {
       <h1>Welcome to ohutils.com!</h1>
 
       <div>
-        <Link href="/posts">投稿一覧</Link>
+        <Link href={postsPath}>{postsTitle}</Link>
       </div>
     </div>
   );

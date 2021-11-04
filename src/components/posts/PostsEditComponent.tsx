@@ -4,9 +4,15 @@ import {useRouter} from 'next/dist/client/router';
 import {useEffect, useRef} from 'react';
 import {BreadcrumbComponent} from '../BreadcrumbComponent';
 import {HeadComponent} from '../HeadComponent';
+import {homePath, homeTitle} from '../HomeComponent';
+import {postPath, postTitle} from './PostComponent';
 import {PostEditorComponent} from './PostEditorComponent';
+import {postsPath, postsTitle} from './PostsComponent';
 import {Post} from 'src/classes/Post';
 import {withAuth} from 'src/hocs/withAuth';
+
+export const postsEditTitle = '投稿編集';
+export const postsEditPath = (id: string) => `/posts/edit/${id}`;
 
 export const PostsEditComponent: NextPage = withAuth(() => {
   const router = useRouter();
@@ -30,18 +36,21 @@ export const PostsEditComponent: NextPage = withAuth(() => {
   if (!postData) return <div>Loading...</div>;
   return (
     <div>
-      <HeadComponent subTitle="投稿編集" />
+      <HeadComponent subTitle={postsEditTitle} />
 
       <BreadcrumbComponent
         list={[
-          {title: 'Home', path: '/'},
-          {title: '投稿一覧', path: '/posts'},
-          {title: originalTitleRef.current || '', path: `/post/${id}`},
-          {title: '投稿編集'},
+          {title: homeTitle, path: homePath},
+          {title: postsTitle, path: postsPath},
+          {
+            title: postTitle(originalTitleRef.current || ''),
+            path: postPath(id),
+          },
+          {title: postsEditTitle},
         ]}
       />
 
-      <h1>投稿編集</h1>
+      <h1>{postsEditTitle}</h1>
 
       <PostEditorComponent post={post} />
     </div>

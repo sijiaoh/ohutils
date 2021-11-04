@@ -4,10 +4,16 @@ import {useEffect, useRef} from 'react';
 import {BreadcrumbComponent} from '../BreadcrumbComponent';
 import {ContainerComponent} from '../ContainerComponent';
 import {HeadComponent} from '../HeadComponent';
+import {homePath, homeTitle} from '../HomeComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
+import {postsPath, postsTitle} from './PostsComponent';
+import {postsEditPath, postsEditTitle} from './PostsEditComponent';
 import {Me} from 'src/classes/Me';
 import {Post} from 'src/classes/Post';
 import {Link} from 'src/utils/Link';
+
+export const postTitle = (title: string) => title;
+export const postPath = (id: string) => `/post/${id}`;
 
 export const PostComponent = () => {
   const router = useRouter();
@@ -24,21 +30,21 @@ export const PostComponent = () => {
   if (!postData) return <div>Loading...</div>;
   return (
     <ContainerComponent>
-      <HeadComponent subTitle={postData.title} />
+      <HeadComponent subTitle={postTitle(postData.title)} />
 
       <BreadcrumbComponent
         list={[
-          {title: 'Home', path: '/'},
-          {title: '投稿一覧', path: '/posts'},
-          {title: postData.title},
+          {title: homeTitle, path: homePath},
+          {title: postsTitle, path: postsPath},
+          {title: postTitle(postData.title)},
         ]}
       />
 
-      <h1>{postData.title}</h1>
+      <h1>{postTitle(postData.title)}</h1>
 
       {meData && (
         <div>
-          <Link href={`/posts/edit/${id}`}>編集</Link>
+          <Link href={postsEditPath(id)}>{postsEditTitle}</Link>
         </div>
       )}
 

@@ -2,9 +2,15 @@ import {useListen} from '@reactive-class/react';
 import {BreadcrumbComponent} from '../BreadcrumbComponent';
 import {ContainerComponent} from '../ContainerComponent';
 import {HeadComponent} from '../HeadComponent';
+import {homePath, homeTitle} from '../HomeComponent';
+import {postPath, postTitle} from './PostComponent';
+import {postsCreatePath, postsCreateTitle} from './PostsCreateComponent';
 import {Order, usePostsQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
 import {Link} from 'src/utils/Link';
+
+export const postsTitle = '投稿一覧';
+export const postsPath = '/posts';
 
 export const PostsComponent = () => {
   const {data, loading} = usePostsQuery({
@@ -15,24 +21,24 @@ export const PostsComponent = () => {
   if (loading) return <div>Loading...</div>;
   return (
     <ContainerComponent>
-      <HeadComponent subTitle="投稿一覧" />
+      <HeadComponent subTitle={postsTitle} />
 
       <BreadcrumbComponent
-        list={[{title: 'Home', path: '/'}, {title: '投稿一覧'}]}
+        list={[{title: homeTitle, path: homePath}, {title: postsTitle}]}
       />
 
-      <h1>投稿一覧</h1>
+      <h1>{postsTitle}</h1>
 
       {meData && (
         <div>
-          <Link href="posts/create">新規投稿</Link>
+          <Link href={postsCreatePath}>{postsCreateTitle}</Link>
         </div>
       )}
 
       <ul>
         {data?.posts.map(post => (
           <li key={post.id}>
-            <Link href={`/post/${post.id}`}>{post.title}</Link>
+            <Link href={postPath(post.id)}>{postTitle(post.title)}</Link>
           </li>
         ))}
       </ul>

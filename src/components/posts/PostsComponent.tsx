@@ -1,4 +1,5 @@
 import {useListen} from '@reactive-class/react';
+import Table from 'react-bootstrap/Table';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {ContainerComponent} from '../ContainerComponent';
 import {HeadComponent} from '../HeadComponent';
@@ -31,13 +32,26 @@ export const PostsComponent = () => {
         </div>
       )}
 
-      <ul>
-        {data?.posts.map(post => (
-          <li key={post.id}>
-            <Link href={postPath(post.id)}>{postTitle(post.title)}</Link>
-          </li>
-        ))}
-      </ul>
+      <Table>
+        <thead>
+          <tr>
+            <th>投稿名</th>
+            <th>投稿日</th>
+            <th>更新日</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data?.posts.map(post => (
+            <tr key={post.id}>
+              <td>
+                <Link href={postPath(post.id)}>{postTitle(post.title)}</Link>
+              </td>
+              <td>{post.createdAt}</td>
+              <td>{post.updatedAt}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
     </ContainerComponent>
   );
 };

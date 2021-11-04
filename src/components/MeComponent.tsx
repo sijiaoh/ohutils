@@ -3,11 +3,10 @@ import type {NextPage} from 'next';
 import {BreadcrumbListComponent} from './BreadcrumbListComponent';
 import {HeadComponent} from './HeadComponent';
 import {Me} from 'src/classes/Me';
-import {withAuth} from 'src/hocs/withAuth';
 import {homeBreadcrumb} from 'src/pages';
 import {meTitle} from 'src/pages/me';
 
-export const MeComponent: NextPage = withAuth(() => {
+export const MeComponent: NextPage = () => {
   const me = Me.useMe();
   const meData = useListen(me);
 
@@ -20,4 +19,4 @@ export const MeComponent: NextPage = withAuth(() => {
       {JSON.stringify(meData.data)}
     </div>
   );
-});
+};

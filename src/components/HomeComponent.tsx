@@ -6,6 +6,7 @@ import {HeadComponent} from './HeadComponent';
 import {useHelloQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
 import {homeBreadcrumb, homeTitle} from 'src/pages';
+import {signInPath, signInTitle} from 'src/pages/signin';
 import {Link} from 'src/utils/Link';
 
 export const HomeComponent: NextPage = () => {
@@ -26,11 +27,17 @@ export const HomeComponent: NextPage = () => {
         </a>
       </h1>
 
-      {token && <div>Your token is {token}</div>}
+      {token ? (
+        <div>Your token is {token}</div>
+      ) : (
+        <Link href={signInPath}>{signInTitle}</Link>
+      )}
 
-      <Link href="#">
-        <a css={{color: 'red'}}>{data?.hello}</a>
-      </Link>
+      <div>
+        <Link href="#">
+          <a css={{color: 'red'}}>{data?.hello}</a>
+        </Link>
+      </div>
 
       <CounterComponent css={{marginTop: '1em'}} />
     </div>

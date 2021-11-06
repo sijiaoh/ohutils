@@ -13,4 +13,19 @@ export const apolloClient = new ApolloClient({
    * ApolloServerがNext.js対応したら修正する。
    */
   // link: new BatchHttpLink({uri}),
+
+  // From: https://www.apollographql.com/docs/react/api/core/ApolloClient/#example-defaultoptions-object
+  defaultOptions: {
+    watchQuery: {
+      fetchPolicy: 'cache-and-network',
+      errorPolicy: 'ignore',
+    },
+    query: {
+      fetchPolicy: 'network-only',
+      errorPolicy: 'all',
+    },
+    mutate: {
+      errorPolicy: 'all',
+    },
+  },
 });

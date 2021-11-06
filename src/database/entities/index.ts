@@ -5,3 +5,5 @@ export * from './PostEntity';
 export * from './SocialProfileEntity';
 export * from './TagEntity';
 export * from './UserEntity';
+export * from './VoteEntity';
+export * from './VoteOptionEntity';

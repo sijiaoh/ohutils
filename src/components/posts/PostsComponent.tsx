@@ -14,7 +14,7 @@ import {printDateTime} from 'src/utils/printDateTime';
 
 export const PostsComponent = () => {
   const {data, loading} = usePostsQuery({
-    variables: {order: {createdAt: Order.Asc}},
+    variables: {order: {createdAt: Order.Desc}},
   });
   const meData = useListen(Me.useMe(), ({data}) => data);
 

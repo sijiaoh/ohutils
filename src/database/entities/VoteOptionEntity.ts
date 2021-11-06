@@ -23,7 +23,7 @@ export class VoteOptionEntity extends BaseEntity {
   @Column()
   @IsNotEmpty()
   name!: string;
-  @Column()
+  @Column({default: 0})
   @Min(0)
   readonly numberOfVotes!: number;
 

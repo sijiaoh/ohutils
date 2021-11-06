@@ -12,7 +12,7 @@ export class VoteType {
   @Field()
   text!: string;
   @Field(() => [VoteOptionType])
-  voteOption!: VoteOptionType[];
+  voteOptions!: VoteOptionType[];
   @Field()
   createdAt!: Date;
   @Field()

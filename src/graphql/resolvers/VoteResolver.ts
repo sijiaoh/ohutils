@@ -30,7 +30,7 @@ export class VoteResolver {
   }
 
   @Query(() => [VoteType])
-  async posts(@Arg('order') order: VotesOrderInput): Promise<VoteType[]> {
+  async votes(@Arg('order') order: VotesOrderInput): Promise<VoteType[]> {
     const o = Object.entries(order).reduce<{[key: string]: string}>(
       (obj, [key, value]) => {
         if (value == null) return obj;
@@ -50,7 +50,7 @@ export class VoteResolver {
 
   @Mutation(() => VoteType)
   @Authorized()
-  async createPost(
+  async createVote(
     @Ctx() {req}: Context,
     @Arg('vote') {title, text, voteOptions}: VoteInput
   ): Promise<VoteType> {

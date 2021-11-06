@@ -13,7 +13,7 @@ import {getManager} from 'typeorm';
 import {EntityNotFoundError} from '../EntityNotFoundError';
 import {Order} from '../enum/Order';
 import {PostInput} from '../input-types/PostInput';
-import {PostOrderInput} from '../input-types/PostOrderInput';
+import {PostsOrderInput} from '../input-types/PostsOrderInput';
 import {PostType} from '../types/PostType';
 import {PostEntity, TagEntity} from 'src/database/entities';
 import {Context} from 'src/utils/Context';
@@ -33,7 +33,7 @@ export class PostResolver {
   }
 
   @Query(() => [PostType])
-  async posts(@Arg('order') order: PostOrderInput): Promise<PostType[]> {
+  async posts(@Arg('order') order: PostsOrderInput): Promise<PostType[]> {
     const o = Object.entries(order).reduce<{[key: string]: string}>(
       (obj, [key, value]) => {
         if (value == null) return obj;

@@ -4,7 +4,7 @@ import {Field, InputType} from 'type-graphql';
 import {Order} from '../enum/Order';
 
 @InputType()
-export class PostOrderInput {
+export class PostsOrderInput {
   @Field(() => Order, {nullable: true})
   title?: Order;
   @Field(() => Order, {nullable: true})

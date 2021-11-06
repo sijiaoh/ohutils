@@ -6,13 +6,13 @@ import {HeadComponent} from './HeadComponent';
 import {useHelloQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
 import {homeBreadcrumb, homeTitle} from 'src/pages';
+import {mePath, meTitle} from 'src/pages/me';
 import {signInPath, signInTitle} from 'src/pages/signin';
 import {Link} from 'src/utils/Link';
 
 export const HomeComponent: NextPage = () => {
   const {data} = useHelloQuery();
-  const me = Me.useMe();
-  const token = useListen(me, i => i.data?.token);
+  const me = useListen(Me.useMe(), me => me);
 
   return (
     <div>
@@ -27,11 +27,13 @@ export const HomeComponent: NextPage = () => {
         </a>
       </h1>
 
-      {token ? (
-        <div>Your token is {token}</div>
-      ) : (
-        <Link href={signInPath}>{signInTitle}</Link>
-      )}
+      <div>
+        {me.data != null ? (
+          <Link href={mePath}>{meTitle}</Link>
+        ) : (
+          <Link href={signInPath}>{signInTitle}</Link>
+        )}
+      </div>
 
       <div>
         <Link href="#">

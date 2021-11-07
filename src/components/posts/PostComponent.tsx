@@ -16,14 +16,15 @@ import {Link} from 'src/utils/Link';
 export const PostComponent = () => {
   const router = useRouter();
   const {id} = router.query;
-  if (typeof id !== 'string') throw new Error('id is not providing.');
-  const post = useRef(new Post(id)).current;
+  const post = useRef(new Post()).current;
   const postData = useListen(post, ({data}) => data);
   const meData = useListen(Me.useMe(), ({data}) => data);
 
   useEffect(() => {
+    if (typeof id !== 'string') return;
+    post.id = id;
     void post.load();
-  }, [post]);
+  }, [id, post]);
 
   if (!postData) return <div>Loading...</div>;
   return (

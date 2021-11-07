@@ -15,14 +15,15 @@ import {votesBreadcrumb} from 'src/pages/votes';
 export const VoteComponent = () => {
   const router = useRouter();
   const {id} = router.query;
-  if (typeof id !== 'string') throw new Error('id is not providing.');
-  const vote = useRef(new Vote(id)).current;
+  const vote = useRef(new Vote()).current;
   const voteData = useListen(vote, ({data}) => data);
   const meData = useListen(Me.useMe(), ({data}) => data);
 
   useEffect(() => {
+    if (typeof id !== 'string') return;
+    vote.id = id;
     void vote.load();
-  }, [vote]);
+  }, [id, vote]);
 
   if (!voteData) return <div>Loading...</div>;
   return (

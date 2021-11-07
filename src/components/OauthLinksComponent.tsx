@@ -1,7 +1,6 @@
 import {css} from '@emotion/react';
 import {CSSInterpolation} from '@emotion/serialize';
 import {SiGoogle} from 'react-icons/si';
-import {Link} from 'src/utils/Link';
 
 export type OauthLinksDetails = {
   provider: string;
@@ -38,15 +37,16 @@ export const OauthLinksComponent = ({
 
         return (
           <li key={data.name}>
-            <Link href={`/api/signin/${data.provider}`}>
-              <a css={css({display: 'flex', alignItems: 'center'}, linkCss)}>
-                <div css={{padding: '0.2em'}}>{data.icon}</div>
-                <div>
-                  {prefix} {detail?.prefix} {data.name} {detail?.postfix}{' '}
-                  {postfix}
-                </div>
-              </a>
-            </Link>
+            <a
+              href={`/api/signin/${data.provider}`}
+              css={css({display: 'flex', alignItems: 'center'}, linkCss)}
+            >
+              <div css={{padding: '0.2em'}}>{data.icon}</div>
+              <div>
+                {prefix} {detail?.prefix} {data.name} {detail?.postfix}{' '}
+                {postfix}
+              </div>
+            </a>
           </li>
         );
       })}

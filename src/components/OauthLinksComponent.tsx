@@ -6,7 +6,7 @@ export type OauthLinksDetails = {
   provider: string;
   prefix?: string;
   postfix?: string;
-  disabled?: string;
+  disabled?: boolean;
 }[];
 
 export const OauthLinksComponent = ({

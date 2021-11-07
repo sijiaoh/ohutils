@@ -27,6 +27,7 @@
   "dependencies": {
     "@apollo/client": "^3.4.16",
     "@emotion/react": "^11.5.0",
+    "@emotion/serialize": "^1.0.2",
     "@reactive-class/react": "^0.1.1",
     "class-validator": "^0.13.1",
     "date-fns": "^2.25.0",

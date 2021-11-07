@@ -63,6 +63,7 @@ export class VoteResolver {
         voteOptions.map((voteOption, index) => ({
           order: index,
           name: voteOption,
+          numberOfVotes: 0,
         }))
       );
       await entityManager.save(voteOptionEntities);

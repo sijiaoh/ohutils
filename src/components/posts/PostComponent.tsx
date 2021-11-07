@@ -26,7 +26,7 @@ export const PostComponent = () => {
     void post.load();
   }, [id, post]);
 
-  if (!postData) return <div>Loading...</div>;
+  if (!postData || typeof id !== 'string') return <div>Loading...</div>;
   return (
     <Container>
       <HeadComponent subTitle={postTitle(postData.title)} />

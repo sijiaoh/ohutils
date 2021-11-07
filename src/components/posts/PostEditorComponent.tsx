@@ -1,7 +1,7 @@
 import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
 import {useRef} from 'react';
-import _ from 'underscore';
+import {debounce} from 'underscore';
 import {MarkdownComponent} from '../MarkdownComponent';
 import {Post} from 'src/classes/Post';
 import {
@@ -18,7 +18,7 @@ export const PostEditorComponent = ({
   const router = useRouter();
   const postData = useListen(post);
   const onChange = useRef(
-    _.debounce(({title, text, tags}: typeof initialValues) => {
+    debounce(({title, text, tags}: typeof initialValues) => {
       post.setInput({title, text});
       post.setTagsFromStr(tags);
     }, 500)

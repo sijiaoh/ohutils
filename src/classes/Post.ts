@@ -1,5 +1,6 @@
 import {ReactiveClass} from '@reactive-class/react';
 import {produce} from 'immer';
+import {pick} from 'underscore';
 import {apolloSdk, PostInputType, PostType} from 'src/apollo';
 
 export class Post extends ReactiveClass {
@@ -40,11 +41,12 @@ export class Post extends ReactiveClass {
 
   save = async () => {
     // this.inputには余分なデータが入っている可能性がある。
-    const postVariable: PostInputType = {
-      title: this.input.title,
-      text: this.input.text,
-      tags: this.input.tags,
-    };
+    const postVariable: PostInputType = pick(
+      this.input,
+      'title',
+      'text',
+      'tags'
+    );
 
     if (this.id == null) {
       const {data} = await apolloSdk.createPostMutation({

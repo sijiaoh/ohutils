@@ -2187,14 +2187,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sijiaoh/ts-index-generator@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@sijiaoh/ts-index-generator@npm:0.0.1"
+"@sijiaoh/ts-index-generator@npm:^0.0.2":
+  version: 0.0.2
+  resolution: "@sijiaoh/ts-index-generator@npm:0.0.2"
   dependencies:
     commander: ^8.3.0
   bin:
     ts-index-generator: build/src/index.js
-  checksum: bd1ad56ed7ccb482059d48755da2ade1f0ddf00542f4db6e3712f38ac9fdbda794b9533c12a759af9100eba52a21c1915387ddfbc20d1027d1d78c51f2104911
+  checksum: e2cf609db01d6f3db46b33c4691b59f1b3fae0ac9047efee1471357b3db6e4c48e4971e239cce47b58b0044dd1b384da306892344b9c1ded520fb2a99d3ecb11
   languageName: node
   linkType: hard
 
@@ -9351,7 +9351,7 @@ __metadata:
     "@reactive-class/react": ^0.1.1
     "@sijiaoh/docker-mysql": ^0.1.0
     "@sijiaoh/graphql-codegen-default-queries": ^0.0.3
-    "@sijiaoh/ts-index-generator": ^0.0.1
+    "@sijiaoh/ts-index-generator": ^0.0.2
     "@types/cookie": ^0.4.1
     "@types/express": ^4.17.13
     "@types/jest": ^27.0.2

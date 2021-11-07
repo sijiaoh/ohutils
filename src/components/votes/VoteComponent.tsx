@@ -6,7 +6,6 @@ import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
-import {Me} from 'src/classes/Me';
 import {Vote} from 'src/classes/Vote';
 import {homeBreadcrumb} from 'src/pages';
 import {voteTitle} from 'src/pages/vote/[id]';
@@ -17,7 +16,6 @@ export const VoteComponent = () => {
   const {id} = router.query;
   const vote = useRef(new Vote()).current;
   const voteData = useListen(vote, ({data}) => data);
-  const meData = useListen(Me.useMe(), ({data}) => data);
 
   useEffect(() => {
     if (typeof id !== 'string') return;
@@ -39,13 +37,6 @@ export const VoteComponent = () => {
       />
 
       <h1>{voteTitle(voteData.title)}</h1>
-
-      {meData && (
-        <div>
-          {/* <Link href={votesEditPath(id)}>{votesEditTitle}</Link> */}
-          TODO
-        </div>
-      )}
 
       <ul>
         {voteData.voteOptions.map(voteOption => (

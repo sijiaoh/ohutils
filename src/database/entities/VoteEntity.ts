@@ -2,6 +2,7 @@ import 'reflect-metadata';
 
 import {IsNotEmpty, validateOrReject} from 'class-validator';
 import {
+  AfterLoad,
   BaseEntity,
   BeforeInsert,
   BeforeUpdate,
@@ -39,6 +40,12 @@ export class VoteEntity extends BaseEntity {
 
   @OneToMany(() => VoteOptionEntity, voteOption => voteOption.vote)
   voteOptions?: VoteOptionEntity[];
+
+  @AfterLoad()
+  sortVoteOptions() {
+    if (this.voteOptions == null) return;
+    this.voteOptions = this.voteOptions.sort((a, b) => a.order - b.order);
+  }
 
   @BeforeInsert()
   @BeforeUpdate()

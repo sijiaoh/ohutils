@@ -22,5 +22,12 @@ export class Vote extends ReactiveClass {
       variables: {vote: this.input},
     });
     this.data = res.data?.createVote;
+    this.id = this.data?.id;
+  };
+
+  load = async () => {
+    if (!this.id) return;
+    const res = await apolloSdk.voteQuery({variables: {id: this.id}});
+    this.data = res.data.vote;
   };
 }

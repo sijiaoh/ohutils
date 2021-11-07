@@ -1,4 +1,5 @@
 import type {NextPage} from 'next';
+import {useRouter} from 'next/dist/client/router';
 import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
@@ -6,10 +7,12 @@ import {FormComponent, FieldComponent, SubmitButtonComponent} from '../form';
 import {FieldArrayComponent} from '../form/FieldArrayComponent';
 import {Vote} from 'src/classes/Vote';
 import {homeBreadcrumb} from 'src/pages';
+import {votePath} from 'src/pages/vote/[id]';
 import {votesBreadcrumb} from 'src/pages/votes';
 import {votesCreateTitle} from 'src/pages/votes/create';
 
 export const VotesCreateComponent: NextPage = () => {
+  const router = useRouter();
   const initialValues: {
     title: string;
     text: string;
@@ -41,6 +44,8 @@ export const VotesCreateComponent: NextPage = () => {
           const vote = new Vote();
           vote.setInput(values);
           await vote.create();
+          if (vote.id == null) throw new Error('Failed to create vote.');
+          await router.push(votePath(vote.id));
         }}
       >
         <FieldComponent label="タイトル" id="title" name="title" />

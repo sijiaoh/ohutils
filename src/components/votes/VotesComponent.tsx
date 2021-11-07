@@ -6,6 +6,7 @@ import {HeadComponent} from '../HeadComponent';
 import {Order, useVotesQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
 import {homeBreadcrumb} from 'src/pages';
+import {votePath, voteTitle} from 'src/pages/vote/[id]';
 import {votesTitle} from 'src/pages/votes';
 import {votesCreatePath, votesCreateTitle} from 'src/pages/votes/create';
 import {Link} from 'src/utils/Link';
@@ -44,8 +45,7 @@ export const VotesComponent = () => {
           {data?.votes.map(vote => (
             <tr key={vote.id}>
               <td>
-                {/* <Link href={votePath(vote.id)}>{voteTitle(vote.title)}</Link> */}
-                TODO
+                <Link href={votePath(vote.id)}>{voteTitle(vote.title)}</Link>
               </td>
               <td>{printDateTime(vote.createdAt)}</td>
               <td>{printDateTime(vote.updatedAt)}</td>

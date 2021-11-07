@@ -12,8 +12,8 @@ import {
 import {getManager} from 'typeorm';
 import {EntityNotFoundError} from '../EntityNotFoundError';
 import {Order} from '../enum/Order';
-import {PostInput} from '../input-types/PostInput';
-import {PostsOrderInput} from '../input-types/PostsOrderInput';
+import {PostInputType} from '../input-types/PostInputType';
+import {PostsOrderInputType} from '../input-types/PostsOrderInputType';
 import {PostType} from '../types/PostType';
 import {PostEntity, TagEntity} from 'src/database/entities';
 import {Context} from 'src/utils/Context';
@@ -33,7 +33,7 @@ export class PostResolver {
   }
 
   @Query(() => [PostType])
-  async posts(@Arg('order') order: PostsOrderInput): Promise<PostType[]> {
+  async posts(@Arg('order') order: PostsOrderInputType): Promise<PostType[]> {
     const o = Object.entries(order).reduce<{[key: string]: string}>(
       (obj, [key, value]) => {
         if (value == null) return obj;
@@ -55,7 +55,7 @@ export class PostResolver {
   @Authorized()
   async createPost(
     @Ctx() {req}: Context,
-    @Arg('post') {title, text, tags}: PostInput
+    @Arg('post') {title, text, tags}: PostInputType
   ): Promise<PostType> {
     const user = getUser(req);
 
@@ -88,7 +88,7 @@ export class PostResolver {
   async updatePost(
     @Ctx() {req}: Context,
     @Arg('id') id: string,
-    @Arg('post') {title, text, tags}: PostInput
+    @Arg('post') {title, text, tags}: PostInputType
   ): Promise<PostType> {
     const user = getUser(req);
 

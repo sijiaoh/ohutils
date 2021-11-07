@@ -12,8 +12,8 @@ import {
 import {getManager} from 'typeorm';
 import {EntityNotFoundError} from '../EntityNotFoundError';
 import {Order} from '../enum/Order';
-import {VoteInput} from '../input-types/VoteInput';
-import {VotesOrderInput} from '../input-types/VotesOrderInput';
+import {VoteInputType} from '../input-types/VoteInputType';
+import {VotesOrderInputType} from '../input-types/VotesOrderInputType';
 import {VoteType} from '../types/VoteType';
 import {VoteEntity, VoteOptionEntity} from 'src/database/entities';
 import {Context} from 'src/utils/Context';
@@ -30,7 +30,7 @@ export class VoteResolver {
   }
 
   @Query(() => [VoteType])
-  async votes(@Arg('order') order: VotesOrderInput): Promise<VoteType[]> {
+  async votes(@Arg('order') order: VotesOrderInputType): Promise<VoteType[]> {
     const o = Object.entries(order).reduce<{[key: string]: string}>(
       (obj, [key, value]) => {
         if (value == null) return obj;
@@ -52,7 +52,7 @@ export class VoteResolver {
   @Authorized()
   async createVote(
     @Ctx() {req}: Context,
-    @Arg('vote') {title, text, voteOptions}: VoteInput
+    @Arg('vote') {title, text, voteOptions}: VoteInputType
   ): Promise<VoteType> {
     const user = getUser(req);
     if (!voteOptions.length) throw new Error('voteOptions is required.');

@@ -3,7 +3,7 @@ import {EntityNotFoundError} from '../EntityNotFoundError';
 import {PostResolver} from '.';
 import {PostEntity, TagEntity} from 'src/database/entities';
 import {createUser} from 'test/createUser';
-import {PostInput} from 'test/generated/generic-sdk';
+import {PostInputType} from 'test/generated/generic-sdk';
 import {getSignedTestSdk} from 'test/getSignedTestSdk';
 import {prepareTestMysql} from 'test/prepareTestMysql';
 
@@ -14,7 +14,11 @@ describe(PostResolver.name, () => {
     it('should return post if exists', async () => {
       const user = await createUser();
       const sdk = await getSignedTestSdk(user);
-      const postProps: PostInput = {title: 'title', text: 'text', tags: []};
+      const postProps: PostInputType = {
+        title: 'title',
+        text: 'text',
+        tags: [],
+      };
       const tagNames = ['tag1', 'tag2'];
 
       const createPostRes = await sdk.createPost({
@@ -38,7 +42,11 @@ describe(PostResolver.name, () => {
       const user = await createUser();
       const sdk = await getSignedTestSdk(user);
 
-      const postProps: PostInput = {title: 'title', text: 'text', tags: []};
+      const postProps: PostInputType = {
+        title: 'title',
+        text: 'text',
+        tags: [],
+      };
       const tagNames = ['tag1', 'tag2'];
       for (let i = 0; i < 5; i++) {
         await sdk.createPost({
@@ -53,7 +61,11 @@ describe(PostResolver.name, () => {
 
   describe(PostResolver.prototype.createPost.name, () => {
     it('can create post without tags', async () => {
-      const postProps: PostInput = {title: 'title', text: 'text', tags: []};
+      const postProps: PostInputType = {
+        title: 'title',
+        text: 'text',
+        tags: [],
+      };
 
       const user = await createUser();
       const sdk = await getSignedTestSdk(user);
@@ -72,7 +84,11 @@ describe(PostResolver.name, () => {
     });
 
     it('can create post with tags', async () => {
-      const postProps: PostInput = {title: 'title', text: 'text', tags: []};
+      const postProps: PostInputType = {
+        title: 'title',
+        text: 'text',
+        tags: [],
+      };
       const tagNames = ['tag1', 'tag2'];
 
       const user = await createUser();
@@ -93,7 +109,11 @@ describe(PostResolver.name, () => {
     });
 
     it('can create post with exists tags', async () => {
-      const postProps: PostInput = {title: 'title', text: 'text', tags: []};
+      const postProps: PostInputType = {
+        title: 'title',
+        text: 'text',
+        tags: [],
+      };
       const tagNames = ['tag1', 'tag2'];
 
       const user = await createUser();

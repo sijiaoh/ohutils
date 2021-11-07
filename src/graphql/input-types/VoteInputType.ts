@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import {Field, InputType} from 'type-graphql';
 
 @InputType()
-export class VoteInput {
+export class VoteInputType {
   @Field()
   title!: string;
   @Field()

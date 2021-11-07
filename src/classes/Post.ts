@@ -1,9 +1,9 @@
 import {ReactiveClass} from '@reactive-class/react';
 import {produce} from 'immer';
-import {apolloSdk, PostInput, PostType} from 'src/apollo';
+import {apolloSdk, PostInputType, PostType} from 'src/apollo';
 
 export class Post extends ReactiveClass {
-  input: Readonly<PostInput> = {title: '', text: '', tags: []};
+  input: Readonly<PostInputType> = {title: '', text: '', tags: []};
   data?: Readonly<PostType>;
 
   constructor(public id?: string) {
@@ -21,7 +21,7 @@ export class Post extends ReactiveClass {
     this.setData(post);
   };
 
-  setInput = (input: Partial<PostInput>) => {
+  setInput = (input: Partial<PostInputType>) => {
     this.input = produce(this.input, draft => ({...draft, ...input}));
     if (!this.data) return;
     this.data = produce(this.data, data => {
@@ -40,7 +40,7 @@ export class Post extends ReactiveClass {
 
   save = async () => {
     // this.inputには余分なデータが入っている可能性がある。
-    const postVariable: PostInput = {
+    const postVariable: PostInputType = {
       title: this.input.title,
       text: this.input.text,
       tags: this.input.tags,

@@ -1,16 +1,16 @@
 import {ReactiveClass} from '@reactive-class/react';
 import {produce} from 'immer';
-import {apolloSdk, VoteInput, VoteType} from 'src/apollo';
+import {apolloSdk, VoteInputType, VoteType} from 'src/apollo';
 
 export class Vote extends ReactiveClass {
-  input: Readonly<VoteInput> = {title: '', text: '', voteOptions: []};
+  input: Readonly<VoteInputType> = {title: '', text: '', voteOptions: []};
   data?: Readonly<VoteType>;
 
   constructor(public id?: string) {
     super();
   }
 
-  setInput = (input: Partial<VoteInput>) => {
+  setInput = (input: Partial<VoteInputType>) => {
     this.input = produce(this.input, data => ({
       ...data,
       ...input,

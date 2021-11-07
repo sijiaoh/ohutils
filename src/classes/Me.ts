@@ -1,6 +1,6 @@
 import {ReactiveClass} from '@reactive-class/react';
 import {createContext, useContext} from 'react';
-import {apolloSdk, UserType} from 'src/apollo';
+import {apolloSdk, MeType} from 'src/apollo';
 
 export class Me extends ReactiveClass {
   static Context = createContext<{me?: Me}>({});
@@ -12,7 +12,7 @@ export class Me extends ReactiveClass {
   };
 
   /** undefined is fetching, null is unauthorized */
-  data?: UserType | null;
+  data?: MeType | null;
 
   load = async () => {
     this.data = await apolloSdk

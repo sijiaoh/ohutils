@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import {Field, ObjectType} from 'type-graphql';
 
 @ObjectType()
-export class UserType {
-  @Field()
-  token!: string;
+export class MeType {
+  @Field(() => [String])
+  linkedProviders!: string[];
 }

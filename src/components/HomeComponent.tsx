@@ -4,6 +4,7 @@ import {BreadcrumbListComponent} from './BreadcrumbListComponent';
 import {HeadComponent} from './HeadComponent';
 import {homeBreadcrumb, homeTitle} from 'src/pages';
 import {postsPath, postsTitle} from 'src/pages/posts';
+import {votesPath, votesTitle} from 'src/pages/votes';
 import {Link} from 'src/utils/Link';
 
 export const HomeComponent: NextPage = () => {
@@ -17,6 +18,9 @@ export const HomeComponent: NextPage = () => {
 
       <div>
         <Link href={postsPath}>{postsTitle}</Link>
+      </div>
+      <div>
+        <Link href={votesPath}>{votesTitle}</Link>
       </div>
     </Container>
   );

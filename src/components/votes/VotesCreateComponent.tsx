@@ -6,6 +6,7 @@ import {FormComponent, FieldComponent, SubmitButtonComponent} from '../form';
 import {FieldArrayComponent} from '../form/FieldArrayComponent';
 import {Vote} from 'src/classes/Vote';
 import {homeBreadcrumb} from 'src/pages';
+import {votesBreadcrumb} from 'src/pages/votes';
 import {votesCreateTitle} from 'src/pages/votes/create';
 
 export const VotesCreateComponent: NextPage = () => {
@@ -20,7 +21,7 @@ export const VotesCreateComponent: NextPage = () => {
       <HeadComponent subTitle={votesCreateTitle} />
 
       <BreadcrumbListComponent
-        list={[homeBreadcrumb, {title: votesCreateTitle}]}
+        list={[homeBreadcrumb, votesBreadcrumb, {title: votesCreateTitle}]}
       />
 
       <h1>{votesCreateTitle}</h1>

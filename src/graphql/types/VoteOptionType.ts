@@ -8,4 +8,6 @@ export class VoteOptionType {
   id!: string;
   @Field()
   name!: string;
+  @Field()
+  numberOfVotes!: number;
 }

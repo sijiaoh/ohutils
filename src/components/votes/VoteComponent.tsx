@@ -1,6 +1,7 @@
 import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
 import {useEffect, useRef} from 'react';
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
@@ -47,8 +48,16 @@ export const VoteComponent = () => {
 
       <ul>
         {voteData.voteOptions.map(voteOption => (
-          <li key={voteOption.id}>
+          <li key={voteOption.id} css={{display: 'flex', alignItems: 'center'}}>
             <div>{voteOption.name}</div>
+            <div>{voteOption.numberOfVotes}</div>
+            <Button
+              onClick={async () => {
+                await vote.voteTo(voteOption.id);
+              }}
+            >
+              +
+            </Button>
           </li>
         ))}
       </ul>

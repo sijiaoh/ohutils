@@ -14,6 +14,7 @@ import {EntityNotFoundError} from '../EntityNotFoundError';
 import {Order} from '../enum/Order';
 import {VoteInputType} from '../input-types/VoteInputType';
 import {VotesOrderInputType} from '../input-types/VotesOrderInputType';
+import {VoteOptionType} from '../types/VoteOptionType';
 import {VoteType} from '../types/VoteType';
 import {VoteEntity, VoteOptionEntity} from 'src/database/entities';
 import {Context} from 'src/utils/Context';
@@ -27,6 +28,21 @@ export class VoteResolver {
     if (!vote) throw new EntityNotFoundError();
     if (!vote.voteOptions) throw new Error('Failed to load tags.');
     return {...vote, voteOptions: vote.voteOptions};
+  }
+
+  @Query(() => VoteOptionType)
+  async voteTo(
+    @Arg('voteOptionId') voteOptionId: string
+  ): Promise<VoteOptionType> {
+    await getManager()
+      .createQueryBuilder()
+      .update(VoteOptionEntity)
+      .set({numberOfVotes: () => 'numberOfVotes + 1'})
+      .where('id = :id', {id: voteOptionId})
+      .execute();
+    const voteOption = await VoteOptionEntity.findOne(voteOptionId);
+    if (!voteOption) throw new Error('Failed to load voteOption.');
+    return voteOption;
   }
 
   @Query(() => [VoteType])

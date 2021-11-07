@@ -30,4 +30,20 @@ export class Vote extends ReactiveClass {
     const res = await apolloSdk.voteQuery({variables: {id: this.id}});
     this.data = res.data.vote;
   };
+
+  voteTo = async (voteOptionId: string) => {
+    if (this.data == null) return;
+    if (
+      this.data.voteOptions.every(voteOption => voteOption.id !== voteOptionId)
+    )
+      throw new Error('Illegal voteOptionId.');
+
+    const res = await apolloSdk.voteToQuery({variables: {voteOptionId}});
+    this.data = produce(this.data, data => {
+      const index = data.voteOptions.findIndex(
+        voteOption => voteOption.id === voteOptionId
+      );
+      data.voteOptions.splice(index, 1, res.data.voteTo);
+    });
+  };
 }

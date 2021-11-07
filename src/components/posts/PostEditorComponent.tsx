@@ -36,7 +36,7 @@ export const PostEditorComponent = ({
       initialValues={initialValues}
       validate={({title}) => {
         const errors: {[key in keyof typeof initialValues]?: string} = {};
-        if (!title) errors.title = 'タイトルは必須です';
+        if (!title) errors.title = 'タイトルは必須です。';
         return errors;
       }}
       onChange={onChange}

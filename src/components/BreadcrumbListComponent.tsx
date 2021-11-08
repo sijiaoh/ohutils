@@ -21,6 +21,8 @@ export const BreadcrumbListComponent = ({
         display: 'flex',
         flexWrap: 'wrap',
         overflow: 'hidden',
+        margin: 0,
+        padding: 0,
       }}
     >
       {list.map((item, index) => (

@@ -3,8 +3,8 @@ import {BreadcrumbListComponent} from './BreadcrumbListComponent';
 import {CounterComponent} from './CounterComponent';
 import {HeadComponent} from './HeadComponent';
 import {useHelloQuery} from 'src/apollo';
-import {homeBreadcrumb, homeTitle} from 'src/pages';
 import {Link} from 'src/utils/Link';
+import {homeBreadcrumb, homeTitle} from 'src/utils/pageHelpers';
 
 export const HomeComponent: NextPage = () => {
   const {data} = useHelloQuery();

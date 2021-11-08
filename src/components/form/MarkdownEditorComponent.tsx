@@ -1,4 +1,5 @@
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
+import {useFormContext} from 'react-hook-form';
 import {debounce} from 'underscore';
 import {MarkdownComponent} from '../MarkdownComponent';
 import {FieldComponent} from '.';
@@ -15,12 +16,17 @@ export const MarkdownEditorComponent = ({
   label: string;
 }>) => {
   const [markdownText, setMarkdownText] = useState('');
+  const {getValues} = useFormContext();
 
   const onChange = useRef(
     debounce((text: string) => {
       setMarkdownText(text);
     }, 500)
   ).current;
+
+  useEffect(() => {
+    onChange(getValues(name) as string);
+  }, [getValues, name, onChange]);
 
   return (
     <div

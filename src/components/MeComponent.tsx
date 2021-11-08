@@ -4,8 +4,7 @@ import {BreadcrumbListComponent} from './BreadcrumbListComponent';
 import {HeadComponent} from './HeadComponent';
 import {OauthLinksComponent, OauthLinksDetails} from './OauthLinksComponent';
 import {Me} from 'src/classes/Me';
-import {homeBreadcrumb} from 'src/pages';
-import {meTitle} from 'src/pages/me';
+import {homeBreadcrumb, meTitle} from 'src/utils/pageHelpers';
 
 export const MeComponent: NextPage = () => {
   const meData = useListen(Me.useMe());

@@ -1,5 +1,6 @@
 import {css} from '@emotion/react';
 import {CSSInterpolation} from '@emotion/serialize';
+import {ChangeEvent} from 'react';
 import {useFormContext} from 'react-hook-form';
 import {DefaultProps} from 'src/utils/DefaultProps';
 
@@ -21,7 +22,6 @@ export const FieldComponent = ({
 }>) => {
   const {
     register,
-    getValues,
     formState: {errors},
   } = useFormContext();
 
@@ -32,8 +32,8 @@ export const FieldComponent = ({
         <input
           id={id}
           {...register(name, {
-            onChange: () => {
-              onChange?.(getValues()[name]);
+            onChange: (e: ChangeEvent<HTMLInputElement>) => {
+              onChange?.(e.target.value);
             },
           })}
           css={fieldCss}
@@ -42,8 +42,8 @@ export const FieldComponent = ({
         <textarea
           id={id}
           {...register(name, {
-            onChange: () => {
-              onChange?.(getValues()[name]);
+            onChange: (e: ChangeEvent<HTMLTextAreaElement>) => {
+              onChange?.(e.target.value);
             },
           })}
           css={css({resize: 'none'}, fieldCss)}

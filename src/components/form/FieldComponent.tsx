@@ -1,24 +1,40 @@
 import {css} from '@emotion/react';
 import {CSSInterpolation} from '@emotion/serialize';
-import {
-  ErrorMessage,
-  Field,
-  FieldConfig,
-  GenericFieldHTMLAttributes,
-} from 'formik';
+import {useFormContext} from 'react-hook-form';
+import {DefaultProps} from 'src/utils/DefaultProps';
 
 export const FieldComponent = ({
-  label,
+  id,
   className,
+  name,
+  label,
   fieldCss,
-  ...props
-}: GenericFieldHTMLAttributes &
-  FieldConfig & {label: string; fieldCss?: CSSInterpolation}) => {
+  as,
+}: DefaultProps<{
+  id: string;
+  name: string;
+  label: string;
+  fieldCss?: CSSInterpolation;
+  as?: 'input' | 'textarea';
+}>) => {
+  const {
+    register,
+    formState: {errors},
+  } = useFormContext();
+
   return (
     <div className={className} css={{display: 'flex', flexDirection: 'column'}}>
-      <label htmlFor={props.id}>{label}</label>
-      <Field {...props} css={css({resize: 'none'}, fieldCss)} />
-      <ErrorMessage name={props.name} component="div" css={{color: 'red'}} />
+      <label htmlFor={id}>{label}</label>
+      {as == null || as === 'input' ? (
+        <input id={id} {...register(name)} css={fieldCss} />
+      ) : (
+        <textarea
+          id={id}
+          {...register(name)}
+          css={css({resize: 'none'}, fieldCss)}
+        />
+      )}
+      {errors[name] && <div>{errors[name]}</div>}
     </div>
   );
 };

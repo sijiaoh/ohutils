@@ -16,10 +16,10 @@ import {votesCreateTitle} from 'src/pages/votes/create';
 
 export const VotesCreateComponent: NextPage = () => {
   const router = useRouter();
-  const initialValues: {
+  const defaultValues: {
     title: string;
     text: string;
-    voteOptions: string[];
+    voteOptions: {value: string}[];
   } = {title: '', text: '', voteOptions: []};
   const vote = useRef(new Vote()).current;
   const voteData = useListen(vote);
@@ -35,21 +35,18 @@ export const VotesCreateComponent: NextPage = () => {
       <h1>{votesCreateTitle}</h1>
 
       <FormComponent
-        initialValues={initialValues}
-        validate={values => {
-          const errors: {[key in keyof typeof initialValues]?: string} = {};
-          if (!values.title) errors.title = 'タイトルは必須です。';
-          if (values.voteOptions.length <= 0)
-            errors.voteOptions = '最低一つは選択肢が必要です。';
-          if (values.voteOptions.some(voteOption => !voteOption))
-            errors.voteOptions = '空の選択肢が存在します。';
-          return errors;
-        }}
+        defaultValues={defaultValues}
         onChange={values => {
-          vote.setInput(values);
+          vote.setInput({
+            ...values,
+            voteOptions: values.voteOptions.map(({value}) => value),
+          });
         }}
         onSubmit={async values => {
-          vote.setInput(values);
+          vote.setInput({
+            ...values,
+            voteOptions: values.voteOptions.map(({value}) => value),
+          });
           await vote.create();
           if (vote.id == null) throw new Error('Failed to create vote.');
           await router.push(votePath(vote.id));
@@ -65,11 +62,8 @@ export const VotesCreateComponent: NextPage = () => {
           css={{height: '30em'}}
         />
 
-        <FieldArrayComponent
-          label="選択肢"
-          id="voteOptions"
-          name="voteOptions"
-        />
+        <FieldArrayComponent label="選択肢" name="voteOptions" />
+
         <SubmitButtonComponent css={{marginTop: '2em'}}>
           登録
         </SubmitButtonComponent>

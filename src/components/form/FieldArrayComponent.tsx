@@ -1,68 +1,65 @@
-import {
-  ErrorMessage,
-  Field,
-  FieldArray,
-  FieldArrayConfig,
-  GenericFieldHTMLAttributes,
-  useFormikContext,
-} from 'formik';
 import Button from 'react-bootstrap/Button';
+import {useFieldArray, useFormContext} from 'react-hook-form';
+import {DefaultProps} from 'src/utils/DefaultProps';
 
 export const FieldArrayComponent = ({
-  label,
   className,
+  name,
+  label,
   addButtonText = '追加',
-  ...props
-}: GenericFieldHTMLAttributes &
-  FieldArrayConfig & {
-    label: string;
-    addButtonText?: string;
-  }) => {
-  const formikContext = useFormikContext<{[key: string]: string[]}>();
-  const values = formikContext.values[props.name];
+}: DefaultProps<{
+  name: string;
+  label: string;
+  addButtonText?: string;
+}>) => {
+  const {
+    control,
+    register,
+    formState: {errors},
+  } = useFormContext();
+  const {fields, append, remove, insert} = useFieldArray({
+    control,
+    name,
+  });
 
   return (
     <div className={className} css={{display: 'flex', flexDirection: 'column'}}>
-      <label htmlFor={props.id}>{label}</label>
-      <FieldArray {...props}>
-        {arrayHelpers => (
-          <div css={{display: 'flex', flexDirection: 'column'}}>
-            {values?.map((_, index) => (
-              <div key={index} css={{display: 'flex'}}>
-                <Field name={`${props.name}.${index}`} css={{flex: 1}} />
-                <Button
-                  onClick={() => {
-                    arrayHelpers.remove(index);
-                  }}
-                  variant="secondary"
-                  size="sm"
-                >
-                  -
-                </Button>
-                <Button
-                  onClick={() => {
-                    arrayHelpers.insert(index, '');
-                  }}
-                  variant="secondary"
-                  size="sm"
-                >
-                  +
-                </Button>
-              </div>
-            ))}
+      <label>{label}</label>
+      <div css={{display: 'flex', flexDirection: 'column'}}>
+        {fields.map((field, index) => (
+          <div key={field.id} css={{display: 'flex'}}>
+            <input {...register(`${name}.${index}.value`)} css={{flex: 1}} />
             <Button
               onClick={() => {
-                arrayHelpers.push('');
+                remove(index);
               }}
               variant="secondary"
               size="sm"
             >
-              {addButtonText}
+              -
+            </Button>
+            <Button
+              onClick={() => {
+                insert(index, {value: ''});
+              }}
+              variant="secondary"
+              size="sm"
+            >
+              +
             </Button>
           </div>
-        )}
-      </FieldArray>
-      <ErrorMessage name={props.name} component="div" css={{color: 'red'}} />
+        ))}
+        <Button
+          onClick={() => {
+            append({value: ''});
+          }}
+          variant="secondary"
+          size="sm"
+        >
+          {addButtonText}
+        </Button>
+      </div>
+      {errors[name] && <div>{errors[name]}</div>}
     </div>
   );
 };

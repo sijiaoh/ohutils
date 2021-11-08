@@ -18,13 +18,13 @@ export const PostEditorComponent = ({
   const router = useRouter();
   const postData = useListen(post);
   const onChange = useRef(
-    debounce(({title, text, tags}: typeof initialValues) => {
+    debounce(({title, text, tags}: typeof defaultValues) => {
       post.setInput({title, text});
       post.setTagsFromStr(tags);
     }, 500)
   ).current;
 
-  const initialValues = {
+  const defaultValues = {
     title: postData.data?.title || '',
     text: postData.data?.text || '',
     tags: postData.data?.tags.join(' ') || '',
@@ -33,12 +33,7 @@ export const PostEditorComponent = ({
   return (
     <FormComponent
       className={className}
-      initialValues={initialValues}
-      validate={({title}) => {
-        const errors: {[key in keyof typeof initialValues]?: string} = {};
-        if (!title) errors.title = 'タイトルは必須です。';
-        return errors;
-      }}
+      defaultValues={defaultValues}
       onChange={onChange}
       onSubmit={async ({title, text, tags}) => {
         post.setInput({title, text});

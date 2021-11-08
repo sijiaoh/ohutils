@@ -1,38 +1,62 @@
-import {Formik, Form, FormikConfig, useFormikContext} from 'formik';
-import {useEffect, useRef} from 'react';
+import {useRef} from 'react';
+import {
+  FormProvider,
+  SubmitHandler,
+  useForm,
+  useFormContext,
+  UseFormProps,
+} from 'react-hook-form';
 import {DefaultProps} from 'src/utils/DefaultProps';
 
-type Props<T> = DefaultProps<{onChange?: (values: T) => void}>;
+interface OnChange<T> {
+  (v: T): void | Promise<void>;
+}
 
-function FormWrapper<T>({onChange, className, children}: Props<T>) {
-  const {values} = useFormikContext<T>();
+function FormWrapper<T>({
+  className,
+  children,
+  onChange,
+  onSubmit,
+}: DefaultProps<{
+  onChange: OnChange<T> | undefined;
+  onSubmit: SubmitHandler<T>;
+}>) {
+  const {getValues, handleSubmit} = useFormContext<T>();
   const oc = useRef(onChange).current;
 
-  useEffect(() => {
-    oc?.(values);
-  }, [oc, values]);
-
   return (
-    <Form
+    <form
       className={className}
       css={{display: 'flex', flexDirection: 'column'}}
+      onChange={() => {
+        oc?.(getValues() as T);
+      }}
+      onSubmit={handleSubmit(onSubmit)}
     >
       {children}
-    </Form>
+    </form>
   );
 }
 
 export function FormComponent<T>({
-  onChange,
   className,
   children,
+  onChange,
+  onSubmit,
   ...props
-}: FormikConfig<T> & Props<T>) {
+}: UseFormProps<T> &
+  DefaultProps<{onChange?: OnChange<T>; onSubmit: SubmitHandler<T>}>) {
+  const methods = useForm({mode: 'onChange', ...props});
+
   return (
-    <Formik {...props}>
-      <FormWrapper className={className} onChange={onChange}>
+    <FormProvider {...methods}>
+      <FormWrapper
+        className={className}
+        onChange={onChange}
+        onSubmit={onSubmit}
+      >
         {children}
       </FormWrapper>
-    </Formik>
+    </FormProvider>
   );
 }

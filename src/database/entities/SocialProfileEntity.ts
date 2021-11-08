@@ -10,7 +10,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import {UserEntity} from '.';
+import type {UserEntity} from '.';
 
 @Entity()
 @Index(['userId', 'provider'], {unique: true})
@@ -33,6 +33,6 @@ export class SocialProfileEntity extends BaseEntity {
 
   @Column()
   readonly userId!: string;
-  @ManyToOne(() => UserEntity, {onDelete: 'CASCADE'})
+  @ManyToOne('UserEntity', {onDelete: 'CASCADE'})
   readonly user?: UserEntity;
 }

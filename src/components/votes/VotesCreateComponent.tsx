@@ -1,8 +1,11 @@
+import {useListen} from '@reactive-class/react';
 import type {NextPage} from 'next';
 import {useRouter} from 'next/dist/client/router';
+import {useRef} from 'react';
 import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
+import {MarkdownComponent} from '../MarkdownComponent';
 import {FormComponent, FieldComponent, SubmitButtonComponent} from '../form';
 import {FieldArrayComponent} from '../form/FieldArrayComponent';
 import {Vote} from 'src/classes/Vote';
@@ -18,6 +21,8 @@ export const VotesCreateComponent: NextPage = () => {
     text: string;
     voteOptions: string[];
   } = {title: '', text: '', voteOptions: []};
+  const vote = useRef(new Vote()).current;
+  const voteData = useListen(vote);
 
   return (
     <Container>
@@ -40,8 +45,10 @@ export const VotesCreateComponent: NextPage = () => {
             errors.voteOptions = '空の選択肢が存在します。';
           return errors;
         }}
+        onChange={values => {
+          vote.setInput(values);
+        }}
         onSubmit={async values => {
-          const vote = new Vote();
           vote.setInput(values);
           await vote.create();
           if (vote.id == null) throw new Error('Failed to create vote.');
@@ -49,6 +56,28 @@ export const VotesCreateComponent: NextPage = () => {
         }}
       >
         <FieldComponent label="タイトル" id="title" name="title" />
+
+        <div css={{display: 'flex', height: '30em'}}>
+          <FieldComponent
+            id="text"
+            name="text"
+            label="内容"
+            as="textarea"
+            css={{width: '50%'}}
+            fieldCss={{flex: 1}}
+          />
+          <MarkdownComponent
+            text={voteData.input.text}
+            css={{
+              width: '50%',
+              height: '100%',
+              overflow: 'auto',
+              border: 'solid 1px lightgray',
+              padding: '1em',
+            }}
+          />
+        </div>
+
         <FieldArrayComponent
           label="選択肢"
           id="voteOptions"

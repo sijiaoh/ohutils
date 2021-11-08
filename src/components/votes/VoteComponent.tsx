@@ -1,6 +1,6 @@
 import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef} from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
@@ -46,6 +46,8 @@ export const VoteComponent = () => {
 
       <h1>{voteTitle(voteData.title)}</h1>
 
+      <MarkdownComponent text={voteData.text}></MarkdownComponent>
+
       <ul>
         {voteData.voteOptions.map(voteOption => (
           <li key={voteOption.id} css={{display: 'flex', alignItems: 'center'}}>
@@ -78,8 +80,6 @@ export const VoteComponent = () => {
           </li>
         ))}
       </ul>
-
-      <MarkdownComponent text={voteData.text}></MarkdownComponent>
     </Container>
   );
 };

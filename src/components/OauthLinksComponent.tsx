@@ -23,7 +23,7 @@ export const OauthLinksComponent = ({
   ];
 
   return (
-    <ul>
+    <ul css={{listStyle: 'none'}}>
       {dataList.map(data => {
         const detail = details?.find(
           detail => detail.provider === data.provider

@@ -9,7 +9,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import {PostEntity, SocialProfileEntity} from '.';
+import {PostEntity} from '.';
+import type {SocialProfileEntity} from '.';
 
 @Entity()
 export class UserEntity extends BaseEntity {
@@ -24,7 +25,7 @@ export class UserEntity extends BaseEntity {
   @UpdateDateColumn()
   readonly updatedAt!: Date;
 
-  @OneToMany(() => SocialProfileEntity, socialProfile => socialProfile.user)
+  @OneToMany('SocialProfileEntity', 'user')
   readonly socialProfiles?: SocialProfileEntity[];
   @OneToMany(() => PostEntity, post => post.user)
   readonly posts?: PostEntity[];

@@ -1,6 +1,4 @@
 import {Breadcrumb} from 'src/components/BreadcrumbListComponent';
-import {VotesCreateComponent} from 'src/components/votes/VotesCreateComponent';
-import {withAuth} from 'src/hocs/withAuth';
 import {toCsrPage} from 'src/utils/toCsrPage';
 
 export const votesCreateTitle = '投票作成';
@@ -10,4 +8,6 @@ export const votesCreateBreadcrumb: Breadcrumb = {
   path: votesCreatePath,
 };
 
-export default toCsrPage(withAuth(VotesCreateComponent));
+export default toCsrPage(import('src/components/votes/VotesCreateComponent'), {
+  requireAuth: true,
+});

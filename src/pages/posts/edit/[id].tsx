@@ -1,6 +1,4 @@
 import {Breadcrumb} from 'src/components/BreadcrumbListComponent';
-import {PostsEditComponent} from 'src/components/posts/PostsEditComponent';
-import {withAuth} from 'src/hocs/withAuth';
 import {toCsrPage} from 'src/utils/toCsrPage';
 
 export const postsEditTitle = '投稿編集';
@@ -10,4 +8,6 @@ export const postsEditBreadcrumb: (id: string) => Breadcrumb = id => ({
   path: postsEditPath(id),
 });
 
-export default toCsrPage(withAuth(PostsEditComponent));
+export default toCsrPage(import('src/components/posts/PostsEditComponent'), {
+  requireAuth: true,
+});

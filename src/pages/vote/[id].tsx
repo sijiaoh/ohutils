@@ -1,5 +1,4 @@
 import {Breadcrumb} from 'src/components/BreadcrumbListComponent';
-import {VoteComponent} from 'src/components/votes/VoteComponent';
 import {toCsrPage} from 'src/utils/toCsrPage';
 
 export const voteTitle = (title: string) => title;
@@ -15,4 +14,4 @@ export const voteBreadcrumb: ({
   path: votePath(id),
 });
 
-export default toCsrPage(VoteComponent);
+export default toCsrPage(import('src/components/votes/VoteComponent'));

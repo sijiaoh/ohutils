@@ -1,5 +1,4 @@
 import {Breadcrumb} from 'src/components/BreadcrumbListComponent';
-import {PostComponent} from 'src/components/posts/PostComponent';
 import {toCsrPage} from 'src/utils/toCsrPage';
 
 export const postTitle = (title: string) => title;
@@ -15,4 +14,4 @@ export const postBreadcrumb: ({
   path: postPath(id),
 });
 
-export default toCsrPage(PostComponent);
+export default toCsrPage(import('src/components/posts/PostComponent'));

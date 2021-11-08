@@ -1,6 +1,4 @@
 import {Breadcrumb} from 'src/components/BreadcrumbListComponent';
-import {PostsCreateComponent} from 'src/components/posts/PostsCreateComponent';
-import {withAuth} from 'src/hocs/withAuth';
 import {toCsrPage} from 'src/utils/toCsrPage';
 
 export const postsCreateTitle = '投稿作成';
@@ -10,4 +8,6 @@ export const postsCreateBreadcrumb: Breadcrumb = {
   path: postsCreatePath,
 };
 
-export default toCsrPage(withAuth(PostsCreateComponent));
+export default toCsrPage(import('src/components/posts/PostsCreateComponent'), {
+  requireAuth: true,
+});

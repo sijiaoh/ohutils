@@ -2,10 +2,15 @@ import type {NextPage} from 'next';
 import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from './BreadcrumbListComponent';
 import {HeadComponent} from './HeadComponent';
-import {postsPath, postsTitle} from 'src/pages/posts';
-import {votesPath, votesTitle} from 'src/pages/votes';
 import {Link} from 'src/utils/Link';
-import {homeBreadcrumb, homeTitle} from 'src/utils/pageHelpers';
+import {
+  postsPath,
+  postsTitle,
+  votesPath,
+  votesTitle,
+  homeBreadcrumb,
+  homeTitle,
+} from 'src/utils/pageHelpers';
 
 export const HomeComponent: NextPage = () => {
   return (

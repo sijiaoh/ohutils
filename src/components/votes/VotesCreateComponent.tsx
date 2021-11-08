@@ -7,10 +7,12 @@ import {FormComponent, FieldComponent, SubmitButtonComponent} from '../form';
 import {FieldArrayComponent} from '../form/FieldArrayComponent';
 import {MarkdownEditorComponent} from '../form/MarkdownEditorComponent';
 import {Vote} from 'src/classes/Vote';
-import {homeBreadcrumb} from 'src/pages';
-import {votePath} from 'src/pages/vote/[id]';
-import {votesBreadcrumb} from 'src/pages/votes';
-import {votesCreateTitle} from 'src/pages/votes/create';
+import {
+  homeBreadcrumb,
+  votePath,
+  votesBreadcrumb,
+  votesCreateTitle,
+} from 'src/utils/pageHelpers';
 
 export const VotesCreateComponent: NextPage = () => {
   const router = useRouter();

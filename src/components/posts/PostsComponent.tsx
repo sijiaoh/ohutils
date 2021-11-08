@@ -5,11 +5,15 @@ import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
 import {Order, usePostsQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
-import {homeBreadcrumb} from 'src/pages';
-import {postPath, postTitle} from 'src/pages/post/[id]';
-import {postsTitle} from 'src/pages/posts';
-import {postsCreatePath, postsCreateTitle} from 'src/pages/posts/create';
 import {Link} from 'src/utils/Link';
+import {
+  homeBreadcrumb,
+  postPath,
+  postTitle,
+  postsTitle,
+  postsCreatePath,
+  postsCreateTitle,
+} from 'src/utils/pageHelpers';
 import {printDateTime} from 'src/utils/printDateTime';
 
 export const PostsComponent = () => {

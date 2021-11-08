@@ -7,11 +7,14 @@ import {HeadComponent} from '../HeadComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
 import {Me} from 'src/classes/Me';
 import {Post} from 'src/classes/Post';
-import {homeBreadcrumb} from 'src/pages';
-import {postTitle} from 'src/pages/post/[id]';
-import {postsBreadcrumb} from 'src/pages/posts';
-import {postsEditPath, postsEditTitle} from 'src/pages/posts/edit/[id]';
 import {Link} from 'src/utils/Link';
+import {
+  homeBreadcrumb,
+  postTitle,
+  postsBreadcrumb,
+  postsEditPath,
+  postsEditTitle,
+} from 'src/utils/pageHelpers';
 
 export const PostComponent = () => {
   const router = useRouter();

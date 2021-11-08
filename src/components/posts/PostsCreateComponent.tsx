@@ -5,9 +5,11 @@ import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
 import {PostEditorComponent} from './PostEditorComponent';
 import {Post} from 'src/classes/Post';
-import {homeBreadcrumb} from 'src/pages';
-import {postsBreadcrumb} from 'src/pages/posts';
-import {postsCreateTitle} from 'src/pages/posts/create';
+import {
+  homeBreadcrumb,
+  postsBreadcrumb,
+  postsCreateTitle,
+} from 'src/utils/pageHelpers';
 
 export const PostsCreateComponent: NextPage = () => {
   const post = useRef(new Post()).current;

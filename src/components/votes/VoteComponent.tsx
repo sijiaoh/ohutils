@@ -7,9 +7,11 @@ import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
 import {Vote} from 'src/classes/Vote';
-import {homeBreadcrumb} from 'src/pages';
-import {voteTitle} from 'src/pages/vote/[id]';
-import {votesBreadcrumb} from 'src/pages/votes';
+import {
+  homeBreadcrumb,
+  voteTitle,
+  votesBreadcrumb,
+} from 'src/utils/pageHelpers';
 
 export const VoteComponent = () => {
   const router = useRouter();

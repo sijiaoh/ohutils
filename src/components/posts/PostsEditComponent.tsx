@@ -7,10 +7,12 @@ import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
 import {PostEditorComponent} from './PostEditorComponent';
 import {Post} from 'src/classes/Post';
-import {homeBreadcrumb} from 'src/pages';
-import {postBreadcrumb} from 'src/pages/post/[id]';
-import {postsBreadcrumb} from 'src/pages/posts';
-import {postsEditTitle} from 'src/pages/posts/edit/[id]';
+import {
+  homeBreadcrumb,
+  postBreadcrumb,
+  postsBreadcrumb,
+  postsEditTitle,
+} from 'src/utils/pageHelpers';
 
 export const PostsEditComponent: NextPage = () => {
   const router = useRouter();

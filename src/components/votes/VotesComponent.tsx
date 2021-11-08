@@ -5,11 +5,15 @@ import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
 import {Order, useVotesQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
-import {homeBreadcrumb} from 'src/pages';
-import {votePath, voteTitle} from 'src/pages/vote/[id]';
-import {votesTitle} from 'src/pages/votes';
-import {votesCreatePath, votesCreateTitle} from 'src/pages/votes/create';
 import {Link} from 'src/utils/Link';
+import {
+  homeBreadcrumb,
+  votePath,
+  voteTitle,
+  votesTitle,
+  votesCreatePath,
+  votesCreateTitle,
+} from 'src/utils/pageHelpers';
 import {printDateTime} from 'src/utils/printDateTime';
 
 export const VotesComponent = () => {

@@ -5,10 +5,10 @@ import {CounterComponent} from './CounterComponent';
 import {HeadComponent} from './HeadComponent';
 import {useHelloQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
-import {homeBreadcrumb, homeTitle} from 'src/pages';
 import {mePath, meTitle} from 'src/pages/me';
 import {signInPath, signInTitle} from 'src/pages/signin';
 import {Link} from 'src/utils/Link';
+import {homeBreadcrumb, homeTitle} from 'src/utils/pageHelpers';
 
 export const HomeComponent: NextPage = () => {
   const {data} = useHelloQuery();

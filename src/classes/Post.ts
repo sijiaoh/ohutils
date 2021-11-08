@@ -6,28 +6,27 @@ import {apolloSdk, PostInputType, PostType} from 'src/apollo';
 export class Post extends ReactiveClass {
   input: Readonly<PostInputType> = {title: '', text: '', tags: []};
   data?: Readonly<PostType>;
+  loaded = false;
 
   constructor(public id?: string) {
     super();
   }
 
-  loading = () => this.id != null && this.data == null;
-
   load = async () => {
     if (!this.id) return;
+    this.loaded = false;
 
     const {
       data: {post},
     } = await apolloSdk.postQuery({variables: {id: this.id}});
     this.setData(post);
+    this.setInput(post);
+
+    this.loaded = true;
   };
 
   setInput = (input: Partial<PostInputType>) => {
     this.input = produce(this.input, draft => ({...draft, ...input}));
-    if (!this.data) return;
-    this.data = produce(this.data, data => {
-      Object.assign(data, this.input);
-    });
   };
 
   setTagsFromStr = (str: string) => {
@@ -69,6 +68,5 @@ export class Post extends ReactiveClass {
 
   private setData = (data: PostType) => {
     this.data = produce(this.data, () => data);
-    this.input = produce(this.input, () => data);
   };
 }

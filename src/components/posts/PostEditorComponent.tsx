@@ -1,5 +1,6 @@
 import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
+import {pick} from 'underscore';
 import {MarkdownEditorComponent} from '../form/MarkdownEditorComponent';
 import {Post} from 'src/classes/Post';
 import {
@@ -20,9 +21,8 @@ export const PostEditorComponent = ({
     <FormComponent
       className={className}
       defaultValues={{
-        title: postData.data?.title || '',
-        text: postData.data?.text || '',
-        tags: postData.data?.tags.join(' ') || '',
+        ...pick(postData.input, 'title', 'text'),
+        tags: postData.input.tags.join(' '),
       }}
       onSubmit={async ({title, text, tags}) => {
         post.setInput({title, text});

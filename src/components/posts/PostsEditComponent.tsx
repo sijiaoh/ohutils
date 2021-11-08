@@ -16,22 +16,13 @@ export const PostsEditComponent: NextPage = () => {
   const router = useRouter();
   const {id} = router.query;
   if (typeof id !== 'string') throw new Error('id is not providing.');
-  const post = useRef(new Post(id)).current;
-  const postData = useListen(post, ({data}) => data);
-  const originalTitleRef = useRef<string | undefined>();
+  const postData = useListen(useRef(new Post(id)).current);
 
   useEffect(() => {
-    void post.load();
-  }, [post]);
-
-  useEffect(() => {
-    if (!postData) return;
-    if (originalTitleRef.current != null) return;
-
-    originalTitleRef.current = postData.title;
+    void postData.load();
   }, [postData]);
 
-  if (!postData) return <div>Loading...</div>;
+  if (!postData.loaded) return <div>Loading...</div>;
   return (
     <Container>
       <HeadComponent subTitle={postsEditTitle} />
@@ -40,14 +31,14 @@ export const PostsEditComponent: NextPage = () => {
         list={[
           homeBreadcrumb,
           postsBreadcrumb,
-          postBreadcrumb({id, title: originalTitleRef.current || ''}),
+          postBreadcrumb({id, title: postData.data?.title || ''}),
           {title: postsEditTitle},
         ]}
       />
 
       <h1>{postsEditTitle}</h1>
 
-      <PostEditorComponent post={post} />
+      <PostEditorComponent post={postData} />
     </Container>
   );
 };

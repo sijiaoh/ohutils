@@ -1,6 +1,6 @@
 import {NextPage} from 'next';
 import dynamic from 'next/dynamic';
 
-export const toCsrPage = (page: NextPage) => {
-  return dynamic(async () => Promise.resolve(page), {ssr: false});
+export const toCsrPage = (module: Promise<{[key: string]: NextPage}>) => {
+  return dynamic(async () => Object.values(await module)[0]!, {ssr: false});
 };

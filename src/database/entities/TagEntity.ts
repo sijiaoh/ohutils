@@ -13,7 +13,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import {PostEntity} from '.';
+import type {PostEntity} from '.';
 
 @Entity()
 export class TagEntity extends BaseEntity {
@@ -43,7 +43,7 @@ export class TagEntity extends BaseEntity {
   @UpdateDateColumn()
   readonly updatedAt!: Date;
 
-  @ManyToMany(() => PostEntity)
+  @ManyToMany('PostEntity')
   readonly posts?: PostEntity[];
 
   @BeforeInsert()

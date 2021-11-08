@@ -10,7 +10,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import {VoteEntity} from '.';
+import type {VoteEntity} from '.';
 
 @Entity()
 export class VoteOptionEntity extends BaseEntity {
@@ -27,7 +27,7 @@ export class VoteOptionEntity extends BaseEntity {
   @Min(0)
   readonly numberOfVotes!: number;
 
-  @ManyToOne(() => VoteEntity, {onDelete: 'CASCADE'})
+  @ManyToOne('VoteEntity', {onDelete: 'CASCADE'})
   vote?: VoteEntity;
 
   @BeforeInsert()

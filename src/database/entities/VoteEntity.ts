@@ -14,8 +14,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import {VoteOptionEntity} from './VoteOptionEntity';
-import {UserEntity} from '.';
+import type {VoteOptionEntity, UserEntity} from '.';
 
 @Entity()
 export class VoteEntity extends BaseEntity {
@@ -35,10 +34,10 @@ export class VoteEntity extends BaseEntity {
 
   @Column()
   readonly userId!: string;
-  @ManyToOne(() => UserEntity, {onDelete: 'CASCADE'})
+  @ManyToOne('UserEntity', {onDelete: 'CASCADE'})
   readonly user?: UserEntity;
 
-  @OneToMany(() => VoteOptionEntity, voteOption => voteOption.vote)
+  @OneToMany('VoteOptionEntity', 'vote')
   voteOptions?: VoteOptionEntity[];
 
   @AfterLoad()

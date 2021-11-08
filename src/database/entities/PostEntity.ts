@@ -14,7 +14,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import {TagEntity, UserEntity} from '.';
+import type {TagEntity, UserEntity} from '.';
 
 @Entity()
 export class PostEntity extends BaseEntity {
@@ -34,10 +34,10 @@ export class PostEntity extends BaseEntity {
 
   @Column()
   readonly userId!: string;
-  @ManyToOne(() => UserEntity, {onDelete: 'CASCADE'})
+  @ManyToOne('UserEntity', {onDelete: 'CASCADE'})
   readonly user?: UserEntity;
 
-  @ManyToMany(() => TagEntity)
+  @ManyToMany('TagEntity')
   @JoinTable()
   tags?: TagEntity[];
 

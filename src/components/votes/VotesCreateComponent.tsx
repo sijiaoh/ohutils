@@ -5,9 +5,9 @@ import {useRef} from 'react';
 import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
-import {MarkdownComponent} from '../MarkdownComponent';
 import {FormComponent, FieldComponent, SubmitButtonComponent} from '../form';
 import {FieldArrayComponent} from '../form/FieldArrayComponent';
+import {MarkdownEditorComponent} from '../form/MarkdownEditorComponent';
 import {Vote} from 'src/classes/Vote';
 import {homeBreadcrumb} from 'src/pages';
 import {votePath} from 'src/pages/vote/[id]';
@@ -57,26 +57,13 @@ export const VotesCreateComponent: NextPage = () => {
       >
         <FieldComponent label="タイトル" id="title" name="title" />
 
-        <div css={{display: 'flex', height: '30em'}}>
-          <FieldComponent
-            id="text"
-            name="text"
-            label="内容"
-            as="textarea"
-            css={{width: '50%'}}
-            fieldCss={{flex: 1}}
-          />
-          <MarkdownComponent
-            text={voteData.input.text}
-            css={{
-              width: '50%',
-              height: '100%',
-              overflow: 'auto',
-              border: 'solid 1px lightgray',
-              padding: '1em',
-            }}
-          />
-        </div>
+        <MarkdownEditorComponent
+          id="text"
+          name="text"
+          label="本文"
+          text={voteData.input.text}
+          css={{height: '30em'}}
+        />
 
         <FieldArrayComponent
           label="選択肢"

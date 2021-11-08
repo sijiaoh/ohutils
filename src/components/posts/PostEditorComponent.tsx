@@ -2,7 +2,7 @@ import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
 import {useRef} from 'react';
 import {debounce} from 'underscore';
-import {MarkdownComponent} from '../MarkdownComponent';
+import {MarkdownEditorComponent} from '../form/MarkdownEditorComponent';
 import {Post} from 'src/classes/Post';
 import {
   FormComponent,
@@ -49,26 +49,13 @@ export const PostEditorComponent = ({
     >
       <FieldComponent id="title" name="title" label="タイトル" />
 
-      <div css={{display: 'flex', height: '30em'}}>
-        <FieldComponent
-          id="text"
-          name="text"
-          label="内容"
-          as="textarea"
-          css={{width: '50%'}}
-          fieldCss={{flex: 1}}
-        />
-        <MarkdownComponent
-          text={postData.data?.text || ''}
-          css={{
-            width: '50%',
-            height: '100%',
-            overflow: 'auto',
-            border: 'solid 1px lightgray',
-            padding: '1em',
-          }}
-        />
-      </div>
+      <MarkdownEditorComponent
+        id="text"
+        name="text"
+        label="本文"
+        text={postData.input.text}
+        css={{height: '30em'}}
+      />
 
       <FieldComponent id="tags" name="tags" label="タグ" />
       <SubmitButtonComponent css={{marginTop: '2em'}}>

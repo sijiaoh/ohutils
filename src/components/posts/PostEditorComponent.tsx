@@ -1,7 +1,5 @@
 import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
-import {useRef} from 'react';
-import {debounce} from 'underscore';
 import {MarkdownEditorComponent} from '../form/MarkdownEditorComponent';
 import {Post} from 'src/classes/Post';
 import {
@@ -17,24 +15,15 @@ export const PostEditorComponent = ({
 }: DefaultProps<{post: Post}>) => {
   const router = useRouter();
   const postData = useListen(post);
-  const onChange = useRef(
-    debounce(({title, text, tags}: typeof defaultValues) => {
-      post.setInput({title, text});
-      post.setTagsFromStr(tags);
-    }, 500)
-  ).current;
-
-  const defaultValues = {
-    title: postData.data?.title || '',
-    text: postData.data?.text || '',
-    tags: postData.data?.tags.join(' ') || '',
-  };
 
   return (
     <FormComponent
       className={className}
-      defaultValues={defaultValues}
-      onChange={onChange}
+      defaultValues={{
+        title: postData.data?.title || '',
+        text: postData.data?.text || '',
+        tags: postData.data?.tags.join(' ') || '',
+      }}
       onSubmit={async ({title, text, tags}) => {
         post.setInput({title, text});
         post.setTagsFromStr(tags);
@@ -48,7 +37,6 @@ export const PostEditorComponent = ({
         id="text"
         name="text"
         label="本文"
-        text={postData.input.text}
         css={{height: '30em'}}
       />
 

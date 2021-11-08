@@ -1,7 +1,5 @@
-import {useListen} from '@reactive-class/react';
 import type {NextPage} from 'next';
 import {useRouter} from 'next/dist/client/router';
-import {useRef} from 'react';
 import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
@@ -21,8 +19,6 @@ export const VotesCreateComponent: NextPage = () => {
     text: string;
     voteOptions: {value: string}[];
   } = {title: '', text: '', voteOptions: []};
-  const vote = useRef(new Vote()).current;
-  const voteData = useListen(vote);
 
   return (
     <Container>
@@ -36,13 +32,8 @@ export const VotesCreateComponent: NextPage = () => {
 
       <FormComponent
         defaultValues={defaultValues}
-        onChange={values => {
-          vote.setInput({
-            ...values,
-            voteOptions: values.voteOptions.map(({value}) => value),
-          });
-        }}
         onSubmit={async values => {
+          const vote = new Vote();
           vote.setInput({
             ...values,
             voteOptions: values.voteOptions.map(({value}) => value),
@@ -58,7 +49,6 @@ export const VotesCreateComponent: NextPage = () => {
           id="text"
           name="text"
           label="本文"
-          text={voteData.input.text}
           css={{height: '30em'}}
         />
 

@@ -1,5 +1,5 @@
 import {css} from '@emotion/react';
-import {CSSInterpolation} from '@emotion/serialize';
+import type {CSSInterpolation} from '@emotion/serialize';
 import {SiGoogle} from 'react-icons/si';
 
 export type OauthLinksDetails = {

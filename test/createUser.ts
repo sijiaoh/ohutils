@@ -1,4 +1,4 @@
-import {Profile} from 'passport';
+import type {Profile} from 'passport';
 import {buildProfile} from './buildProfile';
 import {emptyRequest} from './emptyRequest';
 import {signIn} from 'src/auth/signIn';

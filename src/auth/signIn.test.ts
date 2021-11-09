@@ -1,6 +1,6 @@
 import {signIn} from './signIn';
 import {SocialProfileEntity, UserEntity} from 'src/database/entities';
-import {Request} from 'src/utils/Context';
+import type {Request} from 'src/utils/Context';
 import {buildProfile} from 'test/buildProfile';
 import {createUser} from 'test/createUser';
 import {emptyRequest} from 'test/emptyRequest';

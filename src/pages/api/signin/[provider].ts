@@ -1,5 +1,5 @@
 import {passport} from 'src/auth/passport';
-import {Request, Response} from 'src/utils/Context';
+import type {Request, Response} from 'src/utils/Context';
 import {getDefaultHandler} from 'src/utils/getDefaultHandler';
 
 const handler = getDefaultHandler();

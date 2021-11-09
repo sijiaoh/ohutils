@@ -32,7 +32,7 @@ export const PostComponent = () => {
 
   if (!postData || typeof id !== 'string') return <div>Loading...</div>;
   return (
-    <Container>
+    <Container css={{userSelect: 'none'}}>
       <HeadComponent subTitle={postTitle(postData.title)} />
 
       <BreadcrumbListComponent

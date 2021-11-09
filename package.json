@@ -10,7 +10,7 @@
     "cleanGenerates": "rm -rf generated src/generated test/generated",
     "clean": "yarn cleanGenerates && rm -rf .next",
     "fix": "gts fix",
-    "test": "yarn generate && NODE_PATH=. yarn jest && yarn lint",
+    "test": "yarn generate && NODE_PATH=. yarn jest && yarn lint && yarn build",
     "execScript": "NODE_PATH=. ts-node --project=tsconfig.script.json",
     "generateIndexes": "yarn ts-index-generator src/**/*.ts",
     "generateGraphqlSchema": "yarn execScript scripts/generateGraphqlSchema",

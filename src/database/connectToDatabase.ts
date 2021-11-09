@@ -12,17 +12,23 @@ export const connectToDatabase = async (
     // eslint-disable-next-line no-empty
   } catch {}
 
-  await createConnection({
-    type: 'mysql',
-    host: process.env.DB_HOST,
-    port: parseInt(process.env.DB_PORT || '') || undefined,
-    database: databaseConfig.databaseName,
-    username: databaseConfig.userName,
-    password: databaseConfig.password,
-    entities: Object.values(entities),
-    synchronize: process.env.NODE_ENV !== 'production',
-    charset: 'utf8mb4',
-    timezone: 'Z',
-    ...options,
-  } as ConnectionOptions);
+  const connect = async () => {
+    await createConnection({
+      type: 'mysql',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT || '') || undefined,
+      database: databaseConfig.databaseName,
+      username: databaseConfig.userName,
+      password: databaseConfig.password,
+      entities: Object.values(entities),
+      synchronize: process.env.NODE_ENV !== 'production',
+      charset: 'utf8mb4',
+      timezone: 'Z',
+      ...options,
+    } as ConnectionOptions).catch(async e => {
+      if (process.env.NODE_ENV !== 'development') throw e;
+      else await connect();
+    });
+  };
+  await connect();
 };

@@ -1,4 +1,4 @@
-import {ComponentProps} from 'react';
+import type {ComponentProps} from 'react';
 import Button from 'react-bootstrap/Button';
 import {useFormContext} from 'react-hook-form';
 

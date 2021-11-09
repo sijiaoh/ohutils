@@ -1,7 +1,7 @@
 import hljs from 'highlight.js';
 import marked from 'marked';
 import {useEffect, useRef} from 'react';
-import {DefaultProps} from 'src/utils/DefaultProps';
+import type {DefaultProps} from 'src/utils/DefaultProps';
 
 import 'highlight.js/styles/vs2015.css';
 

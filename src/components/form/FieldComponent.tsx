@@ -1,8 +1,8 @@
 import {css} from '@emotion/react';
-import {CSSInterpolation} from '@emotion/serialize';
-import {ChangeEvent} from 'react';
+import type {CSSInterpolation} from '@emotion/serialize';
+import type {ChangeEvent} from 'react';
 import {useFormContext} from 'react-hook-form';
-import {DefaultProps} from 'src/utils/DefaultProps';
+import type {DefaultProps} from 'src/utils/DefaultProps';
 
 export const FieldComponent = ({
   id,

@@ -2,13 +2,13 @@ import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
 import {pick} from 'underscore';
 import {MarkdownEditorComponent} from '../form/MarkdownEditorComponent';
-import {Post} from 'src/classes/Post';
+import type {Post} from 'src/classes/Post';
 import {
   FormComponent,
   FieldComponent,
   SubmitButtonComponent,
 } from 'src/components/form';
-import {DefaultProps} from 'src/utils/DefaultProps';
+import type {DefaultProps} from 'src/utils/DefaultProps';
 
 export const PostEditorComponent = ({
   post,

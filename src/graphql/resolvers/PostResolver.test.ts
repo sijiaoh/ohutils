@@ -3,7 +3,7 @@ import {EntityNotFoundError} from '../EntityNotFoundError';
 import {PostResolver} from '.';
 import {PostEntity, TagEntity} from 'src/database/entities';
 import {createUser} from 'test/createUser';
-import {PostInputType} from 'test/generated/generic-sdk';
+import type {PostInputType} from 'test/generated/generic-sdk';
 import {getSignedTestSdk} from 'test/getSignedTestSdk';
 import {prepareTestMysql} from 'test/prepareTestMysql';
 

@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import {useFieldArray, useFormContext} from 'react-hook-form';
-import {DefaultProps} from 'src/utils/DefaultProps';
+import type {DefaultProps} from 'src/utils/DefaultProps';
 
 export const FieldArrayComponent = ({
   className,

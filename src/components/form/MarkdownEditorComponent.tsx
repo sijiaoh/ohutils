@@ -2,8 +2,8 @@ import {useEffect, useRef, useState} from 'react';
 import {useFormContext} from 'react-hook-form';
 import {debounce} from 'underscore';
 import {MarkdownComponent} from '../MarkdownComponent';
-import {FieldComponent} from '.';
-import {DefaultProps} from 'src/utils/DefaultProps';
+import {FieldComponent} from './FieldComponent';
+import type {DefaultProps} from 'src/utils/DefaultProps';
 
 export const MarkdownEditorComponent = ({
   className,

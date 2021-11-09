@@ -16,7 +16,7 @@ import {PostInputType} from '../input-types/PostInputType';
 import {PostsOrderInputType} from '../input-types/PostsOrderInputType';
 import {PostType} from '../types/PostType';
 import {PostEntity, TagEntity} from 'src/database/entities';
-import {Context} from 'src/utils/Context';
+import type {Context} from 'src/utils/Context';
 import {getUser} from 'src/utils/getUser';
 
 @Resolver()

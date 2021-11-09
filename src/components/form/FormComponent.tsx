@@ -6,7 +6,7 @@ import {
   useFormContext,
   UseFormProps,
 } from 'react-hook-form';
-import {DefaultProps} from 'src/utils/DefaultProps';
+import type {DefaultProps} from 'src/utils/DefaultProps';
 
 interface OnChange<T> {
   (v: T): void | Promise<void>;

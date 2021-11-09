@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
+import {RemovePostButtonComponent} from './RemovePostButtonComponent';
 import {Me} from 'src/classes/Me';
 import {Post} from 'src/classes/Post';
 import {Link} from 'src/utils/Link';
@@ -45,8 +46,13 @@ export const PostComponent = () => {
       <h1>{postTitle(postData.title)}</h1>
 
       {meData && (
-        <div>
-          <Link href={postsEditPath(id)}>{postsEditTitle}</Link>
+        <div css={{display: 'flex'}}>
+          <div>
+            <Link href={postsEditPath(id)}>{postsEditTitle}</Link>
+          </div>
+          <div css={{marginLeft: '0.5em'}}>
+            <RemovePostButtonComponent post={post} />
+          </div>
         </div>
       )}
 

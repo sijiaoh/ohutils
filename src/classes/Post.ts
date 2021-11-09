@@ -66,6 +66,13 @@ export class Post extends ReactiveClass {
     this.id = this.data?.id;
   };
 
+  remove = async () => {
+    if (!this.id) return;
+    await apolloSdk.removePostMutation({variables: {id: this.id}});
+    this.data = undefined;
+    this.id = undefined;
+  };
+
   private setData = (data: PostType) => {
     this.data = produce(this.data, () => data);
   };

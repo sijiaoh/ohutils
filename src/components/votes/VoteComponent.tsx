@@ -17,6 +17,7 @@ export const VoteComponent = () => {
   const router = useRouter();
   const {id} = router.query;
   const vote = useRef(new Vote()).current;
+  const voted = useListen(vote, ({voted}) => voted);
   const voteData = useListen(vote, ({data}) => data);
   const totalNumberOfVotes = useListen(vote, ({data}) => {
     return (
@@ -76,6 +77,7 @@ export const VoteComponent = () => {
               onClick={async () => {
                 await vote.voteTo(voteOption.id);
               }}
+              disabled={voted}
             >
               +
             </Button>

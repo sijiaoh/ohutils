@@ -1,5 +1,5 @@
 import nookies from 'nookies';
-import {Middleware} from 'src/utils/Middleware';
+import type {Middleware} from 'src/utils/Middleware';
 
 export const cookieMiddleware: Middleware = (req, res, next) => {
   if (process.env.NODE_ENV === 'test') {

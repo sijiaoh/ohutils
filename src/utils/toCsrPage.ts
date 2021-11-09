@@ -1,4 +1,4 @@
-import {NextPage} from 'next';
+import type {NextPage} from 'next';
 import dynamic from 'next/dynamic';
 
 export const toCsrPage = (module: Promise<{[key: string]: NextPage}>) => {

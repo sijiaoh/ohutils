@@ -1,5 +1,5 @@
-import {NextApiRequest, NextApiResponse} from 'next';
-import nookies from 'nookies';
+import type {NextApiRequest, NextApiResponse} from 'next';
+import type nookies from 'nookies';
 
 export type Request = NextApiRequest;
 

@@ -1,4 +1,4 @@
-import {DefaultProps} from 'src/utils/DefaultProps';
+import type {DefaultProps} from 'src/utils/DefaultProps';
 import {Link} from 'src/utils/Link';
 
 export interface Breadcrumb {

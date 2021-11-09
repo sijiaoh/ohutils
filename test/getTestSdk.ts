@@ -1,5 +1,5 @@
 import {print} from 'graphql';
-import {SuperAgentTest} from 'supertest';
+import type {SuperAgentTest} from 'supertest';
 import {getSdk} from './generated/generic-sdk';
 import {getAgent} from './getAgent';
 

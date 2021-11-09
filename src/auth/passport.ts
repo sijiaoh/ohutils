@@ -1,7 +1,7 @@
 import passport from 'passport';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
 import {signIn} from 'src/auth/signIn';
-import {Request} from 'src/utils/Context';
+import type {Request} from 'src/utils/Context';
 
 const config = {
   GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID!,

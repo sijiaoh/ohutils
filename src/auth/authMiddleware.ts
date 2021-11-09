@@ -1,6 +1,6 @@
 import {createSession} from './createSession';
 import {UserEntity} from 'src/database/entities';
-import {Middleware} from 'src/utils/Middleware';
+import type {Middleware} from 'src/utils/Middleware';
 
 export const authMiddleware: Middleware = async (req, res, next) => {
   try {

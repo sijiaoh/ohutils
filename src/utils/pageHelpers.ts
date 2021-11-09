@@ -1,4 +1,4 @@
-import {Breadcrumb} from 'src/components/BreadcrumbListComponent';
+import type {Breadcrumb} from 'src/components/BreadcrumbListComponent';
 
 export const homeTitle = 'Home';
 export const homePath = '/';

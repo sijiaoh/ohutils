@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import {Authorized, Ctx, Query, Resolver} from 'type-graphql';
 import {MeType} from '../types/MeType';
 import {SocialProfileEntity} from 'src/database/entities';
-import {Context} from 'src/utils/Context';
+import type {Context} from 'src/utils/Context';
 import {getUser} from 'src/utils/getUser';
 
 @Resolver()

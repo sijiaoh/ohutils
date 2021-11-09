@@ -1,4 +1,4 @@
-import {Profile} from 'passport';
+import type {Profile} from 'passport';
 
 export const buildProfile = (options?: Partial<Profile>): Profile => ({
   provider: 'google',

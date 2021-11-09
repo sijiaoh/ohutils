@@ -1,4 +1,4 @@
-import {Request} from './Context';
+import type {Request} from './Context';
 
 export const getUser = (req: Request) => {
   const user = req.user;

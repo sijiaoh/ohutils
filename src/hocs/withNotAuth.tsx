@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
 import {useListen} from '@reactive-class/react';
-import {NextPage} from 'next';
+import type {NextPage} from 'next';
 import {useRouter} from 'next/dist/client/router';
 import {useEffect} from 'react';
 import {Me} from 'src/classes/Me';

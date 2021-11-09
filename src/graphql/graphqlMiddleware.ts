@@ -1,6 +1,6 @@
 import {graphqlHTTP} from 'express-graphql';
 import {buildSchema} from './buildSchema';
-import {Middleware} from 'src/utils/Middleware';
+import type {Middleware} from 'src/utils/Middleware';
 
 export const graphqlMiddleware: Middleware = async (req, res, next) => {
   await graphqlHTTP({

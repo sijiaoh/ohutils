@@ -1,7 +1,7 @@
-import {Profile} from 'passport';
+import type {Profile} from 'passport';
 import {getManager} from 'typeorm';
 import {SocialProfileEntity, UserEntity} from 'src/database/entities';
-import {Request} from 'src/utils/Context';
+import type {Request} from 'src/utils/Context';
 
 export type VerifyCallback = (
   err?: string | Error | null,

@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
 import {Ctx, Query, Resolver} from 'type-graphql';
-import {Context} from 'src/utils/Context';
+import type {Context} from 'src/utils/Context';
 
 @Resolver()
 export class HelloResolver {

@@ -2,7 +2,7 @@ import {UnauthorizedError} from 'type-graphql';
 import {EntityNotFoundError} from '../EntityNotFoundError';
 import {PostResolver} from '.';
 import {PostEntity, TagEntity} from 'src/database/entities';
-import {createUser} from 'test/createUser';
+import {createUserWithSocialProfile} from 'test/createUserWithSocialProfile';
 import type {PostInputType} from 'test/generated/generic-sdk';
 import {getSignedTestSdk} from 'test/getSignedTestSdk';
 import {prepareTestMysql} from 'test/prepareTestMysql';
@@ -12,7 +12,7 @@ prepareTestMysql();
 describe(PostResolver.name, () => {
   describe(PostResolver.prototype.post.name, () => {
     it('should return post if exists', async () => {
-      const user = await createUser();
+      const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
       const postProps: PostInputType = {
         title: 'title',
@@ -30,7 +30,7 @@ describe(PostResolver.name, () => {
     });
 
     it('should return error if not exists', async () => {
-      const user = await createUser();
+      const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
       const errors = await sdk.post({id: 'invalid id'}).catch(err => err);
       expect(errors[0].message).toBe(new EntityNotFoundError().message);
@@ -39,7 +39,7 @@ describe(PostResolver.name, () => {
 
   describe(PostResolver.prototype.posts.name, () => {
     it('should return posts', async () => {
-      const user = await createUser();
+      const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
 
       const postProps: PostInputType = {
@@ -67,7 +67,7 @@ describe(PostResolver.name, () => {
         tags: [],
       };
 
-      const user = await createUser();
+      const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
       const res = await sdk.createPost({
         post: postProps,
@@ -91,7 +91,7 @@ describe(PostResolver.name, () => {
       };
       const tagNames = ['tag1', 'tag2'];
 
-      const user = await createUser();
+      const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
       const res = await sdk.createPost({
         post: {...postProps, tags: tagNames},
@@ -116,7 +116,7 @@ describe(PostResolver.name, () => {
       };
       const tagNames = ['tag1', 'tag2'];
 
-      const user = await createUser();
+      const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
 
       let res = await sdk.createPost({
@@ -135,7 +135,7 @@ describe(PostResolver.name, () => {
 
   describe(PostResolver.prototype.updatePost.name, () => {
     it('should update exists post', async () => {
-      const user = await createUser();
+      const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
 
       const {
@@ -152,7 +152,7 @@ describe(PostResolver.name, () => {
     });
 
     it('can remove all tags', async () => {
-      const user = await createUser();
+      const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
 
       const {
@@ -171,7 +171,7 @@ describe(PostResolver.name, () => {
 
   describe(PostResolver.prototype.removePost.name, () => {
     it('should remove post', async () => {
-      const user = await createUser();
+      const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
 
       const createPostRes = await sdk.createPost({
@@ -188,7 +188,7 @@ describe(PostResolver.name, () => {
     });
 
     it('should throw error when user is not owner', async () => {
-      const owner = await createUser();
+      const owner = await createUserWithSocialProfile();
       const ownerSdk = await getSignedTestSdk(owner);
 
       const createPostRes = await ownerSdk.createPost({
@@ -196,7 +196,7 @@ describe(PostResolver.name, () => {
       });
       expect(createPostRes.createPost.id).toBeTruthy();
 
-      const user = await createUser({id: 'googleId2'});
+      const user = await createUserWithSocialProfile();
       const userSdk = await getSignedTestSdk(user);
 
       const errors = await userSdk

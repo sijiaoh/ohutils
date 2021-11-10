@@ -1,13 +1,13 @@
 import {getConnection} from 'typeorm';
 import {PostEntity, TagEntity} from '.';
-import {createUser} from 'test/createUser';
+import {createUserWithSocialProfile} from 'test/createUserWithSocialProfile';
 import {prepareTestMysql} from 'test/prepareTestMysql';
 
 prepareTestMysql();
 
 describe(TagEntity.name, () => {
   const createPost = async () => {
-    const user = await createUser();
+    const user = await createUserWithSocialProfile();
     const post = await PostEntity.create({
       title: 'title',
       text: 'text',

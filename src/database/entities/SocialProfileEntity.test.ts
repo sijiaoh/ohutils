@@ -1,12 +1,12 @@
 import {SocialProfileEntity, UserEntity} from '.';
-import {createUser} from 'test/createUser';
+import {createUserWithSocialProfile} from 'test/createUserWithSocialProfile';
 import {prepareTestMysql} from 'test/prepareTestMysql';
 
 prepareTestMysql();
 
 describe(SocialProfileEntity.name, () => {
   it('will not remove user when itself removed', async () => {
-    const user = await createUser();
+    const user = await createUserWithSocialProfile();
     const socialProfiles = await SocialProfileEntity.find({
       where: {userId: user.id},
     });
@@ -17,7 +17,7 @@ describe(SocialProfileEntity.name, () => {
   });
 
   it('remove itself when user removed', async () => {
-    const user = await createUser();
+    const user = await createUserWithSocialProfile();
     await user.remove();
 
     expect(await UserEntity.count()).toBe(0);

@@ -18,7 +18,7 @@ describe(signIn.name, () => {
   });
 
   it('can normal login', async () => {
-    await createUserWithSocialProfile();
+    await createUserWithSocialProfile(buildProfile());
 
     const user = await signIn(emptyRequest, buildProfile());
     expect(user).toBeInstanceOf(UserEntity);

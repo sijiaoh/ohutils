@@ -47,3 +47,6 @@ build/
 node_modules/
 generated/
 .envrc
+.serverless/
+.serverless_nextjs/
+.env/production.json

@@ -22,8 +22,7 @@
     "prepareMysql": "yarn execScript scripts/prepareMysql",
     "removeDatabase": "yarn execScript scripts/removeDatabase",
     "resetDatabase": "yarn removeDatabase && yarn prepareMysql",
-    "execMysql": "yarn execScript scripts/execMysql",
-    "deploy": "DEPLOY=true serverless"
+    "execMysql": "yarn execScript scripts/execMysql"
   },
   "dependencies": {
     "@apollo/client": "3.4.x",

@@ -1,6 +1,3 @@
-# Change to production in production.
-export HTTPS_PORTAL_STAGE=local
-
 # For deploy command.
 export AWS_ACCESS_KEY_ID=
 export AWS_SECRET_ACCESS_KEY=

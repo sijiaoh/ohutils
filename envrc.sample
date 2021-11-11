@@ -1,9 +1,4 @@
-# For deploy command.
-export AWS_ACCESS_KEY_ID=
-export AWS_SECRET_ACCESS_KEY=
-
-# Google analytics.
-export NEXT_PUBLIC_TRACKING_CODE=
+export URL=http://localhost:3000
 
 export DB_VERSION=8.0
 export DB_HOST=localhost
@@ -13,6 +8,8 @@ export DB_NAME=
 export DB_USER=ohutils
 export DB_PASS=ohutils
 
-export URL=http://localhost:3000
+# Google analytics.
+export NEXT_PUBLIC_TRACKING_CODE=
+
 export GOOGLE_CLIENT_ID=
 export GOOGLE_CLIENT_SECRET=

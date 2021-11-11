@@ -2,3 +2,5 @@ myNextApplication:
   component: '@sls-next/serverless-component@latest'
   inputs:
     domain: ohutils.com
+    build:
+      cmd: yarn

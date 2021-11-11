@@ -10,8 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      # From: https://github.com/actions/checkout/issues/440#issuecomment-854240996
+      AWS_EC2_METADATA_DISABLED: true
+
       AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
       AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+
       URL: ${{secrets.URL}}
       DB_VERSION: ${{secrets.DB_VERSION}}
       DB_HOST: ${{secrets.DB_HOST}}
@@ -36,7 +40,7 @@ jobs:
         run: aws s3 sync s3://ohutils-serverless/production/.serverless .serverless --delete
 
       - name: Deploy to AWS
-        run: yarn deploy
+        uses: serverless/github-action@master
 
       - name: Upload `.serverless` state to S3
         run: aws s3 sync .serverless s3://ohutils-serverless/production/.serverless --delete

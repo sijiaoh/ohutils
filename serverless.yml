@@ -1,6 +1,15 @@
+# From: https://github.com/serverless-nextjs/serverless-next.js#concatenating-environment-variables-doesnt-seem-to-work
+stage: ${env.STAGE}
 myNextApplication:
   component: '@sls-next/serverless-component@latest'
   inputs:
-    domain: ohutils.com
+    domain: ${env.DOMAIN}
     build:
       cmd: yarn
+    roleArn: ${env.ROLE_ARN}
+    bucketName: ohutils-${stage}
+    name:
+      defaultLambda: ohutils-${stage}-default-lambda
+      apiLambda: ohutils-${stage}-api-lambda
+      imageLambda: ohutils-${stage}-image-lambda
+      regenerationLambda: ohutils-${stage}-regeneration-lambda

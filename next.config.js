@@ -1,5 +1,12 @@
+let wrapper = v => v;
+
+if (process.env.ANALYZE === 'true') {
+  // eslint-disable-next-line node/no-unpublished-require
+  wrapper = require('@next/bundle-analyzer')();
+}
+
 /** @type {import('next').NextConfig} */
-module.exports = {
+module.exports = wrapper({
   reactStrictMode: true,
   webpack: config => {
     // eslint-disable-next-line node/no-unpublished-require
@@ -14,4 +21,4 @@ module.exports = {
     ];
     return config;
   },
-};
+});

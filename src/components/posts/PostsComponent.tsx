@@ -1,9 +1,10 @@
+import {gql} from '@apollo/client';
 import {useListen} from '@reactive-class/react';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
-import {Order, usePostsQuery} from 'src/apollo';
+import {Order, useGetPostsQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
 import {Link} from 'src/utils/Link';
 import {
@@ -16,8 +17,19 @@ import {
 } from 'src/utils/pageHelpers';
 import {printDateTime} from 'src/utils/printDateTime';
 
+gql`
+  query getPosts($order: PostsOrderInputType!) {
+    posts(order: $order) {
+      id
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const PostsComponent = () => {
-  const {data, loading} = usePostsQuery({
+  const {data, loading} = useGetPostsQuery({
     variables: {order: {createdAt: Order.Desc}},
   });
   const meData = useListen(Me.useMe(), ({data}) => data);

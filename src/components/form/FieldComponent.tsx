@@ -46,6 +46,7 @@ export const FieldComponent = ({
               onChange?.(e.target.value);
             },
           })}
+          spellCheck={false}
           css={css({resize: 'none'}, fieldCss)}
         />
       )}

@@ -4,6 +4,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {Me} from 'src/classes/Me';
+import type {DefaultProps} from 'src/utils/DefaultProps';
 import {Link} from 'src/utils/Link';
 import {
   homePath,
@@ -12,6 +13,16 @@ import {
   votesPath,
   votesTitle,
 } from 'src/utils/pageHelpers';
+
+const NavLink = ({children, href}: DefaultProps<{href: string}>) => {
+  const router = useRouter();
+
+  return (
+    <Link href={href}>
+      <Nav.Link active={router.pathname === href}>{children}</Nav.Link>
+    </Link>
+  );
+};
 
 export const HeaderComponent = () => {
   const me = Me.useMe();
@@ -32,12 +43,8 @@ export const HeaderComponent = () => {
         <Navbar.Toggle aria-controls="navbar-links" />
         <Navbar.Collapse id="navbar-links">
           <Nav className="me-auto">
-            <Link href={postsPath}>
-              <Nav.Link>{postsTitle}</Nav.Link>
-            </Link>
-            <Link href={votesPath}>
-              <Nav.Link>{votesTitle}</Nav.Link>
-            </Link>
+            <NavLink href={postsPath}>{postsTitle}</NavLink>
+            <NavLink href={votesPath}>{votesTitle}</NavLink>
           </Nav>
           <Nav className="ms-auto">
             {authorized && (

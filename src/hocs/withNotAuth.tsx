@@ -3,6 +3,7 @@ import {useRouter} from 'next/dist/client/router';
 import nookies from 'nookies';
 import {useEffect, useMemo} from 'react';
 import {tokenKey} from 'src/auth/tokenKey';
+import {LoadingComponent} from 'src/components/LoadingComponent';
 
 export const withNotAuth = (Page: NextPage): NextPage => {
   const Res: NextPage = () => {
@@ -20,7 +21,7 @@ export const withNotAuth = (Page: NextPage): NextPage => {
       const Element: NextPage = () => <Page />;
       return <Element />;
     } else {
-      const Loading: NextPage = () => <div>Loading</div>;
+      const Loading: NextPage = () => <LoadingComponent />;
       return <Loading />;
     }
   };

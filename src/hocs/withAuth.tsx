@@ -5,6 +5,7 @@ import nookies from 'nookies';
 import {useEffect, useMemo} from 'react';
 import {tokenKey} from 'src/auth/tokenKey';
 import {Me} from 'src/classes/Me';
+import {LoadingComponent} from 'src/components/LoadingComponent';
 
 export const withAuth = (Page: NextPage): NextPage => {
   const Res: NextPage = () => {
@@ -27,7 +28,7 @@ export const withAuth = (Page: NextPage): NextPage => {
       const Element: NextPage = () => <Page />;
       return <Element />;
     } else {
-      const Loading: NextPage = () => <div>Loading</div>;
+      const Loading: NextPage = () => <LoadingComponent />;
       return <Loading />;
     }
   };

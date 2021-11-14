@@ -1,6 +1,9 @@
+import {useListen} from '@reactive-class/react';
+import {useRouter} from 'next/dist/client/router';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import {Me} from 'src/classes/Me';
 import {Link} from 'src/utils/Link';
 import {
   homePath,
@@ -11,6 +14,14 @@ import {
 } from 'src/utils/pageHelpers';
 
 export const HeaderComponent = () => {
+  const me = Me.useMe();
+  const authorized = useListen(me, ({authorized}) => authorized);
+  const router = useRouter();
+  const signOutHandler = () => {
+    me.signOut();
+    void router.push(homePath);
+  };
+
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -27,6 +38,11 @@ export const HeaderComponent = () => {
             <Link href={votesPath}>
               <Nav.Link>{votesTitle}</Nav.Link>
             </Link>
+          </Nav>
+          <Nav className="ms-auto">
+            {authorized && (
+              <Nav.Link onClick={signOutHandler}>ログアウト</Nav.Link>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

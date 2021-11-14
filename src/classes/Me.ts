@@ -1,6 +1,8 @@
 import {ReactiveClass} from '@reactive-class/react';
+import nookies from 'nookies';
 import {createContext, useContext} from 'react';
 import {apolloSdk, MeType} from 'src/apollo';
+import {tokenKey} from 'src/auth/tokenKey';
 
 export class Me extends ReactiveClass {
   static Context = createContext<{me?: Me}>({});
@@ -27,5 +29,11 @@ export class Me extends ReactiveClass {
 
     if (this.data) this.authorized = true;
     this.loading = false;
+  };
+
+  signOut = () => {
+    nookies.destroy(undefined, tokenKey);
+    this.authorized = false;
+    this.data = null;
   };
 }

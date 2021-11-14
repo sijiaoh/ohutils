@@ -9383,6 +9383,7 @@ __metadata:
     react: 17.0.2
     react-dom: 17.0.2
     react-ga: ^3.3.0
+    react-loader-spinner: ^4.0.0
     reflect-metadata: ^0.1.13
     sanitize.css: ^13.0.0
     sijiaoh-gts: ^0.6.1
@@ -10131,6 +10132,18 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
+  languageName: node
+  linkType: hard
+
+"react-loader-spinner@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "react-loader-spinner@npm:4.0.0"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: "*"
+    react-dom: "*"
+  checksum: 419ca68445444a497f09ead8a040aa8d4a231d336573f345d2a26d39c2694fb8ba284c64c1e45b09a22e41e107f318b9b172f19f3e5bd1d5784dd24fb0101156
   languageName: node
   linkType: hard
 

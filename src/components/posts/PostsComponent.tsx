@@ -1,4 +1,3 @@
-import {gql} from '@apollo/client';
 import {useListen} from '@reactive-class/react';
 import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
@@ -7,6 +6,7 @@ import {HeadComponent} from '../HeadComponent';
 import {Order, useGetPostsQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
 import {Link} from 'src/utils/Link';
+import {gql} from 'src/utils/gql';
 import {
   homeBreadcrumb,
   postPath,

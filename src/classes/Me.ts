@@ -11,13 +11,21 @@ export class Me extends ReactiveClass {
     return me;
   };
 
+  loading = true;
+  authorized = false;
   /** undefined is fetching, null is unauthorized */
   data?: MeType | null;
 
   load = async () => {
+    this.loading = true;
+    this.authorized = false;
+
     this.data = await apolloSdk
       .meQuery({})
       .then(({data}) => data.me)
       .catch(() => null);
+
+    if (this.data) this.authorized = true;
+    this.loading = false;
   };
 }

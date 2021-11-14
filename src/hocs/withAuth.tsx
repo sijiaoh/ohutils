@@ -10,13 +10,16 @@ import {Me} from 'src/classes/Me';
 
 export const withAuth = (Page: NextPage): NextPage => {
   const Res: NextPage = () => {
-    const meData = useListen(Me.useMe());
+    const {authorized, loading} = useListen(
+      Me.useMe(),
+      ({authorized, loading}) => ({authorized, loading})
+    );
     const router = useRouter();
     const tokenExists = useMemo(() => {
-      if (meData.data === null) return false;
+      if (!loading && !authorized) return false;
       const cookies = nookies.get();
       return cookies[tokenKey] != null;
-    }, [meData.data]);
+    }, [authorized, loading]);
 
     useEffect(() => {
       if (!tokenExists) void router.replace('/');

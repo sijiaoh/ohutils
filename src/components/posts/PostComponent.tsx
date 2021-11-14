@@ -4,6 +4,7 @@ import {useEffect, useRef} from 'react';
 import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
+import {LoadingComponent} from '../LoadingComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
 import {RemovePostButtonComponent} from './RemovePostButtonComponent';
 import {Me} from 'src/classes/Me';
@@ -30,7 +31,7 @@ export const PostComponent = () => {
     void post.load();
   }, [id, post]);
 
-  if (!postData || typeof id !== 'string') return <div>Loading...</div>;
+  if (!postData || typeof id !== 'string') return <LoadingComponent />;
   return (
     <Container css={{userSelect: 'none', '@media print': {display: 'none'}}}>
       <HeadComponent subTitle={postTitle(postData.title)} />

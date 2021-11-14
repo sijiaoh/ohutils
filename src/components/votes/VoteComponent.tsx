@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
+import {LoadingComponent} from '../LoadingComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
 import {Vote} from 'src/classes/Vote';
 import {
@@ -34,7 +35,7 @@ export const VoteComponent = () => {
     void vote.load();
   }, [id, vote]);
 
-  if (!voteData) return <div>Loading...</div>;
+  if (!voteData) return <LoadingComponent />;
   return (
     <Container>
       <HeadComponent subTitle={voteTitle(voteData.title)} />

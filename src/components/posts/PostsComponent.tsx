@@ -3,6 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Table from 'react-bootstrap/Table';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
+import {LoadingComponent} from '../LoadingComponent';
 import {Order, useGetPostsQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
 import {Link} from 'src/utils/Link';
@@ -34,7 +35,7 @@ export const PostsComponent = () => {
   });
   const meData = useListen(Me.useMe(), ({data}) => data);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <LoadingComponent />;
   return (
     <Container>
       <HeadComponent subTitle={postsTitle} />

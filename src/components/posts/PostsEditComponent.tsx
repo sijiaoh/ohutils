@@ -5,6 +5,7 @@ import {useEffect, useRef} from 'react';
 import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
+import {LoadingComponent} from '../LoadingComponent';
 import {PostEditorComponent} from './PostEditorComponent';
 import {Post} from 'src/classes/Post';
 import {
@@ -24,7 +25,7 @@ export const PostsEditComponent: NextPage = () => {
     void postData.load();
   }, [postData]);
 
-  if (!postData.loaded) return <div>Loading...</div>;
+  if (!postData.loaded) return <LoadingComponent />;
   return (
     <Container>
       <HeadComponent subTitle={postsEditTitle} />

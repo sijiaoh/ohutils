@@ -1,26 +1,34 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-
 import {useListen} from '@reactive-class/react';
 import type {NextPage} from 'next';
 import {useRouter} from 'next/dist/client/router';
-import {useEffect} from 'react';
+import nookies from 'nookies';
+import {useEffect, useMemo} from 'react';
+import {tokenKey} from 'src/auth/tokenKey';
 import {Me} from 'src/classes/Me';
+import {LoadingComponent} from 'src/components/LoadingComponent';
 
 export const withAuth = (Page: NextPage): NextPage => {
   const Res: NextPage = () => {
-    const me = Me.useMe();
-    const meData = useListen(me);
+    const {authorized, loading} = useListen(
+      Me.useMe(),
+      ({authorized, loading}) => ({authorized, loading})
+    );
     const router = useRouter();
+    const tokenExists = useMemo(() => {
+      if (!loading && !authorized) return false;
+      const cookies = nookies.get();
+      return cookies[tokenKey] != null;
+    }, [authorized, loading]);
 
     useEffect(() => {
-      if (me.data === null) void router.replace('/');
-    }, [me.data, router]);
+      if (!tokenExists) void router.replace('/');
+    }, [router, tokenExists]);
 
-    if (meData.data) {
+    if (tokenExists) {
       const Element: NextPage = () => <Page />;
       return <Element />;
     } else {
-      const Loading: NextPage = () => <div>Loading</div>;
+      const Loading: NextPage = () => <LoadingComponent />;
       return <Loading />;
     }
   };

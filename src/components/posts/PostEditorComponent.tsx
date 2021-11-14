@@ -9,6 +9,7 @@ import {
   SubmitButtonComponent,
 } from 'src/components/form';
 import type {DefaultProps} from 'src/utils/DefaultProps';
+import {postPath} from 'src/utils/pageHelpers';
 
 export const PostEditorComponent = ({
   post,
@@ -28,7 +29,8 @@ export const PostEditorComponent = ({
         post.setInput({title, text});
         post.setTagsFromStr(tags);
         await post.save();
-        await router.push(`/post/${post.id}`);
+        if (!post.id) throw new Error('Failed to create post.');
+        await router.push(postPath(post.id));
       }}
     >
       <FieldComponent id="title" name="title" label="タイトル" />

@@ -20,7 +20,7 @@ export const postsPath = '/posts';
 export const postsBreadcrumb: Breadcrumb = {title: postsTitle, path: postsPath};
 
 export const postTitle = (title: string) => title;
-export const postPath = (id: string) => `/post/${id}`;
+export const postPath = (id: string) => `/posts/${id}`;
 export const postBreadcrumb: ({
   id,
   title,
@@ -33,14 +33,14 @@ export const postBreadcrumb: ({
 });
 
 export const postsCreateTitle = '投稿作成';
-export const postsCreatePath = '/posts/create';
+export const postsCreatePath = '/post/create';
 export const postsCreateBreadcrumb: Breadcrumb = {
   title: postsCreateTitle,
   path: postsCreatePath,
 };
 
 export const postsEditTitle = '投稿編集';
-export const postsEditPath = (id: string) => `/posts/edit/${id}`;
+export const postsEditPath = (id: string) => `/post/edit/${id}`;
 export const postsEditBreadcrumb: (id: string) => Breadcrumb = id => ({
   title: postsEditTitle,
   path: postsEditPath(id),
@@ -51,7 +51,7 @@ export const votesPath = '/votes';
 export const votesBreadcrumb: Breadcrumb = {title: votesTitle, path: votesPath};
 
 export const voteTitle = (title: string) => title;
-export const votePath = (id: string) => `/vote/${id}`;
+export const votePath = (id: string) => `/votes/${id}`;
 export const voteBreadcrumb: ({
   id,
   title,
@@ -64,7 +64,7 @@ export const voteBreadcrumb: ({
 });
 
 export const votesCreateTitle = '投票作成';
-export const votesCreatePath = '/votes/create';
+export const votesCreatePath = '/vote/create';
 export const votesCreateBreadcrumb: Breadcrumb = {
   title: votesCreateTitle,
   path: votesCreatePath,

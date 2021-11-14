@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-
 import type {NextPage} from 'next';
 import {useRouter} from 'next/dist/client/router';
 import nookies from 'nookies';

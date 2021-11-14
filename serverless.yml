@@ -6,7 +6,6 @@ myNextApplication:
   inputs:
     domain: ${env.DOMAIN}
     build:
-      cwd: ../
       cmd: yarn
     roleArn: ${env.ROLE_ARN}
     bucketName: ${projectName}-${stage}

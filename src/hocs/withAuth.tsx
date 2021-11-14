@@ -3,20 +3,26 @@
 import {useListen} from '@reactive-class/react';
 import type {NextPage} from 'next';
 import {useRouter} from 'next/dist/client/router';
-import {useEffect} from 'react';
+import nookies from 'nookies';
+import {useEffect, useMemo} from 'react';
+import {tokenKey} from 'src/auth/tokenKey';
 import {Me} from 'src/classes/Me';
 
 export const withAuth = (Page: NextPage): NextPage => {
   const Res: NextPage = () => {
-    const me = Me.useMe();
-    const meData = useListen(me);
+    const meData = useListen(Me.useMe());
     const router = useRouter();
+    const tokenExists = useMemo(() => {
+      if (meData.data === null) return false;
+      const cookies = nookies.get();
+      return cookies[tokenKey] != null;
+    }, [meData.data]);
 
     useEffect(() => {
-      if (me.data === null) void router.replace('/');
-    }, [me.data, router]);
+      if (!tokenExists) void router.replace('/');
+    }, [router, tokenExists]);
 
-    if (meData.data) {
+    if (tokenExists) {
       const Element: NextPage = () => <Page />;
       return <Element />;
     } else {

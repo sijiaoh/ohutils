@@ -1,3 +1,4 @@
+projectName: ohutils
 # From: https://github.com/serverless-nextjs/serverless-next.js#concatenating-environment-variables-doesnt-seem-to-work
 stage: ${env.STAGE}
 myNextApplication:
@@ -5,11 +6,12 @@ myNextApplication:
   inputs:
     domain: ${env.DOMAIN}
     build:
+      cwd: ../
       cmd: yarn
     roleArn: ${env.ROLE_ARN}
-    bucketName: ohutils-${stage}
+    bucketName: ${projectName}-${stage}
     name:
-      defaultLambda: ohutils-${stage}-default-lambda
-      apiLambda: ohutils-${stage}-api-lambda
-      imageLambda: ohutils-${stage}-image-lambda
-      regenerationLambda: ohutils-${stage}-regeneration-lambda
+      defaultLambda: ${projectName}-${stage}-default-lambda
+      apiLambda: ${projectName}-${stage}-api-lambda
+      imageLambda: ${projectName}-${stage}-image-lambda
+      regenerationLambda: ${projectName}-${stage}-regeneration-lambda

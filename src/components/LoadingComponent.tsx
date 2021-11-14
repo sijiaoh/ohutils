@@ -11,7 +11,7 @@ export const LoadingComponent = () => {
         alignItems: 'center',
       }}
     >
-      <Loader type="Bars" color="gray" />
+      <Loader type="ThreeDots" color="gray" />
     </div>
   );
 };

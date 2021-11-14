@@ -4,9 +4,10 @@ import Table from 'react-bootstrap/Table';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
 import {LoadingComponent} from '../LoadingComponent';
-import {Order, useVotesQuery} from 'src/apollo';
+import {Order, useGetVotesQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
 import {Link} from 'src/utils/Link';
+import {gql} from 'src/utils/gql';
 import {
   homeBreadcrumb,
   votePath,
@@ -17,8 +18,19 @@ import {
 } from 'src/utils/pageHelpers';
 import {printDateTime} from 'src/utils/printDateTime';
 
+gql`
+  query getVotes($order: VotesOrderInputType!) {
+    votes(order: $order) {
+      id
+      title
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const VotesComponent = () => {
-  const {data, loading} = useVotesQuery({
+  const {data, loading} = useGetVotesQuery({
     variables: {order: {createdAt: Order.Desc}},
   });
   const meData = useListen(Me.useMe(), ({data}) => data);

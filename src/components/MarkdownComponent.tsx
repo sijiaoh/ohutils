@@ -5,7 +5,7 @@ import mermaid from 'mermaid';
 import {useEffect, useRef} from 'react';
 import type {DefaultProps} from 'src/utils/DefaultProps';
 
-import 'highlight.js/styles/vs2015.css';
+import 'highlight.js/styles/github-dark.css';
 
 hljs.registerLanguage('cpp', cpp);
 

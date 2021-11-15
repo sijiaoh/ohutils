@@ -3,7 +3,7 @@ import {BreadcrumbListComponent} from './BreadcrumbListComponent';
 import {CounterComponent} from './CounterComponent';
 import {HeadComponent} from './HeadComponent';
 import {useHelloQuery} from 'src/apollo';
-import {Link} from 'src/utils/Link';
+import {LinkComponent} from 'src/components/LinkComponent';
 import {homeBreadcrumb, homeTitle} from 'src/utils/pageHelpers';
 
 export const HomeComponent: NextPage = () => {
@@ -19,9 +19,9 @@ export const HomeComponent: NextPage = () => {
         Welcome to <a href="https://github.com/sijiaoh/osushi">Osushi!</a>
       </h1>
 
-      <Link href="#">
+      <LinkComponent href="#">
         <a css={{color: 'red'}}>{data?.hello}</a>
-      </Link>
+      </LinkComponent>
 
       <CounterComponent css={{marginTop: '1em'}} />
     </div>

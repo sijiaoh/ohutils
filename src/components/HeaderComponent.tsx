@@ -1,5 +1,6 @@
 import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
+import {useEffect, useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -32,9 +33,31 @@ export const HeaderComponent = () => {
     me.signOut();
     void router.push(homePath);
   };
+  const [expanded, setExpanded] = useState(false);
+
+  const toggle = () => {
+    setExpanded(!expanded);
+  };
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      setExpanded(false);
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   return (
-    <Navbar bg="light" expand="lg" collapseOnSelect>
+    <Navbar
+      bg="light"
+      expand="lg"
+      onToggle={toggle}
+      expanded={expanded}
+      collapseOnSelect
+    >
       <Container fluid>
         <Link href={homePath}>
           <Navbar.Brand>ohutils.com</Navbar.Brand>

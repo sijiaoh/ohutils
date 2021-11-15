@@ -34,16 +34,16 @@ export const HomeComponent: NextPage = () => {
 
       <div>
         {me.data != null ? (
-          <Link href={mePath}>{meTitle}</Link>
+          <LinkComponent href={mePath}>{meTitle}</LinkComponent>
         ) : (
-          <Link href={signInPath}>{signInTitle}</Link>
+          <LinkComponent href={signInPath}>{signInTitle}</LinkComponent>
         )}
       </div>
 
       <div>
-        <Link href="#">
+        <LinkComponent href="#">
           <a css={{color: 'red'}}>{data?.hello}</a>
-        </Link>
+        </LinkComponent>
       </div>
 
       <CounterComponent css={{marginTop: '1em'}} />

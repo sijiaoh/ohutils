@@ -9,7 +9,7 @@ import {MarkdownComponent} from '../MarkdownComponent';
 import {RemovePostButtonComponent} from './RemovePostButtonComponent';
 import {Me} from 'src/classes/Me';
 import {Post} from 'src/classes/Post';
-import {Link} from 'src/utils/Link';
+import {LinkComponent} from 'src/components/LinkComponent';
 import {
   homeBreadcrumb,
   postTitle,
@@ -49,7 +49,9 @@ export const PostComponent = () => {
       {meData && (
         <div css={{display: 'flex'}}>
           <div>
-            <Link href={postsEditPath(id)}>{postsEditTitle}</Link>
+            <LinkComponent href={postsEditPath(id)}>
+              {postsEditTitle}
+            </LinkComponent>
           </div>
           <div css={{marginLeft: '0.5em'}}>
             <RemovePostButtonComponent post={post} />

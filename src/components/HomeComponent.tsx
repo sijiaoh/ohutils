@@ -22,10 +22,10 @@ export const HomeComponent: NextPage = () => {
       <h1>Welcome to ohutils.com!</h1>
 
       <div>
-        <Link href={postsPath}>{postsTitle}</Link>
+        <LinkComponent href={postsPath}>{postsTitle}</LinkComponent>
       </div>
       <div>
-        <Link href={votesPath}>{votesTitle}</Link>
+        <LinkComponent href={votesPath}>{votesTitle}</LinkComponent>
       </div>
     </Container>
   );

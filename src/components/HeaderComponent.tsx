@@ -5,8 +5,8 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import {Me} from 'src/classes/Me';
+import {LinkComponent} from 'src/components/LinkComponent';
 import type {DefaultProps} from 'src/utils/DefaultProps';
-import {Link} from 'src/utils/Link';
 import {
   homePath,
   postsPath,
@@ -19,9 +19,9 @@ const NavLink = ({children, href}: DefaultProps<{href: string}>) => {
   const router = useRouter();
 
   return (
-    <Link href={href}>
+    <LinkComponent href={href}>
       <Nav.Link active={router.pathname === href}>{children}</Nav.Link>
-    </Link>
+    </LinkComponent>
   );
 };
 
@@ -59,9 +59,9 @@ export const HeaderComponent = () => {
       collapseOnSelect
     >
       <Container fluid>
-        <Link href={homePath}>
+        <LinkComponent href={homePath}>
           <Navbar.Brand>ohutils.com</Navbar.Brand>
-        </Link>
+        </LinkComponent>
 
         <Navbar.Toggle aria-controls="navbar-links" />
         <Navbar.Collapse id="navbar-links">

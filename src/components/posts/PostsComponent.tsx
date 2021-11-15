@@ -6,7 +6,7 @@ import {HeadComponent} from '../HeadComponent';
 import {LoadingComponent} from '../LoadingComponent';
 import {Order, useGetPostsQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
-import {Link} from 'src/utils/Link';
+import {LinkComponent} from 'src/components/LinkComponent';
 import {gql} from 'src/utils/gql';
 import {
   homeBreadcrumb,
@@ -46,7 +46,9 @@ export const PostsComponent = () => {
 
       {meData && (
         <div>
-          <Link href={postsCreatePath}>{postsCreateTitle}</Link>
+          <LinkComponent href={postsCreatePath}>
+            {postsCreateTitle}
+          </LinkComponent>
         </div>
       )}
 
@@ -62,7 +64,9 @@ export const PostsComponent = () => {
           {data?.posts.map(post => (
             <tr key={post.id}>
               <td>
-                <Link href={postPath(post.id)}>{postTitle(post.title)}</Link>
+                <LinkComponent href={postPath(post.id)}>
+                  {postTitle(post.title)}
+                </LinkComponent>
               </td>
               <td>{printDateTime(post.createdAt)}</td>
               <td>{printDateTime(post.updatedAt)}</td>

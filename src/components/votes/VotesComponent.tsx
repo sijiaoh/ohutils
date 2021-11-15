@@ -6,7 +6,7 @@ import {HeadComponent} from '../HeadComponent';
 import {LoadingComponent} from '../LoadingComponent';
 import {Order, useGetVotesQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
-import {Link} from 'src/utils/Link';
+import {LinkComponent} from 'src/components/LinkComponent';
 import {gql} from 'src/utils/gql';
 import {
   homeBreadcrumb,
@@ -46,7 +46,9 @@ export const VotesComponent = () => {
 
       {meData && (
         <div>
-          <Link href={votesCreatePath}>{votesCreateTitle}</Link>
+          <LinkComponent href={votesCreatePath}>
+            {votesCreateTitle}
+          </LinkComponent>
         </div>
       )}
 
@@ -62,7 +64,9 @@ export const VotesComponent = () => {
           {data?.votes.map(vote => (
             <tr key={vote.id}>
               <td>
-                <Link href={votePath(vote.id)}>{voteTitle(vote.title)}</Link>
+                <LinkComponent href={votePath(vote.id)}>
+                  {voteTitle(vote.title)}
+                </LinkComponent>
               </td>
               <td>{printDateTime(vote.createdAt)}</td>
               <td>{printDateTime(vote.updatedAt)}</td>

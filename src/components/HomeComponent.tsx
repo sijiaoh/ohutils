@@ -5,7 +5,7 @@ import {CounterComponent} from './CounterComponent';
 import {HeadComponent} from './HeadComponent';
 import {useHelloQuery} from 'src/apollo';
 import {Me} from 'src/classes/Me';
-import {Link} from 'src/utils/Link';
+import {LinkComponent} from 'src/components/LinkComponent';
 import {
   homeBreadcrumb,
   homeTitle,

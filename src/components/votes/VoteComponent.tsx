@@ -52,7 +52,7 @@ export const VoteComponent = () => {
 
       <MarkdownComponent text={voteData.text}></MarkdownComponent>
 
-      <ul>
+      <ul css={{padding: 0, margin: 0}}>
         {voteData.voteOptions.map(voteOption => (
           <li key={voteOption.id} css={{display: 'flex', alignItems: 'center'}}>
             <div css={{width: '15%', padding: '0 0.2em'}}>

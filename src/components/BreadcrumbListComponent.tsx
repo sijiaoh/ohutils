@@ -1,5 +1,5 @@
+import {LinkComponent} from 'src/components/LinkComponent';
 import type {DefaultProps} from 'src/utils/DefaultProps';
-import {Link} from 'src/utils/Link';
 
 export interface Breadcrumb {
   title: string;
@@ -44,7 +44,11 @@ export const BreadcrumbListComponent = ({
             },
           }}
         >
-          {item.path ? <Link href={item.path}>{item.title}</Link> : item.title}
+          {item.path ? (
+            <LinkComponent href={item.path}>{item.title}</LinkComponent>
+          ) : (
+            item.title
+          )}
         </li>
       ))}
     </ul>

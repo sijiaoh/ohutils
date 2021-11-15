@@ -2,7 +2,7 @@ import type {NextPage} from 'next';
 import Container from 'react-bootstrap/Container';
 import {BreadcrumbListComponent} from './BreadcrumbListComponent';
 import {HeadComponent} from './HeadComponent';
-import {Link} from 'src/utils/Link';
+import {LinkComponent} from 'src/components/LinkComponent';
 import {
   postsPath,
   postsTitle,

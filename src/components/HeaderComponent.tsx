@@ -34,7 +34,7 @@ export const HeaderComponent = () => {
   };
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" collapseOnSelect>
       <Container fluid>
         <Link href={homePath}>
           <Navbar.Brand>ohutils.com</Navbar.Brand>

@@ -55,7 +55,7 @@ export class PostResolver {
   @Authorized()
   async createPost(
     @Ctx() {req}: Context,
-    @Arg('post') {title, text, tags}: PostInputType
+    @Arg('post') {title, text, copyProtect, tags}: PostInputType
   ): Promise<PostType> {
     const user = getUser(req);
 
@@ -73,6 +73,7 @@ export class PostResolver {
         userId: user.id,
         title,
         text,
+        copyProtect,
       });
       await entityManager.save(postEntity);
 
@@ -88,7 +89,7 @@ export class PostResolver {
   async updatePost(
     @Ctx() {req}: Context,
     @Arg('id') id: string,
-    @Arg('post') {title, text, tags}: PostInputType
+    @Arg('post') {title, text, copyProtect, tags}: PostInputType
   ): Promise<PostType> {
     const user = getUser(req);
 
@@ -111,6 +112,7 @@ export class PostResolver {
       postEntity.title = title;
       postEntity.text = text;
       postEntity.tags = tagEntities;
+      postEntity.copyProtect = copyProtect;
       await entityManager.save(postEntity);
 
       if (!postEntity) throw new Error('Failed to find updated post.');

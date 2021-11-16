@@ -26,6 +26,8 @@ export class PostEntity extends BaseEntity {
   title!: string;
   @Column('text')
   text!: string;
+  @Column()
+  copyProtect!: boolean;
 
   @CreateDateColumn()
   readonly createdAt!: Date;

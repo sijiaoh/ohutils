@@ -4,7 +4,12 @@ import {pick} from 'underscore';
 import {apolloSdk, PostInputType, PostType} from 'src/apollo';
 
 export class Post extends ReactiveClass {
-  input: Readonly<PostInputType> = {title: '', text: '', tags: []};
+  input: Readonly<PostInputType> = {
+    title: '',
+    text: '',
+    tags: [],
+    copyProtect: true,
+  };
   data?: Readonly<PostType>;
   loaded = false;
 
@@ -44,7 +49,8 @@ export class Post extends ReactiveClass {
       this.input,
       'title',
       'text',
-      'tags'
+      'tags',
+      'copyProtect'
     );
 
     if (this.id == null) {

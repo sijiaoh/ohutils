@@ -10,6 +10,8 @@ export class PostType {
   title!: string;
   @Field()
   text!: string;
+  @Field()
+  copyProtect!: boolean;
   @Field(() => [String])
   tags!: string[];
   @Field()

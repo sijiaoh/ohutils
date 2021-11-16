@@ -1,3 +1,4 @@
+import type {CSSInterpolation} from '@emotion/serialize';
 import {useListen} from '@reactive-class/react';
 import {useRouter} from 'next/dist/client/router';
 import {useEffect, useRef} from 'react';
@@ -32,8 +33,16 @@ export const PostComponent = () => {
   }, [id, post]);
 
   if (!postData || typeof id !== 'string') return <LoadingComponent />;
+
+  const css: CSSInterpolation = postData.copyProtect
+    ? {
+        userSelect: 'none',
+        '@media print': {display: 'none'},
+      }
+    : {};
+
   return (
-    <Container css={{userSelect: 'none', '@media print': {display: 'none'}}}>
+    <Container css={css}>
       <HeadComponent subTitle={postTitle(postData.title)} />
 
       <BreadcrumbListComponent

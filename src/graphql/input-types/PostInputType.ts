@@ -8,6 +8,8 @@ export class PostInputType {
   title!: string;
   @Field()
   text!: string;
+  @Field()
+  copyProtect!: boolean;
   @Field(() => [String])
   tags!: string[];
 }

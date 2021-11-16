@@ -59,4 +59,11 @@ export class Vote extends ReactiveClass {
     await localforage.setItem(Vote.votedListKey, [...votedList, this.id]);
     this.voted = true;
   };
+
+  remove = async () => {
+    if (!this.id) return;
+    await apolloSdk.removeVoteMutation({variables: {id: this.id}});
+    this.data = undefined;
+    this.id = undefined;
+  };
 }

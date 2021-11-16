@@ -7,6 +7,7 @@ import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
 import {LoadingComponent} from '../LoadingComponent';
 import {MarkdownComponent} from '../MarkdownComponent';
+import {RemoveVoteButtonComponent} from './RemoveVoteButtonComponent';
 import {Vote} from 'src/classes/Vote';
 import {
   homeBreadcrumb,
@@ -49,6 +50,8 @@ export const VoteComponent = () => {
       />
 
       <h1>{voteTitle(voteData.title)}</h1>
+
+      <RemoveVoteButtonComponent vote={vote} />
 
       <MarkdownComponent text={voteData.text}></MarkdownComponent>
 

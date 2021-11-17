@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 
+import type {Profile} from 'passport';
 import {
   BaseEntity,
   Column,
@@ -16,6 +17,14 @@ import type {UserEntity} from '.';
 @Index(['userId', 'provider'], {unique: true})
 @Index(['provider', 'providerId'], {unique: true})
 export class SocialProfileEntity extends BaseEntity {
+  static build = ({userId, profile}: {userId: string; profile: Profile}) =>
+    SocialProfileEntity.create({
+      userId,
+      provider: profile.provider,
+      providerId: profile.id,
+      email: profile.emails?.[0]?.value || null,
+    });
+
   @PrimaryGeneratedColumn('uuid')
   readonly id!: string;
 

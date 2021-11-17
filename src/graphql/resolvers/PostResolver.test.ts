@@ -9,17 +9,18 @@ import {prepareTestMysql} from 'test/prepareTestMysql';
 
 prepareTestMysql();
 
+const postProps: PostInputType = {
+  title: 'title',
+  text: 'text',
+  copyProtect: true,
+  tags: [],
+};
+
 describe(PostResolver.name, () => {
   describe(PostResolver.prototype.post.name, () => {
     it('should return post if exists', async () => {
       const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
-      const postProps: PostInputType = {
-        title: 'title',
-        text: 'text',
-        copyProtect: true,
-        tags: [],
-      };
       const tagNames = ['tag1', 'tag2'];
 
       const createPostRes = await sdk.createPost({
@@ -43,12 +44,6 @@ describe(PostResolver.name, () => {
       const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
 
-      const postProps: PostInputType = {
-        title: 'title',
-        text: 'text',
-        copyProtect: true,
-        tags: [],
-      };
       const tagNames = ['tag1', 'tag2'];
       for (let i = 0; i < 5; i++) {
         await sdk.createPost({
@@ -63,13 +58,6 @@ describe(PostResolver.name, () => {
 
   describe(PostResolver.prototype.createPost.name, () => {
     it('can create post without tags', async () => {
-      const postProps: PostInputType = {
-        title: 'title',
-        text: 'text',
-        copyProtect: true,
-        tags: [],
-      };
-
       const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
       const res = await sdk.createPost({
@@ -90,12 +78,6 @@ describe(PostResolver.name, () => {
     });
 
     it('can create post with tags', async () => {
-      const postProps: PostInputType = {
-        title: 'title',
-        text: 'text',
-        copyProtect: true,
-        tags: [],
-      };
       const tagNames = ['tag1', 'tag2'];
 
       const user = await createUserWithSocialProfile();
@@ -119,12 +101,6 @@ describe(PostResolver.name, () => {
     });
 
     it('can create post with exists tags', async () => {
-      const postProps: PostInputType = {
-        title: 'title',
-        text: 'text',
-        copyProtect: true,
-        tags: [],
-      };
       const tagNames = ['tag1', 'tag2'];
 
       const user = await createUserWithSocialProfile();

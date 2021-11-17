@@ -17,6 +17,7 @@ describe(PostResolver.name, () => {
       const postProps: PostInputType = {
         title: 'title',
         text: 'text',
+        copyProtect: true,
         tags: [],
       };
       const tagNames = ['tag1', 'tag2'];
@@ -45,6 +46,7 @@ describe(PostResolver.name, () => {
       const postProps: PostInputType = {
         title: 'title',
         text: 'text',
+        copyProtect: true,
         tags: [],
       };
       const tagNames = ['tag1', 'tag2'];
@@ -64,6 +66,7 @@ describe(PostResolver.name, () => {
       const postProps: PostInputType = {
         title: 'title',
         text: 'text',
+        copyProtect: true,
         tags: [],
       };
 
@@ -75,9 +78,12 @@ describe(PostResolver.name, () => {
       expect(res.createPost.id).toBeTruthy();
 
       const post = await PostEntity.findOne({relations: ['tags']});
-      expect({title: post?.title, text: post?.text, tags: []}).toEqual(
-        postProps
-      );
+      expect({
+        title: post?.title,
+        text: post?.text,
+        copyProtect: post?.copyProtect,
+        tags: [],
+      }).toEqual(postProps);
 
       const tags = post?.tags;
       expect(tags?.length).toBe(0);
@@ -87,6 +93,7 @@ describe(PostResolver.name, () => {
       const postProps: PostInputType = {
         title: 'title',
         text: 'text',
+        copyProtect: true,
         tags: [],
       };
       const tagNames = ['tag1', 'tag2'];
@@ -99,9 +106,12 @@ describe(PostResolver.name, () => {
       expect(res.createPost.id).toBeTruthy();
 
       const post = await PostEntity.findOne({relations: ['tags']});
-      expect({title: post?.title, text: post?.text, tags: []}).toEqual(
-        postProps
-      );
+      expect({
+        title: post?.title,
+        text: post?.text,
+        copyProtect: post?.copyProtect,
+        tags: [],
+      }).toEqual(postProps);
 
       const tags = post?.tags;
       expect(tags?.map(tag => tag.name).sort()).toEqual(tagNames.sort());
@@ -112,6 +122,7 @@ describe(PostResolver.name, () => {
       const postProps: PostInputType = {
         title: 'title',
         text: 'text',
+        copyProtect: true,
         tags: [],
       };
       const tagNames = ['tag1', 'tag2'];
@@ -141,14 +152,19 @@ describe(PostResolver.name, () => {
       const {
         createPost: {id},
       } = await sdk.createPost({
-        post: {title: 'title', text: 'text', tags: []},
+        post: {title: 'title', text: 'text', copyProtect: true, tags: []},
       });
 
-      const newPostData = {title: 'title2', text: 'text2', tags: ['newTag']};
+      const newPostData = {
+        title: 'title2',
+        text: 'text2',
+        copyProtect: true,
+        tags: ['newTag'],
+      };
 
       const updatePostRes = await sdk.updatePost({id, post: newPostData});
-      const {title, text, tags} = updatePostRes.updatePost;
-      expect({title, text, tags}).toEqual(newPostData);
+      const {title, text, copyProtect, tags} = updatePostRes.updatePost;
+      expect({title, text, copyProtect, tags}).toEqual(newPostData);
     });
 
     it('can remove all tags', async () => {
@@ -158,14 +174,24 @@ describe(PostResolver.name, () => {
       const {
         createPost: {id},
       } = await sdk.createPost({
-        post: {title: 'title', text: 'text', tags: ['tag1', 'tag2']},
+        post: {
+          title: 'title',
+          text: 'text',
+          copyProtect: true,
+          tags: ['tag1', 'tag2'],
+        },
       });
 
-      const newPostData = {title: 'title2', text: 'text2', tags: []};
+      const newPostData = {
+        title: 'title2',
+        text: 'text2',
+        copyProtect: true,
+        tags: [],
+      };
 
       const updatePostRes = await sdk.updatePost({id, post: newPostData});
-      const {title, text, tags} = updatePostRes.updatePost;
-      expect({title, text, tags}).toEqual(newPostData);
+      const {title, text, copyProtect, tags} = updatePostRes.updatePost;
+      expect({title, text, copyProtect, tags}).toEqual(newPostData);
     });
   });
 
@@ -175,7 +201,7 @@ describe(PostResolver.name, () => {
       const sdk = await getSignedTestSdk(user);
 
       const createPostRes = await sdk.createPost({
-        post: {title: 'title', text: 'text', tags: []},
+        post: {title: 'title', text: 'text', copyProtect: true, tags: []},
       });
       expect(createPostRes.createPost.id).toBeTruthy();
 
@@ -192,7 +218,7 @@ describe(PostResolver.name, () => {
       const ownerSdk = await getSignedTestSdk(owner);
 
       const createPostRes = await ownerSdk.createPost({
-        post: {title: 'title', text: 'text', tags: []},
+        post: {title: 'title', text: 'text', copyProtect: true, tags: []},
       });
       expect(createPostRes.createPost.id).toBeTruthy();
 

@@ -72,7 +72,7 @@
     "@graphql-codegen/typescript-graphql-apollo": "^1.1.0",
     "@graphql-codegen/typescript-operations": "^2.2.0",
     "@graphql-codegen/typescript-react-apollo": "^3.2.1",
-    "@next/bundle-analyzer": "^12.0.3",
+    "@next/bundle-analyzer": "11.x",
     "@sijiaoh/docker-mysql": "^0.1.0",
     "@sijiaoh/graphql-codegen-default-queries": "^0.0.3",
     "@sijiaoh/ts-index-generator": "^0.0.2",

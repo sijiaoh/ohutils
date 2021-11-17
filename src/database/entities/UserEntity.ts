@@ -13,6 +13,8 @@ import type {PostEntity, SocialProfileEntity} from '.';
 
 @Entity()
 export class UserEntity extends BaseEntity {
+  static build = () => UserEntity.create();
+
   @PrimaryGeneratedColumn('uuid')
   readonly id!: string;
 

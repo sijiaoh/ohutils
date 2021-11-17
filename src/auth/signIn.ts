@@ -8,13 +8,6 @@ export type VerifyCallback = (
   user?: UserEntity
 ) => void;
 
-const buildSocialProfile = (userId: string, profile: Profile) => ({
-  userId,
-  provider: profile.provider,
-  providerId: profile.id,
-  email: profile.emails?.[0]?.value,
-});
-
 export async function signIn(
   req: Request,
   profile: Profile
@@ -35,9 +28,7 @@ export async function signIn(
     }
     // Link new social profile.
     else {
-      await SocialProfileEntity.create(
-        buildSocialProfile(req.user.id, profile)
-      ).save();
+      await SocialProfileEntity.build({userId: req.user.id, profile}).save();
       return req.user;
     }
   }
@@ -50,10 +41,10 @@ export async function signIn(
   // Sign up.
   else {
     const user = await getManager().transaction(async entityManager => {
-      const user = await entityManager.create(UserEntity).save();
-      await entityManager
-        .create(SocialProfileEntity, buildSocialProfile(user.id, profile))
-        .save();
+      const user = await entityManager.save(UserEntity.build());
+      await entityManager.save(
+        SocialProfileEntity.build({userId: user.id, profile})
+      );
       return user;
     });
 

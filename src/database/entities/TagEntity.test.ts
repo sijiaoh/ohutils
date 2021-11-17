@@ -8,17 +8,18 @@ prepareTestMysql();
 describe(TagEntity.name, () => {
   const createPost = async () => {
     const user = await createUserWithSocialProfile();
-    const post = await PostEntity.create({
+    const post = await PostEntity.build({
+      userId: user.id,
       title: 'title',
       text: 'text',
-      userId: user.id,
+      copyProtect: true,
     }).save();
     return post;
   };
 
   const createTags = async () => {
     return await Promise.all(
-      ['tag1', 'tag2'].map(async name => await TagEntity.create({name}).save())
+      ['tag1', 'tag2'].map(async name => await TagEntity.build({name}).save())
     );
   };
 
@@ -54,7 +55,7 @@ describe(TagEntity.name, () => {
 
   describe('validate', () => {
     const createWithName = async (name: string) => {
-      return await TagEntity.create({name})
+      return await TagEntity.build({name})
         .save()
         .catch(err => err);
     };

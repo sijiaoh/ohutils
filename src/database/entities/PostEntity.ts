@@ -18,6 +18,14 @@ import type {TagEntity, UserEntity} from '.';
 
 @Entity()
 export class PostEntity extends BaseEntity {
+  static build = (props: {
+    userId: string;
+    title: string;
+    text: string;
+    copyProtect: boolean;
+    tags?: TagEntity[];
+  }) => PostEntity.create(props);
+
   @PrimaryGeneratedColumn('uuid')
   readonly id!: string;
 

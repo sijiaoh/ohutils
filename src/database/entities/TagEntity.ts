@@ -17,6 +17,8 @@ import type {PostEntity} from '.';
 
 @Entity()
 export class TagEntity extends BaseEntity {
+  static build = (props: {name: string}) => TagEntity.create(props);
+
   static createIfNotExists = async (
     entityManager: EntityManager,
     tagNames: string[]

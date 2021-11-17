@@ -69,7 +69,7 @@ export class PostResolver {
         });
       }
 
-      const postEntity = entityManager.create(PostEntity, {
+      const postEntity = PostEntity.build({
         userId: user.id,
         title,
         text,

@@ -74,17 +74,16 @@ export class VoteResolver {
     if (!voteOptions.length) throw new Error('voteOptions is required.');
 
     const createdVote = await getManager().transaction(async entityManager => {
-      const voteOptionEntities = entityManager.create(
-        VoteOptionEntity,
-        voteOptions.map((voteOption, index) => ({
+      const voteOptionEntities = voteOptions.map((voteOption, index) =>
+        VoteOptionEntity.build({
           order: index,
           name: voteOption,
           numberOfVotes: 0,
-        }))
+        })
       );
       await entityManager.save(voteOptionEntities);
 
-      const voteEntity = entityManager.create(VoteEntity, {
+      const voteEntity = VoteEntity.build({
         userId: user.id,
         title,
         text,

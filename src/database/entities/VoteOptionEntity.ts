@@ -14,6 +14,12 @@ import type {VoteEntity} from '.';
 
 @Entity()
 export class VoteOptionEntity extends BaseEntity {
+  static build = (props: {
+    order: number;
+    name: string;
+    numberOfVotes: number;
+  }) => VoteOptionEntity.create(props);
+
   @PrimaryGeneratedColumn('uuid')
   readonly id!: string;
 

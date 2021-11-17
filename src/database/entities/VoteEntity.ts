@@ -18,6 +18,13 @@ import type {VoteOptionEntity, UserEntity} from '.';
 
 @Entity()
 export class VoteEntity extends BaseEntity {
+  static build = (props: {
+    userId: string;
+    title: string;
+    text: string;
+    voteOptions?: VoteOptionEntity[];
+  }) => VoteEntity.create(props);
+
   @PrimaryGeneratedColumn('uuid')
   readonly id!: string;
 

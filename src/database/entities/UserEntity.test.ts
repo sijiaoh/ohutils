@@ -5,7 +5,7 @@ prepareTestMysql();
 
 describe(UserEntity.name, () => {
   it('can create', async () => {
-    await UserEntity.create().save();
+    await UserEntity.build().save();
     expect(await UserEntity.count()).toBe(1);
   });
 });

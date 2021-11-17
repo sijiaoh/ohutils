@@ -1893,12 +1893,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/bundle-analyzer@npm:^12.0.3":
-  version: 12.0.3
-  resolution: "@next/bundle-analyzer@npm:12.0.3"
+"@next/bundle-analyzer@npm:11.x":
+  version: 11.1.2
+  resolution: "@next/bundle-analyzer@npm:11.1.2"
   dependencies:
     webpack-bundle-analyzer: 4.3.0
-  checksum: a214c8bb0276be43880db67935726d57569c1c8edc8333c01400197d48462f97950eb687515909b543423f91684a1e4beaaca397a3590d406dad5817f189010d
+  checksum: f869e7067a612b5ebb78dab4225fa3159ffa52d0f33c43e51941f21daff96b24e2d0519f4ba2899917cb353ad1b963f1d1b0d718b5947a17d760e9279d8df55a
   languageName: node
   linkType: hard
 
@@ -9353,7 +9353,7 @@ __metadata:
     "@graphql-codegen/typescript-graphql-apollo": ^1.1.0
     "@graphql-codegen/typescript-operations": ^2.2.0
     "@graphql-codegen/typescript-react-apollo": ^3.2.1
-    "@next/bundle-analyzer": ^12.0.3
+    "@next/bundle-analyzer": 11.x
     "@reactive-class/react": ^0.1.1
     "@sijiaoh/docker-mysql": ^0.1.0
     "@sijiaoh/graphql-codegen-default-queries": ^0.0.3

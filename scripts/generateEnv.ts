@@ -17,7 +17,7 @@ const serverEnvNames: string[] = [
 ];
 const clientEnvNames: string[] = [
   // Google analytics.
-  'NEXT_PUBLIC_TRACKING_CODE',
+  'TRACKING_CODE',
 ];
 
 const generate = (fileName: string, envNames: string[], isServer: boolean) => {

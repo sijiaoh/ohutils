@@ -8,8 +8,8 @@ export DB_NAME=ohutils_development
 export DB_USER=ohutils
 export DB_PASS=ohutils
 
-# Google analytics.
-export NEXT_PUBLIC_TRACKING_CODE=
-
 export GOOGLE_CLIENT_ID=
 export GOOGLE_CLIENT_SECRET=
+
+# Google analytics.
+export TRACKING_CODE=

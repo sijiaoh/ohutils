@@ -1,6 +1,9 @@
 import {useListen} from '@reactive-class/react';
 import Container from 'react-bootstrap/Container';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Table from 'react-bootstrap/Table';
+import Tooltip from 'react-bootstrap/Tooltip';
+import {FaLockOpen} from 'react-icons/fa';
 import {BreadcrumbListComponent} from '../BreadcrumbListComponent';
 import {HeadComponent} from '../HeadComponent';
 import {LoadingComponent} from '../LoadingComponent';
@@ -23,6 +26,7 @@ gql`
     posts(order: $order) {
       id
       title
+      copyProtect
       createdAt
       updatedAt
     }
@@ -63,10 +67,25 @@ export const PostsComponent = () => {
         <tbody>
           {data?.posts.map(post => (
             <tr key={post.id}>
-              <td>
+              <td css={{display: 'flex'}}>
                 <LinkComponent href={postPath(post.id)}>
                   {postTitle(post.title)}
                 </LinkComponent>
+                {!post.copyProtect && (
+                  <OverlayTrigger
+                    placement="right"
+                    overlay={<Tooltip>コピペ可</Tooltip>}
+                  >
+                    <div
+                      css={{
+                        margin: '0 0.5em',
+                        color: 'gray',
+                      }}
+                    >
+                      <FaLockOpen />
+                    </div>
+                  </OverlayTrigger>
+                )}
               </td>
               <td>{printDateTime(post.createdAt)}</td>
               <td>{printDateTime(post.updatedAt)}</td>

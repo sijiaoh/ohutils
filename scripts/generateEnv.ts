@@ -2,6 +2,8 @@ import fs from 'fs';
 import {EOL} from 'os';
 
 const serverEnvNames: string[] = [
+  'URL',
+
   'DB_VERSION',
   'DB_HOST',
   'DB_PORT',
@@ -9,6 +11,9 @@ const serverEnvNames: string[] = [
   'DB_NAME',
   'DB_USER',
   'DB_PASS',
+
+  'GOOGLE_CLIENT_ID',
+  'GOOGLE_CLIENT_SECRET',
 ];
 const clientEnvNames: string[] = [
   // Google analytics.

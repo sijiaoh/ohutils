@@ -1,7 +1,8 @@
 import execa from 'execa';
 import {getConnection} from 'typeorm';
 import {connectToDatabase} from 'src/database/connectToDatabase';
-import {databaseConfig} from 'src/database/databaseConfig';
+import {getDatabaseName} from 'src/database/getDatabaseName';
+import {serverEnv} from 'src/generated/serverEnv';
 
 void (async () => {
   await execa(
@@ -9,12 +10,12 @@ void (async () => {
     [
       'docker-mysql',
       'prepare',
-      databaseConfig.version,
-      databaseConfig.databaseName,
+      serverEnv.DB_VERSION,
+      getDatabaseName(),
       '--userName',
-      databaseConfig.userName,
+      serverEnv.DB_USER,
       '--password',
-      databaseConfig.password,
+      serverEnv.DB_PASS,
     ],
     {env: process.env, stdio: 'inherit'}
   );

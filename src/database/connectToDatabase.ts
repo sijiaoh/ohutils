@@ -1,6 +1,7 @@
 import {ConnectionOptions, createConnection, getConnection} from 'typeorm';
-import {databaseConfig} from './databaseConfig';
 import * as entities from './entities';
+import {getDatabaseName} from './getDatabaseName';
+import {serverEnv} from 'src/generated/serverEnv';
 
 export const connectToDatabase = async (
   options?: Partial<ConnectionOptions>
@@ -15,11 +16,11 @@ export const connectToDatabase = async (
   const connect = async () => {
     await createConnection({
       type: 'mysql',
-      host: process.env.DB_HOST,
-      port: parseInt(process.env.DB_PORT || '') || undefined,
-      database: databaseConfig.databaseName,
-      username: databaseConfig.userName,
-      password: databaseConfig.password,
+      host: serverEnv.DB_HOST,
+      port: parseInt(serverEnv.DB_PORT),
+      database: getDatabaseName(),
+      username: serverEnv.DB_USER,
+      password: serverEnv.DB_PASS,
       entities: Object.values(entities),
       synchronize: process.env.NODE_ENV !== 'production',
       charset: 'utf8mb4',

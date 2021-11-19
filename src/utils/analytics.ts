@@ -3,6 +3,7 @@
 import {useRouter} from 'next/dist/client/router';
 import {useEffect} from 'react';
 import {initialize, set, pageview, event, exception} from 'react-ga';
+import {clientEnv} from 'src/generated/clientEnv';
 
 export const useAnalytics = () => {
   const router = useRouter();
@@ -24,7 +25,7 @@ export const useAnalytics = () => {
 };
 
 export const initGA = () => {
-  const trackingCode = process.env.NEXT_PUBLIC_TRACKING_CODE;
+  const trackingCode = clientEnv.NEXT_PUBLIC_TRACKING_CODE;
   initialize(trackingCode || '', {
     debug: process.env.NODE_ENV !== 'production' || trackingCode == null,
   });

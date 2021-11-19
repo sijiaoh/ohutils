@@ -7,4 +7,4 @@ export DB_USER=osushi
 export DB_PASS=osushi
 
 # Google analytics.
-export NEXT_PUBLIC_TRACKING_CODE=
+export TRACKING_CODE=

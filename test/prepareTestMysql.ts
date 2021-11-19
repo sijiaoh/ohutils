@@ -2,13 +2,11 @@ import execa from 'execa';
 import {getConnection} from 'typeorm';
 import {v4} from 'uuid';
 import {connectToDatabase} from 'src/database/connectToDatabase';
-import {databaseConfig} from 'src/database/databaseConfig';
+import {getDatabaseName} from 'src/database/getDatabaseName';
+import {serverEnv} from 'src/generated/serverEnv';
 
 export const prepareTestMysql = () => {
-  const databaseName = `${databaseConfig.databaseName}-${v4()}`.replace(
-    /-/g,
-    '_'
-  );
+  const databaseName = `${getDatabaseName()}-${v4()}`.replace(/-/g, '_');
 
   beforeAll(async () => {
     await execa(
@@ -16,12 +14,12 @@ export const prepareTestMysql = () => {
       [
         'docker-mysql',
         'prepare',
-        databaseConfig.version,
+        serverEnv.DB_VERSION,
         databaseName,
         '--userName',
-        databaseConfig.userName,
+        serverEnv.DB_USER,
         '--password',
-        databaseConfig.password,
+        serverEnv.DB_PASS,
       ],
       {env: process.env, stdio: 'inherit'}
     );
@@ -38,12 +36,12 @@ export const prepareTestMysql = () => {
       [
         'docker-mysql',
         'rm',
-        databaseConfig.version,
+        serverEnv.DB_VERSION,
         databaseName,
         '--userName',
-        databaseConfig.userName,
+        serverEnv.DB_USER,
         '--password',
-        databaseConfig.password,
+        serverEnv.DB_PASS,
       ],
       {env: process.env, stdio: 'inherit'}
     );

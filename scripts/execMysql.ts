@@ -1,5 +1,6 @@
 import execa from 'execa';
-import {databaseConfig} from 'src/database/databaseConfig';
+import {getDatabaseName} from 'src/database/getDatabaseName';
+import {serverEnv} from 'src/generated/serverEnv';
 
 void (async () => {
   const command = process.argv.slice(2).join(' ');
@@ -9,13 +10,13 @@ void (async () => {
     [
       'docker-mysql',
       'exec',
-      databaseConfig.version,
+      serverEnv.DB_VERSION,
       '--databaseName',
-      databaseConfig.databaseName,
+      getDatabaseName(),
       '--userName',
-      databaseConfig.userName,
+      serverEnv.DB_USER,
       '--password',
-      databaseConfig.password,
+      serverEnv.DB_PASS,
       command,
     ],
     {env: process.env, stdio: 'inherit'}

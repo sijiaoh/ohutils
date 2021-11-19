@@ -1,8 +1,8 @@
 export DB_VERSION=8.0
 export DB_HOST=localhost
 export DB_PORT=3080
-# Use `${basename(PROJECT_CWD)}_${NODE_ENV} if empty.
-export DB_NAME=
+# Will replace xxx_development to xxx_test in test environment.
+export DB_NAME=osushi_development
 export DB_USER=osushi
 export DB_PASS=osushi
 

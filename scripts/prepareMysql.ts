@@ -1,6 +1,4 @@
 import execa from 'execa';
-import {getConnection} from 'typeorm';
-import {connectToDatabase} from 'src/database/connectToDatabase';
 import {getDatabaseName} from 'src/database/getDatabaseName';
 import {serverEnv} from 'src/generated/serverEnv';
 
@@ -20,7 +18,5 @@ void (async () => {
     {env: process.env, stdio: 'inherit'}
   );
 
-  await connectToDatabase();
-  const connection = getConnection();
-  await connection.close();
+  // TODO: Create database.
 })();

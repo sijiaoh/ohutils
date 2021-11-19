@@ -1,7 +1,5 @@
 import execa from 'execa';
-import {getConnection} from 'typeorm';
 import {v4} from 'uuid';
-import {connectToDatabase} from 'src/database/connectToDatabase';
 import {getDatabaseName} from 'src/database/getDatabaseName';
 import {serverEnv} from 'src/generated/serverEnv';
 
@@ -24,12 +22,11 @@ export const prepareTestMysql = () => {
       {env: process.env, stdio: 'inherit'}
     );
 
-    await connectToDatabase({database: databaseName});
+    // TODO: Connect to database.
   });
 
   afterAll(async () => {
-    const connection = getConnection();
-    await connection.close();
+    // TODO: Close connect.
 
     await execa(
       'yarn',
@@ -48,6 +45,6 @@ export const prepareTestMysql = () => {
   });
 
   beforeEach(async () => {
-    await getConnection().synchronize(true);
+    // Reset database.
   });
 };

@@ -8,8 +8,8 @@ export DB_NAME=osushi_with_auth_development
 export DB_USER=osushi_with_auth
 export DB_PASS=osushi_with_auth
 
-# Google analytics.
-export NEXT_PUBLIC_TRACKING_CODE=
-
 export GOOGLE_CLIENT_ID=
 export GOOGLE_CLIENT_SECRET=
+
+# Google analytics.
+export TRACKING_CODE=

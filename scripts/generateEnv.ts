@@ -9,6 +9,7 @@ const serverEnvNames: string[] = [
   'DB_NAME',
   'DB_USER',
   'DB_PASS',
+  'DB_URL',
 ];
 const clientEnvNames: string[] = [
   // Google analytics.

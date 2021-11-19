@@ -5,6 +5,7 @@ export DB_PORT=3080
 export DB_NAME=osushi_development
 export DB_USER=osushi
 export DB_PASS=osushi
+export DB_URL="mysql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
 
 # Google analytics.
 export TRACKING_CODE=

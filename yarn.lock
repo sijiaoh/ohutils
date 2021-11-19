@@ -2051,6 +2051,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@prisma/client@npm:3.5.0":
+  version: 3.5.0
+  resolution: "@prisma/client@npm:3.5.0"
+  dependencies:
+    "@prisma/engines-version": 3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e
+  peerDependencies:
+    prisma: "*"
+  peerDependenciesMeta:
+    prisma:
+      optional: true
+  checksum: 515880b22c4df43185cefb17fe34968c9ba51cf4fead39e2a9bd9da7ba58a3303194ca0d81fcee27e9a14caa017d3f92cffdcdb4e90fa912ba1ca9508991503d
+  languageName: node
+  linkType: hard
+
+"@prisma/engines-version@npm:3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e":
+  version: 3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e
+  resolution: "@prisma/engines-version@npm:3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e"
+  checksum: 2919f44abc369ec48c8b2c0169293934ba7e2cff6e2bf29a86731b9e1a8c6bad8a3ffc41e604187ea75cfbb04b138bad7e4fe8ec7b557b437e0e2264ef9806df
+  languageName: node
+  linkType: hard
+
+"@prisma/engines@npm:3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e":
+  version: 3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e
+  resolution: "@prisma/engines@npm:3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e"
+  checksum: 2a31da94fef3c497d66ae77174c1a6627e7aae63039b01cbd4f2dbc4b44198dd4932af48a013566bb54ed173dd948d75b8d47bfb4f139551cc685f2e2cf2f0ad
+  languageName: node
+  linkType: hard
+
 "@reactive-class/core@npm:0.1.1":
   version: 0.1.1
   resolution: "@reactive-class/core@npm:0.1.1"
@@ -9275,6 +9303,7 @@ __metadata:
     "@graphql-codegen/typescript-operations": ^2.2.0
     "@graphql-codegen/typescript-react-apollo": ^3.2.1
     "@next/bundle-analyzer": 11.x
+    "@prisma/client": 3.5.0
     "@reactive-class/react": ^0.1.1
     "@sijiaoh/docker-mysql": ^0.1.0
     "@sijiaoh/graphql-codegen-default-queries": ^0.0.3
@@ -9301,6 +9330,7 @@ __metadata:
     next-connect: ^0.11.0
     nodemon: ^2.0.14
     nookies: ^2.5.2
+    prisma: 3.5.0
     react: 17.0.2
     react-dom: 17.0.2
     react-ga: ^3.3.0
@@ -9715,6 +9745,18 @@ __metadata:
     ansi-styles: ^5.0.0
     react-is: ^17.0.1
   checksum: 2979eae85a4f7ba1c3946faa8f5c6497cc80dc64ba499ccd5fdada267f82dc664f315a4c1cdd4c0b4b97edbae399a7bf0a957cc1b87feb91cd95f1e436834fed
+  languageName: node
+  linkType: hard
+
+"prisma@npm:3.5.0":
+  version: 3.5.0
+  resolution: "prisma@npm:3.5.0"
+  dependencies:
+    "@prisma/engines": 3.5.0-38.78a5df6def6943431f4c022e1428dbc3e833cf8e
+  bin:
+    prisma: build/index.js
+    prisma2: build/index.js
+  checksum: 5ac2558dc29a8c325d991e59de2208bf6756bddb4fa2d3d97cd17aa9daa94611515d3ab284777adcda2c7b918b0624316e7081bae5d1c01b449738b8ebf81882
   languageName: node
   linkType: hard
 

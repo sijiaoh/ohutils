@@ -1,6 +1,6 @@
 import {ConnectionOptions, createConnection, getConnection} from 'typeorm';
-import {databaseConfig} from './databaseConfig';
 import * as entities from './entities';
+import {getDatabaseName} from './getDatabaseName';
 import {serverEnv} from 'src/generated/serverEnv';
 
 export const connectToDatabase = async (
@@ -18,9 +18,9 @@ export const connectToDatabase = async (
       type: 'mysql',
       host: serverEnv.DB_HOST,
       port: parseInt(serverEnv.DB_PORT),
-      database: databaseConfig.databaseName,
-      username: databaseConfig.userName,
-      password: databaseConfig.password,
+      database: getDatabaseName(),
+      username: serverEnv.DB_USER,
+      password: serverEnv.DB_PASS,
       entities: Object.values(entities),
       synchronize: process.env.NODE_ENV !== 'production',
       charset: 'utf8mb4',

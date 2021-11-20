@@ -5,7 +5,7 @@ prepareTestMysql();
 
 describe('User', () => {
   it('Can create', async () => {
-    await getPrisma().user.create({data: {name: 'name'}});
+    await getPrisma().user.create({data: {}});
     expect(await getPrisma().user.count()).toBe(1);
   });
 });

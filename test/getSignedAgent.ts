@@ -1,7 +1,7 @@
+import type {User} from '@prisma/client';
 import {getAgent} from './getAgent';
-import type {UserEntity} from 'src/database/entities';
 
-export const getSignedAgent = async (user: UserEntity) => {
+export const getSignedAgent = async (user: User) => {
   const agent = getAgent();
   await agent.set('Cookie', `token=${user.token}`);
   return agent;

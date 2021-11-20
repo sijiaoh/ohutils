@@ -1,9 +1,9 @@
+import type {User} from '@prisma/client';
 import type {NextApiRequest, NextApiResponse} from 'next';
 import type nookies from 'nookies';
-import type {UserEntity} from 'src/database/entities';
 
 export type Request = NextApiRequest & {
-  user?: UserEntity;
+  user?: User;
 };
 
 export type Response = NextApiResponse & {

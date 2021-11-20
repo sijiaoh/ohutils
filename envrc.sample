@@ -7,6 +7,10 @@ export DB_PORT=3080
 export DB_NAME=ohutils_development
 export DB_USER=ohutils
 export DB_PASS=ohutils
+export DB_URL="mysql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
+
+# Development environment only.
+export SHADOW_DB_URL="mysql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}_shadow"
 
 export GOOGLE_CLIENT_ID=
 export GOOGLE_CLIENT_SECRET=

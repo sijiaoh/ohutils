@@ -1,53 +1,33 @@
 import execa from 'execa';
-import {getConnection} from 'typeorm';
 import {v4} from 'uuid';
-import {connectToDatabase} from 'src/database/connectToDatabase';
+import {PrismaClient} from '.prisma/client';
 import {getDatabaseName} from 'src/database/getDatabaseName';
-import {serverEnv} from 'src/generated/serverEnv';
+import {getDatabaseUrl} from 'src/database/getDatabaseUrl';
+import {getPrisma, setPrisma} from 'src/database/prisma';
+
+// From: https://github.com/sijiaoh/docker-mysql/blob/main/src/index.ts#L8
+const mysqlRootPassword = 'docker-mysql-root-password';
 
 export const prepareTestMysql = () => {
   const databaseName = `${getDatabaseName()}-${v4()}`.replace(/-/g, '_');
+  const databaseUrl = getDatabaseUrl({
+    user: 'root',
+    pass: mysqlRootPassword,
+    name: databaseName,
+  });
 
-  beforeAll(async () => {
-    await execa(
-      'yarn',
-      [
-        'docker-mysql',
-        'prepare',
-        serverEnv.DB_VERSION,
-        databaseName,
-        '--userName',
-        serverEnv.DB_USER,
-        '--password',
-        serverEnv.DB_PASS,
-      ],
-      {env: process.env}
-    );
-
-    await connectToDatabase({database: databaseName});
+  beforeAll(() => {
+    setPrisma(new PrismaClient({datasources: {db: {url: databaseUrl}}}));
   });
 
   afterAll(async () => {
-    const connection = getConnection();
-    await connection.close();
-
-    await execa(
-      'yarn',
-      [
-        'docker-mysql',
-        'rm',
-        serverEnv.DB_VERSION,
-        databaseName,
-        '--userName',
-        serverEnv.DB_USER,
-        '--password',
-        serverEnv.DB_PASS,
-      ],
-      {env: process.env}
-    );
+    await getPrisma().$executeRawUnsafe(`drop database ${databaseName};`);
+    await getPrisma().$disconnect();
   });
 
   beforeEach(async () => {
-    await getConnection().synchronize(true);
+    await execa('yarn', ['prisma', 'migrate', 'reset', '--force'], {
+      env: {...process.env, DB_URL: databaseUrl},
+    });
   });
 };

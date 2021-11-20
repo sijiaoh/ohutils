@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 
+import {Prisma} from '@prisma/client';
 import {
   Arg,
   Authorized,
@@ -9,13 +10,12 @@ import {
   Resolver,
   UnauthorizedError,
 } from 'type-graphql';
-import {getManager} from 'typeorm';
 import {EntityNotFoundError} from '../EntityNotFoundError';
 import {Order} from '../enum/Order';
 import {PostInputType} from '../input-types/PostInputType';
 import {PostsOrderInputType} from '../input-types/PostsOrderInputType';
 import {PostType} from '../types/PostType';
-import {PostEntity, TagEntity} from 'src/database/entities';
+import {getPrisma} from 'src/database/prisma';
 import type {Context} from 'src/utils/Context';
 import {getUser} from 'src/utils/getUser';
 
@@ -23,7 +23,10 @@ import {getUser} from 'src/utils/getUser';
 export class PostResolver {
   @Query(() => PostType)
   async post(@Arg('id') id: string): Promise<PostType> {
-    const post = await PostEntity.findOne(id, {relations: ['tags']});
+    const post = await getPrisma().post.findUnique({
+      where: {id},
+      include: {tags: true},
+    });
     if (!post) throw new EntityNotFoundError();
     if (!post.tags) throw new Error('Failed to load tags.');
     return {
@@ -34,19 +37,26 @@ export class PostResolver {
 
   @Query(() => [PostType])
   async posts(@Arg('order') order: PostsOrderInputType): Promise<PostType[]> {
-    const o = Object.entries(order).reduce<{[key: string]: string}>(
+    const o = Object.entries(order).reduce<{[key: string]: Prisma.SortOrder}>(
       (obj, [key, value]) => {
         if (value == null) return obj;
         const v = Order[value]?.toString();
-        if (v != null) obj[key] = Order[value]!.toString();
+        if (v != null) {
+          if (Order[value]!.toString() === 'ASC')
+            obj[key] = Prisma.SortOrder.asc;
+          else obj[key] = Prisma.SortOrder.desc;
+        }
         return obj;
       },
       {}
     );
-    const posts = await PostEntity.find({order: o});
+    const posts = await getPrisma().post.findMany({
+      orderBy: o,
+      include: {tags: true},
+    });
     const res = posts.map(post => ({
       ...post,
-      tags: post.tags?.map(tag => tag.name) || [],
+      tags: post.tags.map(tag => tag.name),
     }));
     return res;
   }
@@ -59,29 +69,23 @@ export class PostResolver {
   ): Promise<PostType> {
     const user = getUser(req);
 
-    const createdPost = await getManager().transaction(async entityManager => {
-      let tagEntities: TagEntity[] = [];
-      if (tags.length) {
-        await TagEntity.createIfNotExists(entityManager, tags);
-
-        tagEntities = await entityManager.find(TagEntity, {
-          where: tags.map(tag => ({name: tag})),
-        });
-      }
-
-      const postEntity = PostEntity.build({
-        userId: user.id,
+    const post = await getPrisma().post.create({
+      data: {
         title,
         text,
         copyProtect,
-      });
-      await entityManager.save(postEntity);
-
-      postEntity.tags = tagEntities;
-      return await entityManager.save(postEntity);
+        user: {connect: {id: user.id}},
+        tags: {
+          connectOrCreate: tags.map(tag => ({
+            where: {name: tag},
+            create: {name: tag},
+          })),
+        },
+      },
+      include: {tags: true},
     });
 
-    return {...createdPost, tags: tags || []};
+    return {...post, tags: post.tags.map(({name}) => name)};
   }
 
   @Mutation(() => PostType)
@@ -93,36 +97,34 @@ export class PostResolver {
   ): Promise<PostType> {
     const user = getUser(req);
 
-    const updatedPost = await getManager().transaction(async entityManager => {
-      const postEntity = await entityManager.findOne(PostEntity, id, {
-        relations: ['tags'],
-      });
-      if (!postEntity) throw new EntityNotFoundError();
-      if (postEntity.userId !== user.id) throw new UnauthorizedError();
-
-      let tagEntities: TagEntity[] = [];
-      if (tags.length) {
-        await TagEntity.createIfNotExists(entityManager, tags);
-
-        tagEntities = await entityManager.find(TagEntity, {
-          where: tags.map(tag => ({name: tag})),
-        });
-      }
-
-      postEntity.title = title;
-      postEntity.text = text;
-      postEntity.tags = tagEntities;
-      postEntity.copyProtect = copyProtect;
-      await entityManager.save(postEntity);
-
-      if (!postEntity) throw new Error('Failed to find updated post.');
-      return postEntity;
+    const post = await getPrisma().post.findUnique({
+      where: {id},
+      include: {tags: true},
     });
 
-    if (updatedPost.tags == null) throw new Error('Failed to load tags.');
-    const resTags = updatedPost.tags.map(({name}) => name);
+    if (!post) throw new EntityNotFoundError();
+    if (post.userId !== user.id) throw new UnauthorizedError();
 
-    return {...updatedPost, tags: resTags};
+    const updatedPost = await getPrisma().post.update({
+      where: {id},
+      data: {
+        title,
+        text,
+        copyProtect,
+        tags: {
+          connectOrCreate: tags.map(tag => ({
+            create: {name: tag},
+            where: {name: tag},
+          })),
+          disconnect: post.tags
+            .filter(({name}) => !tags.includes(name))
+            .map(({id}) => ({id})),
+        },
+      },
+      include: {tags: true},
+    });
+
+    return {...updatedPost, tags: updatedPost.tags.map(({name}) => name)};
   }
 
   @Mutation(() => Boolean)
@@ -132,12 +134,12 @@ export class PostResolver {
     @Arg('id') id: string
   ): Promise<boolean> {
     const user = getUser(req);
-    const post = await PostEntity.findOne(id);
+    const post = await getPrisma().post.findUnique({where: {id}});
 
     if (!post) throw new EntityNotFoundError();
     if (post.userId !== user.id) throw new UnauthorizedError();
 
-    await post.remove();
+    await getPrisma().post.delete({where: {id: post.id}});
     return true;
   }
 }

@@ -1,7 +1,7 @@
 import {UnauthorizedError} from 'type-graphql';
 import {EntityNotFoundError} from '../EntityNotFoundError';
 import {PostResolver} from '.';
-import {PostEntity, TagEntity} from 'src/database/entities';
+import {getPrisma} from 'src/database/prisma';
 import {createUserWithSocialProfile} from 'test/createUserWithSocialProfile';
 import type {PostInputType} from 'test/generated/generic-sdk';
 import {getSignedTestSdk} from 'test/getSignedTestSdk';
@@ -65,7 +65,7 @@ describe(PostResolver.name, () => {
       });
       expect(res.createPost.id).toBeTruthy();
 
-      const post = await PostEntity.findOne({relations: ['tags']});
+      const post = await getPrisma().post.findFirst({include: {tags: true}});
       expect({
         title: post?.title,
         text: post?.text,
@@ -87,7 +87,7 @@ describe(PostResolver.name, () => {
       });
       expect(res.createPost.id).toBeTruthy();
 
-      const post = await PostEntity.findOne({relations: ['tags']});
+      const post = await getPrisma().post.findFirst({include: {tags: true}});
       expect({
         title: post?.title,
         text: post?.text,
@@ -116,7 +116,7 @@ describe(PostResolver.name, () => {
       });
       expect(res.createPost.id).toBeTruthy();
 
-      expect(await TagEntity.count()).toBe(3);
+      expect(await getPrisma().tag.count()).toBe(3);
     });
   });
 
@@ -186,7 +186,7 @@ describe(PostResolver.name, () => {
       });
       expect(removePostRes.removePost).toBeTruthy();
 
-      expect(await PostEntity.count()).toBe(0);
+      expect(await getPrisma().post.count()).toBe(0);
     });
 
     it('should throw error when user is not owner', async () => {
@@ -206,7 +206,7 @@ describe(PostResolver.name, () => {
         .catch(err => err);
       expect(errors[0].message).toBe(new UnauthorizedError().message);
 
-      expect(await PostEntity.count()).toBe(1);
+      expect(await getPrisma().post.count()).toBe(1);
     });
   });
 });

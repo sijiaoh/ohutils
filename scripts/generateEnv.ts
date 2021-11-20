@@ -11,6 +11,7 @@ const serverEnvNames: string[] = [
   'DB_NAME',
   'DB_USER',
   'DB_PASS',
+  'DB_URL',
 
   'GOOGLE_CLIENT_ID',
   'GOOGLE_CLIENT_SECRET',

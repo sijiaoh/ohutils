@@ -1,8 +1,5 @@
 import {HelloResolver} from '.';
 import {getTestSdk} from 'test/getTestSdk';
-import {prepareTestMysql} from 'test/prepareTestMysql';
-
-prepareTestMysql();
 
 describe(HelloResolver.name, () => {
   it('should return hello world with count', async () => {

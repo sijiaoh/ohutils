@@ -7,6 +7,10 @@ export DB_PORT=3080
 export DB_NAME=osushi_with_auth_development
 export DB_USER=osushi_with_auth
 export DB_PASS=osushi_with_auth
+export DB_URL="mysql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
+
+# Development environment only.
+export SHADOW_DB_URL="mysql://${DB_USER}:${DB_PASS}@${DB_HOST}:${DB_PORT}/${DB_NAME}_shadow"
 
 export GOOGLE_CLIENT_ID=
 export GOOGLE_CLIENT_SECRET=

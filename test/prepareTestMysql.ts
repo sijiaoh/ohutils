@@ -1,6 +1,9 @@
 import execa from 'execa';
 import {v4} from 'uuid';
+import {PrismaClient} from '.prisma/client';
 import {getDatabaseName} from 'src/database/getDatabaseName';
+import {getDatabaseUrl} from 'src/database/getDatabaseUrl';
+import {getPrisma, setPrisma} from 'src/database/prisma';
 import {serverEnv} from 'src/generated/serverEnv';
 
 export const prepareTestMysql = () => {
@@ -22,11 +25,17 @@ export const prepareTestMysql = () => {
       {env: process.env, stdio: 'inherit'}
     );
 
-    // TODO: Connect to database.
+    await execa('yarn', ['prisma', 'migrate'], {
+      env: {...process.env, DB_URL: getDatabaseUrl(databaseName)},
+    });
+
+    setPrisma(
+      new PrismaClient({datasources: {db: {url: getDatabaseUrl(databaseName)}}})
+    );
   });
 
   afterAll(async () => {
-    // TODO: Close connect.
+    await getPrisma().$disconnect();
 
     await execa(
       'yarn',
@@ -45,6 +54,8 @@ export const prepareTestMysql = () => {
   });
 
   beforeEach(async () => {
-    // Reset database.
+    await execa('yarn', ['prisma', 'migrate', 'reset', '--force'], {
+      env: {...process.env, DB_URL: getDatabaseUrl(databaseName)},
+    });
   });
 };

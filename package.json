@@ -77,6 +77,7 @@
     "execa": "^5.1.1",
     "express": "^4.17.1",
     "jest": "^27.3.1",
+    "jest-mock-extended": "^2.0.4",
     "nodemon": "^2.0.14",
     "prisma": "3.5.0",
     "sijiaoh-gts": "^0.6.1",

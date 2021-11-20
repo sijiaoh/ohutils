@@ -18,5 +18,20 @@ void (async () => {
     {env: process.env, stdio: 'inherit'}
   );
 
-  // TODO: Create database.
+  await execa(
+    'yarn',
+    [
+      'docker-mysql',
+      'prepare',
+      serverEnv.DB_VERSION,
+      `${getDatabaseName()}_shadow`,
+      '--userName',
+      serverEnv.DB_USER,
+      '--password',
+      serverEnv.DB_PASS,
+    ],
+    {env: process.env, stdio: 'inherit'}
+  );
+
+  await execa('yarn', ['prisma', 'migrate'], {env: process.env});
 })();

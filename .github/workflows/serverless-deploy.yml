@@ -28,7 +28,7 @@ jobs:
       DB_NAME: ${{secrets.DB_NAME}}
       DB_USER: ${{secrets.DB_USER}}
       DB_PASS: ${{secrets.DB_PASS}}
-      DB_URL: ${{secrets.DB_URL}}
+      DB_URL: mysql://${{secrets.DB_USER}}:${{secrets.DB_PASS}}@${{secrets.DB_HOST}}:${{secrets.DB_PORT}}/${{secrets.DB_NAME}}
       GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
       GOOGLE_CLIENT_SECRET: ${{secrets.GOOGLE_CLIENT_SECRET}}
       TRACKING_CODE: ${{secrets.TRACKING_CODE}}

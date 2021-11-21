@@ -7,7 +7,7 @@
     "build": "yarn generate && next build",
     "start": "next start",
     "lint": "gts lint",
-    "cleanGenerates": "rm -rf generated src/generated test/generated",
+    "cleanGenerates": "rm -rf generated src/generated",
     "clean": "yarn cleanGenerates && rm -rf .next",
     "fix": "gts fix",
     "jestOnly": "NODE_PATH=. yarn jest",

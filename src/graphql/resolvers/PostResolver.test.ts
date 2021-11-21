@@ -1,9 +1,9 @@
 import {UnauthorizedError} from 'type-graphql';
 import {EntityNotFoundError} from '../EntityNotFoundError';
 import {PostResolver} from '.';
+import type {PostInputType} from 'src/apollo';
 import {prisma} from 'src/database/prisma';
 import {createUserWithSocialProfile} from 'test/createUserWithSocialProfile';
-import type {PostInputType} from 'test/generated/generic-sdk';
 import {getSignedTestSdk} from 'test/getSignedTestSdk';
 import {prepareTestMysql} from 'test/prepareTestMysql';
 
@@ -23,19 +23,23 @@ describe(PostResolver.name, () => {
       const sdk = await getSignedTestSdk(user);
       const tagNames = ['tag1', 'tag2'];
 
-      const createPostRes = await sdk.createPost({
-        post: {...postProps, tags: tagNames},
+      const createPostRes = await sdk.createPostMutation({
+        variables: {
+          post: {...postProps, tags: tagNames},
+        },
       });
 
-      const postRes = await sdk.post({id: createPostRes.createPost.id});
-      expect(postRes.post.id).toBe(createPostRes.createPost.id);
+      const postRes = await sdk.postQuery({
+        variables: {id: createPostRes.data!.createPost.id},
+      });
+      expect(postRes.data.post.id).toBe(createPostRes.data?.createPost.id);
     });
 
     it('should return error if not exists', async () => {
       const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
-      const errors = await sdk.post({id: 'invalid id'}).catch(err => err);
-      expect(errors[0].message).toBe(new EntityNotFoundError().message);
+      const {errors} = await sdk.postQuery({variables: {id: 'invalid id'}});
+      expect(errors?.[0]?.message).toBe(new EntityNotFoundError().message);
     });
   });
 
@@ -46,13 +50,13 @@ describe(PostResolver.name, () => {
 
       const tagNames = ['tag1', 'tag2'];
       for (let i = 0; i < 5; i++) {
-        await sdk.createPost({
-          post: {...postProps, tags: tagNames},
+        await sdk.createPostMutation({
+          variables: {post: {...postProps, tags: tagNames}},
         });
       }
 
-      const postsRes = await sdk.posts({order: {}});
-      expect(postsRes.posts.length).toBe(5);
+      const postsRes = await sdk.postsQuery({variables: {order: {}}});
+      expect(postsRes.data.posts.length).toBe(5);
     });
   });
 
@@ -60,10 +64,12 @@ describe(PostResolver.name, () => {
     it('can create post without tags', async () => {
       const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
-      const res = await sdk.createPost({
-        post: postProps,
+      const res = await sdk.createPostMutation({
+        variables: {
+          post: postProps,
+        },
       });
-      expect(res.createPost.id).toBeTruthy();
+      expect(res.data?.createPost.id).toBeTruthy();
 
       const post = await prisma.post.findFirst({include: {tags: true}});
       expect({
@@ -82,10 +88,12 @@ describe(PostResolver.name, () => {
 
       const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
-      const res = await sdk.createPost({
-        post: {...postProps, tags: tagNames},
+      const res = await sdk.createPostMutation({
+        variables: {
+          post: {...postProps, tags: tagNames},
+        },
       });
-      expect(res.createPost.id).toBeTruthy();
+      expect(res.data?.createPost.id).toBeTruthy();
 
       const post = await prisma.post.findFirst({include: {tags: true}});
       expect({
@@ -106,15 +114,19 @@ describe(PostResolver.name, () => {
       const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
 
-      let res = await sdk.createPost({
-        post: {...postProps, tags: tagNames},
+      let res = await sdk.createPostMutation({
+        variables: {
+          post: {...postProps, tags: tagNames},
+        },
       });
-      expect(res.createPost.id).toBeTruthy();
+      expect(res.data?.createPost.id).toBeTruthy();
 
-      res = await sdk.createPost({
-        post: {...postProps, tags: [...tagNames, 'tag3']},
+      res = await sdk.createPostMutation({
+        variables: {
+          post: {...postProps, tags: [...tagNames, 'tag3']},
+        },
       });
-      expect(res.createPost.id).toBeTruthy();
+      expect(res.data?.createPost.id).toBeTruthy();
 
       expect(await prisma.tag.count()).toBe(3);
     });
@@ -125,11 +137,12 @@ describe(PostResolver.name, () => {
       const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
 
-      const {
-        createPost: {id},
-      } = await sdk.createPost({
-        post: {title: 'title', text: 'text', copyProtect: true, tags: []},
+      const createPostRes = await sdk.createPostMutation({
+        variables: {
+          post: {title: 'title', text: 'text', copyProtect: true, tags: []},
+        },
       });
+      const id = createPostRes.data!.createPost.id;
 
       const newPostData = {
         title: 'title2',
@@ -138,8 +151,10 @@ describe(PostResolver.name, () => {
         tags: ['newTag'],
       };
 
-      const updatePostRes = await sdk.updatePost({id, post: newPostData});
-      const {title, text, copyProtect, tags} = updatePostRes.updatePost;
+      const updatePostRes = await sdk.updatePostMutation({
+        variables: {id, post: newPostData},
+      });
+      const {title, text, copyProtect, tags} = updatePostRes.data!.updatePost;
       expect({title, text, copyProtect, tags}).toEqual(newPostData);
     });
 
@@ -147,16 +162,17 @@ describe(PostResolver.name, () => {
       const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
 
-      const {
-        createPost: {id},
-      } = await sdk.createPost({
-        post: {
-          title: 'title',
-          text: 'text',
-          copyProtect: true,
-          tags: ['tag1', 'tag2'],
+      const createPostRes = await sdk.createPostMutation({
+        variables: {
+          post: {
+            title: 'title',
+            text: 'text',
+            copyProtect: true,
+            tags: ['tag1', 'tag2'],
+          },
         },
       });
+      const id = createPostRes.data!.createPost.id;
 
       const newPostData = {
         title: 'title2',
@@ -165,8 +181,10 @@ describe(PostResolver.name, () => {
         tags: [],
       };
 
-      const updatePostRes = await sdk.updatePost({id, post: newPostData});
-      const {title, text, copyProtect, tags} = updatePostRes.updatePost;
+      const updatePostRes = await sdk.updatePostMutation({
+        variables: {id, post: newPostData},
+      });
+      const {title, text, copyProtect, tags} = updatePostRes.data!.updatePost;
       expect({title, text, copyProtect, tags}).toEqual(newPostData);
     });
   });
@@ -176,15 +194,19 @@ describe(PostResolver.name, () => {
       const user = await createUserWithSocialProfile();
       const sdk = await getSignedTestSdk(user);
 
-      const createPostRes = await sdk.createPost({
-        post: {title: 'title', text: 'text', copyProtect: true, tags: []},
+      const createPostRes = await sdk.createPostMutation({
+        variables: {
+          post: {title: 'title', text: 'text', copyProtect: true, tags: []},
+        },
       });
-      expect(createPostRes.createPost.id).toBeTruthy();
+      expect(createPostRes.data?.createPost.id).toBeTruthy();
 
-      const removePostRes = await sdk.removePost({
-        id: createPostRes.createPost.id,
+      const removePostRes = await sdk.removePostMutation({
+        variables: {
+          id: createPostRes.data!.createPost.id,
+        },
       });
-      expect(removePostRes.removePost).toBeTruthy();
+      expect(removePostRes.data?.removePost).toBeTruthy();
 
       expect(await prisma.post.count()).toBe(0);
     });
@@ -193,18 +215,22 @@ describe(PostResolver.name, () => {
       const owner = await createUserWithSocialProfile();
       const ownerSdk = await getSignedTestSdk(owner);
 
-      const createPostRes = await ownerSdk.createPost({
-        post: {title: 'title', text: 'text', copyProtect: true, tags: []},
+      const createPostRes = await ownerSdk.createPostMutation({
+        variables: {
+          post: {title: 'title', text: 'text', copyProtect: true, tags: []},
+        },
       });
-      expect(createPostRes.createPost.id).toBeTruthy();
+      expect(createPostRes.data?.createPost.id).toBeTruthy();
 
       const user = await createUserWithSocialProfile();
       const userSdk = await getSignedTestSdk(user);
 
-      const errors = await userSdk
-        .removePost({id: createPostRes.createPost.id})
-        .catch(err => err);
-      expect(errors[0].message).toBe(new UnauthorizedError().message);
+      const {errors} = await userSdk.removePostMutation({
+        variables: {
+          id: createPostRes.data!.createPost.id,
+        },
+      });
+      expect(errors?.[0]?.message).toBe(new UnauthorizedError().message);
 
       expect(await prisma.post.count()).toBe(1);
     });

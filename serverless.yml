@@ -14,9 +14,10 @@ myNextApplication:
       apiLambda: ${projectName}-${stage}-api-lambda
       imageLambda: ${projectName}-${stage}-image-lambda
       regenerationLambda: ${projectName}-${stage}-regeneration-lambda
-    # You need add maintenance bucket to origin and set behaviour yourself.
-    errorPages:
-      - code: 403
-        path: '/maintenance.html'
-        minTTL: 1
-        responseCode: 503
+    cloudfront:
+      # You need add maintenance bucket to origin and set behaviour yourself.
+      errorPages:
+        - code: 403
+          path: '/maintenance.html'
+          minTTL: 1
+          responseCode: 503

@@ -1,4 +1,4 @@
 {
   "ignore": ["generated", "src/generated"],
-  "ext": "js jsx ts tsx gql graphql"
+  "ext": "js jsx ts tsx gql graphql prisma"
 }

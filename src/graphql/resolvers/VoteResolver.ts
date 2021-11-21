@@ -16,7 +16,7 @@ import {VoteInputType} from '../input-types/VoteInputType';
 import {VotesOrderInputType} from '../input-types/VotesOrderInputType';
 import {VoteOptionType} from '../types/VoteOptionType';
 import {VoteType} from '../types/VoteType';
-import {getPrisma} from 'src/database/prisma';
+import {prisma} from 'src/database/prisma';
 import type {Context} from 'src/utils/Context';
 import {getUser} from 'src/utils/getUser';
 
@@ -24,7 +24,7 @@ import {getUser} from 'src/utils/getUser';
 export class VoteResolver {
   @Query(() => VoteType)
   async vote(@Arg('id') id: string): Promise<VoteType> {
-    const vote = await getPrisma().vote.findUnique({
+    const vote = await prisma.vote.findUnique({
       where: {id},
       include: {voteOptions: true},
     });
@@ -36,7 +36,7 @@ export class VoteResolver {
   async voteTo(
     @Arg('voteOptionId') voteOptionId: string
   ): Promise<VoteOptionType> {
-    return await getPrisma().voteOption.update({
+    return await prisma.voteOption.update({
       where: {id: voteOptionId},
       data: {numberOfVotes: {increment: 1}},
     });
@@ -57,7 +57,7 @@ export class VoteResolver {
       },
       {}
     );
-    return await getPrisma().vote.findMany({
+    return await prisma.vote.findMany({
       orderBy: o,
       include: {voteOptions: true},
     });
@@ -72,7 +72,7 @@ export class VoteResolver {
     const user = getUser(req);
     if (!voteOptions.length) throw new Error('voteOptions is required.');
 
-    return await getPrisma().vote.create({
+    return await prisma.vote.create({
       data: {
         title,
         text,
@@ -95,12 +95,12 @@ export class VoteResolver {
     @Arg('id') id: string
   ): Promise<boolean> {
     const user = getUser(req);
-    const vote = await getPrisma().vote.findUnique({where: {id}});
+    const vote = await prisma.vote.findUnique({where: {id}});
 
     if (!vote) throw new EntityNotFoundError();
     if (vote.userId !== user.id) throw new UnauthorizedError();
 
-    await getPrisma().vote.delete({where: {id: vote.id}});
+    await prisma.vote.delete({where: {id: vote.id}});
     return true;
   }
 }

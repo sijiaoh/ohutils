@@ -15,7 +15,7 @@ import {Order} from '../enum/Order';
 import {PostInputType} from '../input-types/PostInputType';
 import {PostsOrderInputType} from '../input-types/PostsOrderInputType';
 import {PostType} from '../types/PostType';
-import {getPrisma} from 'src/database/prisma';
+import {prisma} from 'src/database/prisma';
 import type {Context} from 'src/utils/Context';
 import {getUser} from 'src/utils/getUser';
 
@@ -23,7 +23,7 @@ import {getUser} from 'src/utils/getUser';
 export class PostResolver {
   @Query(() => PostType)
   async post(@Arg('id') id: string): Promise<PostType> {
-    const post = await getPrisma().post.findUnique({
+    const post = await prisma.post.findUnique({
       where: {id},
       include: {tags: true},
     });
@@ -50,7 +50,7 @@ export class PostResolver {
       },
       {}
     );
-    const posts = await getPrisma().post.findMany({
+    const posts = await prisma.post.findMany({
       orderBy: o,
       include: {tags: true},
     });
@@ -69,7 +69,7 @@ export class PostResolver {
   ): Promise<PostType> {
     const user = getUser(req);
 
-    const post = await getPrisma().post.create({
+    const post = await prisma.post.create({
       data: {
         title,
         text,
@@ -97,7 +97,7 @@ export class PostResolver {
   ): Promise<PostType> {
     const user = getUser(req);
 
-    const post = await getPrisma().post.findUnique({
+    const post = await prisma.post.findUnique({
       where: {id},
       include: {tags: true},
     });
@@ -105,7 +105,7 @@ export class PostResolver {
     if (!post) throw new EntityNotFoundError();
     if (post.userId !== user.id) throw new UnauthorizedError();
 
-    const updatedPost = await getPrisma().post.update({
+    const updatedPost = await prisma.post.update({
       where: {id},
       data: {
         title,
@@ -134,12 +134,12 @@ export class PostResolver {
     @Arg('id') id: string
   ): Promise<boolean> {
     const user = getUser(req);
-    const post = await getPrisma().post.findUnique({where: {id}});
+    const post = await prisma.post.findUnique({where: {id}});
 
     if (!post) throw new EntityNotFoundError();
     if (post.userId !== user.id) throw new UnauthorizedError();
 
-    await getPrisma().post.delete({where: {id: post.id}});
+    await prisma.post.delete({where: {id: post.id}});
     return true;
   }
 }

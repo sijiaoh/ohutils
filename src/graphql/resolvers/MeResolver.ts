@@ -2,7 +2,7 @@ import 'reflect-metadata';
 
 import {Authorized, Ctx, Query, Resolver} from 'type-graphql';
 import {MeType} from '../types/MeType';
-import {getPrisma} from 'src/database/prisma';
+import {prisma} from 'src/database/prisma';
 import type {Context} from 'src/utils/Context';
 import {getUser} from 'src/utils/getUser';
 
@@ -12,7 +12,7 @@ export class MeResolver {
   @Authorized()
   async me(@Ctx() {req}: Context): Promise<MeType> {
     const user = getUser(req);
-    const socialProfiles = await getPrisma().socialProfile.findMany({
+    const socialProfiles = await prisma.socialProfile.findMany({
       where: {userId: user.id},
     });
     const linkedProviders = socialProfiles.map(

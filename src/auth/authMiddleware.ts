@@ -1,5 +1,5 @@
 import {createSession} from './createSession';
-import {getPrisma} from 'src/database/prisma';
+import {prisma} from 'src/database/prisma';
 import type {Middleware} from 'src/utils/Middleware';
 
 export const authMiddleware: Middleware = async (req, res, next) => {
@@ -7,7 +7,7 @@ export const authMiddleware: Middleware = async (req, res, next) => {
     const token = req.cookies.token;
     if (!token) return;
 
-    const user = await getPrisma().user.findUnique({where: {token}});
+    const user = await prisma.user.findUnique({where: {token}});
     // Invalid token.
     if (!user) {
       res.clearCookie('token');

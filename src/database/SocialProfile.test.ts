@@ -1,4 +1,4 @@
-import {getPrisma} from './prisma';
+import {prisma} from './prisma';
 import {createUserWithSocialProfile} from 'test/createUserWithSocialProfile';
 import {prepareTestMysql} from 'test/prepareTestMysql';
 
@@ -6,8 +6,6 @@ prepareTestMysql();
 
 describe('SocialProfile', () => {
   it('will not remove user when itself removed', async () => {
-    const prisma = getPrisma();
-
     const user = await createUserWithSocialProfile();
     const socialProfile = await prisma.socialProfile.findFirst({
       where: {userId: user.id},
@@ -19,8 +17,6 @@ describe('SocialProfile', () => {
   });
 
   it('remove itself when user removed', async () => {
-    const prisma = getPrisma();
-
     const user = await createUserWithSocialProfile();
     await prisma.user.delete({where: {id: user.id}});
 

@@ -1,5 +1,5 @@
 import {signIn} from './signIn';
-import {getPrisma} from 'src/database/prisma';
+import {prisma} from 'src/database/prisma';
 import type {Request} from 'src/utils/Context';
 import {buildProfile} from 'test/buildProfile';
 import {createUserWithSocialProfile} from 'test/createUserWithSocialProfile';
@@ -13,17 +13,17 @@ describe(signIn.name, () => {
     await expect(
       signIn(emptyRequest, buildProfile())
     ).resolves.not.toThrowError();
-    expect(await getPrisma().user.count()).toBe(1);
-    expect(await getPrisma().socialProfile.count()).toBe(1);
+    expect(await prisma.user.count()).toBe(1);
+    expect(await prisma.socialProfile.count()).toBe(1);
   });
 
   it('can normal login', async () => {
     await createUserWithSocialProfile(buildProfile());
 
     const user = await signIn(emptyRequest, buildProfile());
-    expect(user.id).toBe((await getPrisma().user.findFirst())?.id);
-    expect(await getPrisma().user.count()).toBe(1);
-    expect(await getPrisma().socialProfile.count()).toBe(1);
+    expect(user.id).toBe((await prisma.user.findFirst())?.id);
+    expect(await prisma.user.count()).toBe(1);
+    expect(await prisma.socialProfile.count()).toBe(1);
   });
 
   it('can link other social account', async () => {
@@ -34,8 +34,8 @@ describe(signIn.name, () => {
       buildProfile({provider: 'twitter'})
     );
     expect(user).toBeTruthy();
-    expect(await getPrisma().user.count()).toBe(1);
-    expect(await getPrisma().socialProfile.count()).toBe(2);
+    expect(await prisma.user.count()).toBe(1);
+    expect(await prisma.socialProfile.count()).toBe(2);
   });
 
   it('can not sign in with social profile that already linked to another user', async () => {
@@ -45,8 +45,8 @@ describe(signIn.name, () => {
     await expect(
       signIn({user: {id: userId}} as Request, buildProfile({id: 'googleId2'}))
     ).rejects.toThrowError();
-    expect(await getPrisma().user.count()).toBe(2);
-    expect(await getPrisma().socialProfile.count()).toBe(2);
+    expect(await prisma.user.count()).toBe(2);
+    expect(await prisma.socialProfile.count()).toBe(2);
   });
 
   it("can not sign in with already linked provider's another profile", async () => {
@@ -55,8 +55,8 @@ describe(signIn.name, () => {
     await expect(
       signIn({user: {id: userId}} as Request, buildProfile({id: 'googleId2'}))
     ).rejects.toThrowError();
-    expect(await getPrisma().user.count()).toBe(1);
-    expect(await getPrisma().socialProfile.count()).toBe(1);
+    expect(await prisma.user.count()).toBe(1);
+    expect(await prisma.socialProfile.count()).toBe(1);
   });
 
   it('can sign in without emails', async () => {

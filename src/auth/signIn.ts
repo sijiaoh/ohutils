@@ -1,6 +1,6 @@
 import type {User} from '@prisma/client';
 import type {Profile} from 'passport';
-import {getPrisma} from 'src/database/prisma';
+import {prisma} from 'src/database/prisma';
 import type {Request} from 'src/utils/Context';
 
 export type VerifyCallback = (err?: string | Error | null, user?: User) => void;
@@ -13,7 +13,7 @@ const buildSocialProfile = <T>(userId: T, profile: Profile) => ({
 });
 
 export async function signIn(req: Request, profile: Profile): Promise<User> {
-  const socialProfile = await getPrisma().socialProfile.findUnique({
+  const socialProfile = await prisma.socialProfile.findUnique({
     where: {
       provider_providerId: {provider: profile.provider, providerId: profile.id},
     },
@@ -31,7 +31,7 @@ export async function signIn(req: Request, profile: Profile): Promise<User> {
     }
     // Link new social profile.
     else {
-      await getPrisma().socialProfile.create({
+      await prisma.socialProfile.create({
         data: buildSocialProfile(req.user.id, profile),
       });
       return req.user;
@@ -39,7 +39,7 @@ export async function signIn(req: Request, profile: Profile): Promise<User> {
   }
   // Normal sign in.
   else if (socialProfile) {
-    const user = await getPrisma().user.findUnique({
+    const user = await prisma.user.findUnique({
       where: {id: socialProfile.userId},
     });
     if (!user) throw new Error("Social profile's user not found.");
@@ -47,7 +47,7 @@ export async function signIn(req: Request, profile: Profile): Promise<User> {
   }
   // Sign up.
   else {
-    const user = await getPrisma().user.create({
+    const user = await prisma.user.create({
       data: {
         socialProfiles: {
           create: buildSocialProfile(undefined, profile),

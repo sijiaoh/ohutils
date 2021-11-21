@@ -1188,21 +1188,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/typescript-generic-sdk@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "@graphql-codegen/typescript-generic-sdk@npm:2.2.0"
-  dependencies:
-    "@graphql-codegen/plugin-helpers": ^2.3.0
-    "@graphql-codegen/visitor-plugin-common": 2.5.0
-    auto-bind: ~4.0.0
-    tslib: ~2.3.0
-  peerDependencies:
-    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
-    graphql-tag: ^2.0.0
-  checksum: 1193a6cc4d822e7bb1b0fa066cff89d36ac5b70b2c43989e83a57932002e9c742c8600cfa4d52b9c59bae19ee5c00639376ba80e76dc928b49d160aeec171e86
-  languageName: node
-  linkType: hard
-
 "@graphql-codegen/typescript-graphql-apollo@npm:^1.1.0":
   version: 1.1.0
   resolution: "@graphql-codegen/typescript-graphql-apollo@npm:1.1.0"
@@ -9310,7 +9295,6 @@ __metadata:
     "@emotion/react": ^11.5.0
     "@graphql-codegen/cli": ^2.2.2
     "@graphql-codegen/typescript": ^2.3.1
-    "@graphql-codegen/typescript-generic-sdk": ^2.2.0
     "@graphql-codegen/typescript-graphql-apollo": ^1.1.0
     "@graphql-codegen/typescript-operations": ^2.2.0
     "@graphql-codegen/typescript-react-apollo": ^3.2.1

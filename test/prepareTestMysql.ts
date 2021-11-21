@@ -1,9 +1,8 @@
 import execa from 'execa';
 import {v4} from 'uuid';
-import {PrismaClient} from '.prisma/client';
 import {getDatabaseName} from 'src/database/getDatabaseName';
 import {getDatabaseUrl} from 'src/database/getDatabaseUrl';
-import {getPrisma, setPrisma} from 'src/database/prisma';
+import {prisma} from 'src/database/prisma';
 
 // From: https://github.com/sijiaoh/docker-mysql/blob/main/src/index.ts#L8
 const mysqlRootPassword = 'docker-mysql-root-password';
@@ -17,12 +16,12 @@ export const prepareTestMysql = () => {
   });
 
   beforeAll(() => {
-    setPrisma(new PrismaClient({datasources: {db: {url: databaseUrl}}}));
+    process.env.DB_URL = databaseUrl;
   });
 
   afterAll(async () => {
-    await getPrisma().$executeRawUnsafe(`drop database ${databaseName};`);
-    await getPrisma().$disconnect();
+    await prisma.$executeRawUnsafe(`drop database ${databaseName};`);
+    await prisma.$disconnect();
   });
 
   beforeEach(async () => {

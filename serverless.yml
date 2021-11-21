@@ -7,6 +7,25 @@ myNextApplication:
     domain: ${env.DOMAIN}
     build:
       cmd: yarn
+      # TODO: 下記のIssueの動向次第で削除する。
+      # Fromとパスが変わっているため、より大雑把な指定に変更。
+      # https://github.com/serverless-nextjs/serverless-next.js/issues/843#issuecomment-837291066
+      # From: https://github.com/millsp/prisma-serverless-nextjs/blob/main/serverless.yml#L8
+      postBuildCommands:
+        - PDIR=node_modules/.prisma/client/;
+          LDIR=.serverless_nextjs/api-lambda/;
+          if [ "$(ls -A $LDIR)" ]; then
+          mkdir -p $LDIR$PDIR;
+          cp "$PDIR"*-rhel-* $LDIR$PDIR;
+          cp "$PDIR"schema.prisma $LDIR$PDIR;
+          fi;
+        - PDIR=node_modules/.prisma/client/;
+          LDIR=.serverless_nextjs/default-lambda/;
+          if [ "$(ls -A $LDIR)" ]; then
+          mkdir -p $LDIR$PDIR;
+          cp "$PDIR"*-rhel-* $LDIR$PDIR;
+          cp "$PDIR"schema.prisma $LDIR$PDIR;
+          fi;
     roleArn: ${env.ROLE_ARN}
     bucketName: ${projectName}-${stage}
     name:

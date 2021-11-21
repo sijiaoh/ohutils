@@ -1,5 +1,9 @@
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  // TODO: 下記のIssueの動向次第で削除する。
+  // https://github.com/serverless-nextjs/serverless-next.js/issues/843#issuecomment-837291066
+  // From: https://github.com/millsp/prisma-serverless-nextjs/blob/main/prisma/schema.prisma#L3
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
 datasource db {

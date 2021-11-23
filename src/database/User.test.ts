@@ -1,7 +1,6 @@
 import {prisma} from './prisma';
-import {prepareTestMysql} from 'test/prepareTestMysql';
 
-prepareTestMysql();
+import 'test/prepareTestDatabase';
 
 describe('User', () => {
   it('Can create', async () => {

@@ -1,9 +1,8 @@
 import {MeResolver} from '.';
 import {createUserWithSocialProfile} from 'test/createUserWithSocialProfile';
 import {getSignedTestSdk} from 'test/getSignedTestSdk';
-import {prepareTestMysql} from 'test/prepareTestMysql';
 
-prepareTestMysql();
+import 'test/prepareTestDatabase';
 
 describe(MeResolver.name, () => {
   it('should return token', async () => {

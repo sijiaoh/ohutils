@@ -1,8 +1,7 @@
 import {prisma} from './prisma';
 import {createUserWithSocialProfile} from 'test/createUserWithSocialProfile';
-import {prepareTestMysql} from 'test/prepareTestMysql';
 
-prepareTestMysql();
+import 'test/prepareTestDatabase';
 
 describe('SocialProfile', () => {
   it('will not remove user when itself removed', async () => {

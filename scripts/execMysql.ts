@@ -2,8 +2,8 @@ import execa from 'execa';
 import {getDatabaseName} from 'src/database/getDatabaseName';
 import {serverEnv} from 'src/generated/serverEnv';
 
-void (async () => {
-  const command = process.argv.slice(2).join(' ');
+export const execMysql = async (commands: string[]) => {
+  const command = commands.join(' ');
 
   await execa(
     'yarn',
@@ -21,4 +21,4 @@ void (async () => {
     ],
     {env: process.env, stdio: 'inherit'}
   );
-})();
+};

@@ -9307,6 +9307,7 @@ __metadata:
     babel-plugin-transform-typescript-metadata: ^0.3.2
     circular-dependency-plugin: ^5.2.2
     class-validator: ^0.13.1
+    commander: ^8.3.0
     date-fns: ^2.25.0
     eslint-config-next: 11.x
     execa: ^5.1.1

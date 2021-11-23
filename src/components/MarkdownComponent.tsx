@@ -23,9 +23,9 @@ export const MarkdownComponent = ({
       highlight: (code, lang) => {
         if (hljs.getLanguage(lang))
           return [
-            '<div class="hljs">',
+            '<code class="hljs">',
             hljs.highlight(code, {language: lang}).value,
-            '</div>',
+            '</code>',
           ].join('');
         if (lang === 'mermaid')
           return ['<div class="mermaid">', code, '</div>'].join('');

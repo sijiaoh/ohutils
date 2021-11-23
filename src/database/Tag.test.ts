@@ -1,8 +1,7 @@
 import {prisma} from './prisma';
 import {createUserWithSocialProfile} from 'test/createUserWithSocialProfile';
-import {prepareTestMysql} from 'test/prepareTestMysql';
 
-prepareTestMysql();
+import 'test/prepareTestDatabase';
 
 describe('Tag', () => {
   const createPost = async () => {

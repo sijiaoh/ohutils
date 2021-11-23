@@ -5,9 +5,8 @@ import type {PostInputType} from 'src/apollo';
 import {prisma} from 'src/database/prisma';
 import {createUserWithSocialProfile} from 'test/createUserWithSocialProfile';
 import {getSignedTestSdk} from 'test/getSignedTestSdk';
-import {prepareTestMysql} from 'test/prepareTestMysql';
 
-prepareTestMysql();
+import 'test/prepareTestDatabase';
 
 const postProps: PostInputType = {
   title: 'title',

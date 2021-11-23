@@ -25,7 +25,7 @@ export const PostsEditComponent: NextPage = () => {
     void postData.load();
   }, [postData]);
 
-  if (!postData.loaded) return <LoadingComponent />;
+  if (!postData.loaded) return <LoadingComponent css={{padding: '1em 0'}} />;
   return (
     <Container>
       <HeadComponent subTitle={postsEditTitle} />

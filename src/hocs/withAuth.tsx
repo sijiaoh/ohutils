@@ -28,7 +28,9 @@ export const withAuth = (Page: NextPage): NextPage => {
       const Element: NextPage = () => <Page />;
       return <Element />;
     } else {
-      const Loading: NextPage = () => <LoadingComponent />;
+      const Loading: NextPage = () => (
+        <LoadingComponent css={{padding: '1em 0'}} />
+      );
       return <Loading />;
     }
   };

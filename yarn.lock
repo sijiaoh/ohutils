@@ -10174,7 +10174,6 @@ __metadata:
     react-ga: ^3.3.0
     react-hook-form: ^7.19.1
     react-icons: ^4.3.1
-    react-loader-spinner: ^4.0.0
     reflect-metadata: ^0.1.13
     sijiaoh-gts: ^0.6.1
     supertest: ^6.1.6
@@ -11080,18 +11079,6 @@ __metadata:
   version: 3.0.4
   resolution: "react-lifecycles-compat@npm:3.0.4"
   checksum: a904b0fc0a8eeb15a148c9feb7bc17cec7ef96e71188280061fc340043fd6d8ee3ff233381f0e8f95c1cf926210b2c4a31f38182c8f35ac55057e453d6df204f
-  languageName: node
-  linkType: hard
-
-"react-loader-spinner@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "react-loader-spinner@npm:4.0.0"
-  dependencies:
-    prop-types: ^15.7.2
-  peerDependencies:
-    react: "*"
-    react-dom: "*"
-  checksum: 419ca68445444a497f09ead8a040aa8d4a231d336573f345d2a26d39c2694fb8ba284c64c1e45b09a22e41e107f318b9b172f19f3e5bd1d5784dd24fb0101156
   languageName: node
   linkType: hard
 

@@ -36,7 +36,7 @@ export const VoteComponent = () => {
     void vote.load();
   }, [id, vote]);
 
-  if (!voteData) return <LoadingComponent />;
+  if (!voteData) return <LoadingComponent css={{padding: '1em 0'}} />;
   return (
     <Container>
       <HeadComponent subTitle={voteTitle(voteData.title)} />

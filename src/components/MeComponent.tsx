@@ -10,7 +10,7 @@ import {homeBreadcrumb, meTitle} from 'src/utils/pageHelpers';
 export const MeComponent: NextPage = () => {
   const meData = useListen(Me.useMe());
 
-  if (meData.data == null) return <LoadingComponent />;
+  if (meData.data == null) return <LoadingComponent css={{padding: '1em 0'}} />;
 
   const details: OauthLinksDetails = meData.data?.linkedProviders.map(
     provider => ({

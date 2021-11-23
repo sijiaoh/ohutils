@@ -39,7 +39,7 @@ export const PostsComponent = () => {
   });
   const meData = useListen(Me.useMe(), ({data}) => data);
 
-  if (loading) return <LoadingComponent />;
+  if (loading) return <LoadingComponent css={{padding: '1em 0'}} />;
   return (
     <Container>
       <HeadComponent subTitle={postsTitle} />

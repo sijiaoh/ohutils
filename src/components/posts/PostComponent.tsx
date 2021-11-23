@@ -32,7 +32,8 @@ export const PostComponent = () => {
     void post.load();
   }, [id, post]);
 
-  if (!postData || typeof id !== 'string') return <LoadingComponent />;
+  if (!postData || typeof id !== 'string')
+    return <LoadingComponent css={{padding: '1em 0'}} />;
 
   const css: CSSInterpolation = postData.copyProtect
     ? {

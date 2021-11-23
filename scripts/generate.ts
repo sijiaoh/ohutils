@@ -1,11 +1,5 @@
 import {program} from 'commander';
-import execa from 'execa';
-
-const exec = async (command: string) => {
-  const [c, ...a] = command.split(' ');
-  if (!c) throw new Error('Failed to exec: ' + command);
-  await execa(c, a, {env: process.env, stdio: 'inherit'});
-};
+import {exec} from './exec';
 
 const generateCommandData = [
   {

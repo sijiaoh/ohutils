@@ -15,10 +15,7 @@
     "execScript": "NODE_PATH=. ts-node --project=tsconfig.script.json",
     "generate": "yarn execScript scripts/generate",
     "watchGenerate": "yarn nodemon --exec yarn generate all",
-    "prepareMysql": "yarn execScript scripts/prepareMysql",
-    "removeDatabase": "yarn execScript scripts/removeDatabase",
-    "resetDatabase": "yarn removeDatabase && yarn prepareMysql",
-    "execMysql": "yarn execScript scripts/execMysql"
+    "database": "yarn execScript scripts/database"
   },
   "dependencies": {
     "@apollo/client": "3.4.x",

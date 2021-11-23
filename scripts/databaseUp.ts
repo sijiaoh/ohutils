@@ -2,7 +2,7 @@ import execa from 'execa';
 import {getDatabaseName} from 'src/database/getDatabaseName';
 import {serverEnv} from 'src/generated/serverEnv';
 
-void (async () => {
+export const databaseUp = async () => {
   await execa(
     'yarn',
     [
@@ -32,6 +32,4 @@ void (async () => {
     ],
     {env: process.env, stdio: 'inherit'}
   );
-
-  await execa('yarn', ['prisma', 'migrate'], {env: process.env});
-})();
+};

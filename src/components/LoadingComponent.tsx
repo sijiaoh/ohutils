@@ -1,7 +1,11 @@
 import Spinner from 'react-bootstrap/Spinner';
 import type {DefaultProps} from 'src/utils/DefaultProps';
 
-export const LoadingComponent = ({className}: DefaultProps) => {
+export const LoadingComponent = ({
+  className,
+  width,
+  height,
+}: DefaultProps<{width?: string; height?: string}>) => {
   return (
     <div
       className={className}
@@ -13,7 +17,7 @@ export const LoadingComponent = ({className}: DefaultProps) => {
         alignItems: 'center',
       }}
     >
-      <Spinner animation="border" />
+      <Spinner animation="border" css={{width, height}} />
     </div>
   );
 };

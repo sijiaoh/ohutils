@@ -7,7 +7,7 @@ import {prisma} from 'src/database/prisma';
 // From: https://github.com/sijiaoh/docker-mysql/blob/main/src/index.ts#L8
 const mysqlRootPassword = 'docker-mysql-root-password';
 
-export const prepareTestMysql = () => {
+export const prepareTestDatabase = () => {
   const databaseName = `${getDatabaseName()}-${v4()}`.replace(/-/g, '_');
   const databaseUrl = getDatabaseUrl({
     user: 'root',

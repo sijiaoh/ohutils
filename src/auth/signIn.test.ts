@@ -4,9 +4,8 @@ import type {Request} from 'src/utils/Context';
 import {buildProfile} from 'test/buildProfile';
 import {createUserWithSocialProfile} from 'test/createUserWithSocialProfile';
 import {emptyRequest} from 'test/emptyRequest';
-import {prepareTestMysql} from 'test/prepareTestMysql';
 
-prepareTestMysql();
+import 'test/prepareTestDatabase';
 
 describe(signIn.name, () => {
   it('can create new user', async () => {

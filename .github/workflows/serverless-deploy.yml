@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      STAGE: production
       NODE_ENV: production
-      DOMAIN: ohutils.com
+      PROJECT_NAME: ${{secrets.PROJECT_NAME}}
+      DOMAIN: ${{secrets.DOMAIN}}
 
       # From: https://github.com/actions/checkout/issues/440#issuecomment-854240996
       AWS_EC2_METADATA_DISABLED: true
@@ -34,6 +34,9 @@ jobs:
       TRACKING_CODE: ${{secrets.TRACKING_CODE}}
 
     steps:
+      - name: Set STAGE environment
+        run: echo "STAGE=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
@@ -44,10 +47,10 @@ jobs:
         run: yarn install --immutable
 
       - name: Download `.serverless` state from S3
-        run: aws s3 sync s3://ohutils-serverless/production/.serverless .serverless --delete
+        run: aws s3 sync s3://${{env.PROJECT_NAME}}-serverless/${{env.STAGE}}/.serverless .serverless --delete
 
       - name: Deploy to AWS
         uses: serverless/github-action@master
 
       - name: Upload `.serverless` state to S3
-        run: aws s3 sync .serverless s3://ohutils-serverless/production/.serverless --delete
+        run: aws s3 sync .serverless s3://${{env.PROJECT_NAME}}-serverless/${{env.STAGE}}/.serverless --delete

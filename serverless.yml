@@ -1,5 +1,5 @@
-projectName: ohutils
 # From: https://github.com/serverless-nextjs/serverless-next.js#concatenating-environment-variables-doesnt-seem-to-work
+projectName: ${env.PROJECT_NAME}
 stage: ${env.STAGE}
 myNextApplication:
   component: '@sls-next/serverless-component@latest'

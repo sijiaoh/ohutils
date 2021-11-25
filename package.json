@@ -13,6 +13,7 @@
     "jestOnly": "NODE_PATH=. yarn jest",
     "test": "yarn generate all && yarn lint && yarn jestOnly && yarn build",
     "execScript": "NODE_PATH=. ts-node --project=tsconfig.script.json",
+    "maskSecrets": "yarn execScript scripts/maskSecrets",
     "generate": "yarn execScript scripts/generate",
     "watchGenerate": "yarn nodemon --exec yarn generate all",
     "database": "yarn execScript scripts/database"

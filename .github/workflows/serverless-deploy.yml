@@ -11,32 +11,9 @@ jobs:
 
     env:
       NODE_ENV: production
-      PROJECT_NAME: ${{secrets.PROJECT_NAME}}
-      DOMAIN: ${{secrets.DOMAIN}}
-
       # From: https://github.com/actions/checkout/issues/440#issuecomment-854240996
       AWS_EC2_METADATA_DISABLED: true
-
-      AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-      ROLE_ARN: ${{secrets.ROLE_ARN}}
-
-      URL: ${{secrets.URL}}
-      DB_VERSION: ${{secrets.DB_VERSION}}
-      DB_HOST: ${{secrets.DB_HOST}}
-      DB_PORT: ${{secrets.DB_PORT}}
-      DB_NAME: ${{secrets.DB_NAME}}
-      DB_USER: ${{secrets.DB_USER}}
-      DB_PASS: ${{secrets.DB_PASS}}
-      DB_URL: mysql://${{secrets.DB_USER}}:${{secrets.DB_PASS}}@${{secrets.DB_HOST}}:${{secrets.DB_PORT}}/${{secrets.DB_NAME}}
-      GOOGLE_CLIENT_ID: ${{secrets.GOOGLE_CLIENT_ID}}
-      GOOGLE_CLIENT_SECRET: ${{secrets.GOOGLE_CLIENT_SECRET}}
-      TRACKING_CODE: ${{secrets.TRACKING_CODE}}
-
     steps:
-      - name: Set STAGE environment
-        run: echo "STAGE=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
@@ -45,6 +22,15 @@ jobs:
 
       - name: Install dependencies
         run: yarn install --immutable
+
+      - name: Set STAGE environment
+        run: echo "STAGE=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+      - name: Set SECRETS_KEY environment
+        run: echo "SECRETS_KEY=${STAGE}_secrets" >> $GITHUB_ENV
+      - name: Mask secrets
+        run: yarn maskSecrets "${{secrets[env.SECRETS_KEY]}}"
+      - name: Set secrets to env
+        run: echo "${{secrets[env.SECRETS_KEY]}}" >> $GITHUB_ENV
 
       - name: Download `.serverless` state from S3
         run: aws s3 sync s3://${{env.PROJECT_NAME}}-serverless/${{env.STAGE}}/.serverless .serverless --delete

@@ -5,7 +5,7 @@ __metadata:
   version: 4
   cacheKey: 8
 
-"@apollo/client@npm:^3.4.17":
+"@apollo/client@npm:^3.5.5":
   version: 3.5.5
   resolution: "@apollo/client@npm:3.5.5"
   dependencies:
@@ -9511,7 +9511,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "osushi@workspace:."
   dependencies:
-    "@apollo/client": ^3.4.17
+    "@apollo/client": ^3.5.5
     "@babel/core": ^7.16.0
     "@babel/plugin-proposal-class-properties": ^7.16.0
     "@babel/plugin-proposal-decorators": ^7.16.4

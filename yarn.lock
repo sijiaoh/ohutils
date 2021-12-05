@@ -2401,7 +2401,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/passport-google-oauth20@npm:^2.0.10":
+"@types/passport-google-oauth20@npm:^2.0.11":
   version: 2.0.11
   resolution: "@types/passport-google-oauth20@npm:2.0.11"
   dependencies:
@@ -9468,7 +9468,7 @@ __metadata:
     "@types/jest": ^27.0.3
     "@types/node": ^16.11.11
     "@types/passport": ^1.0.7
-    "@types/passport-google-oauth20": ^2.0.10
+    "@types/passport-google-oauth20": ^2.0.11
     "@types/react": 17.0.37
     "@types/supertest": ^2.0.11
     "@types/uuid": ^8.3.3

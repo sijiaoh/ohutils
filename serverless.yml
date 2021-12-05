@@ -1,0 +1,42 @@
+# From: https://github.com/serverless-nextjs/serverless-next.js#concatenating-environment-variables-doesnt-seem-to-work
+projectName: ${env.PROJECT_NAME}
+stage: ${env.STAGE}
+myNextApplication:
+  component: '@sls-next/serverless-component@latest'
+  inputs:
+    domain: ${env.DOMAIN}
+    build:
+      cmd: yarn
+      # TODO: 下記のIssueの動向次第で削除する。
+      # Fromとパスが変わっているため、より大雑把な指定に変更。
+      # https://github.com/serverless-nextjs/serverless-next.js/issues/843#issuecomment-837291066
+      # From: https://github.com/millsp/prisma-serverless-nextjs/blob/main/serverless.yml#L8
+      postBuildCommands:
+        - PDIR=node_modules/.prisma/client/;
+          LDIR=.serverless_nextjs/api-lambda/;
+          if [ "$(ls -A $LDIR)" ]; then
+          mkdir -p $LDIR$PDIR;
+          cp "$PDIR"*-rhel-* $LDIR$PDIR;
+          cp "$PDIR"schema.prisma $LDIR$PDIR;
+          fi;
+        - PDIR=node_modules/.prisma/client/;
+          LDIR=.serverless_nextjs/default-lambda/;
+          if [ "$(ls -A $LDIR)" ]; then
+          mkdir -p $LDIR$PDIR;
+          cp "$PDIR"*-rhel-* $LDIR$PDIR;
+          cp "$PDIR"schema.prisma $LDIR$PDIR;
+          fi;
+    roleArn: ${env.ROLE_ARN}
+    bucketName: ${projectName}-${stage}
+    name:
+      defaultLambda: ${projectName}-${stage}-default-lambda
+      apiLambda: ${projectName}-${stage}-api-lambda
+      imageLambda: ${projectName}-${stage}-image-lambda
+      regenerationLambda: ${projectName}-${stage}-regeneration-lambda
+    cloudfront:
+      # You need add maintenance bucket to origin and set behaviour yourself.
+      errorPages:
+        - code: 403
+          path: '/maintenance.html'
+          minTTL: 1
+          responseCode: 503

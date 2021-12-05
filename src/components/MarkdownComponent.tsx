@@ -1,6 +1,6 @@
 import hljs from 'highlight.js/lib/core';
 import cpp from 'highlight.js/lib/languages/cpp';
-import marked from 'marked';
+import {marked} from 'marked';
 import mermaid from 'mermaid';
 import {useEffect, useRef} from 'react';
 import type {DefaultProps} from 'src/utils/DefaultProps';

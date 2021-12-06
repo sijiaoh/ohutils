@@ -1,4 +1,5 @@
 import {program} from 'commander';
+import glob from 'glob';
 import {exec} from './exec';
 
 const generateCommandData = [
@@ -20,7 +21,8 @@ const generateCommandData = [
     name: 'indexes',
     description: 'yarn ts-index-generator src/**/*.ts',
     action: async () => {
-      await exec('yarn ts-index-generator src/**/*.ts');
+      const files = glob.sync('src/**/*.ts');
+      await exec(`yarn ts-index-generator ${files.join(' ')}`);
     },
   },
   {

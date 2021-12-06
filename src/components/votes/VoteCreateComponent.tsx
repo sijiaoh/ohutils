@@ -14,7 +14,7 @@ import {
   votesCreateTitle,
 } from 'src/utils/pageHelpers';
 
-export const VotesCreateComponent: NextPage = () => {
+export const VoteCreateComponent: NextPage = () => {
   const router = useRouter();
   const defaultValues: {
     title: string;

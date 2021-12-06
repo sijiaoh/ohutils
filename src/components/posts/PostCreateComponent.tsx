@@ -11,7 +11,7 @@ import {
   postsCreateTitle,
 } from 'src/utils/pageHelpers';
 
-export const PostsCreateComponent: NextPage = () => {
+export const PostCreateComponent: NextPage = () => {
   const post = useRef(new Post()).current;
 
   return (
